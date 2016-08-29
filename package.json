@@ -31,8 +31,8 @@
     "webpack-dev-server": "^1.15.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host beam-dev.tpc.io --open",
-    "build": "webpack -p"
+    "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host redux.app.io --open",
+    "build": "npm i && webpack -p"
   },
   "author": "freezystem@gmail.com",
   "license": "UNLICENSED"
