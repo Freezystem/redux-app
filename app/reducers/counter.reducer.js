@@ -1,11 +1,14 @@
 "use strict";
 
-export const counter = ( state = { count : 0 }, action ) => {
+export const INCREMENT_COUNT  = 'INCREMENT_COUNT';
+export const DECREMENT_COUNT  = 'DECREMENT_COUNT';
+
+export const counter = ( state = 0, action ) => {
   switch ( action.type ) {
-    case 'INCREMENT':
-      return Object.assign({}, state, { count : state.count + 1 });
-    case 'DECREMENT':
-      return Object.assign({}, state, { count : state.count - 1 });
+    case INCREMENT_COUNT:
+      return parseInt(state, 10) + 1;
+    case DECREMENT_COUNT:
+      return parseInt(state, 10) - 1;
     default:
       return state;
   }
