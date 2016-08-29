@@ -1,13 +1,13 @@
-var debug       = process.env.NODE_ENV !== 'production',
-  webpack     = require('webpack'),
-  path        = require('path'),
-  HWP         = require('html-webpack-plugin'),
-  HWPConfig   = new HWP({ template : __dirname + '/app/index.html', filename : 'index.html', inject : 'body' });
+var debug   = process.env.NODE_ENV !== 'production',
+  webpack   = require('webpack'),
+  path      = require('path'),
+  HWP       = require('html-webpack-plugin'),
+  HWPConfig = new HWP({ template : __dirname + '/app/index.html', filename : 'index.html', inject : 'body' });
 
 module.exports = {
   context : path.join(__dirname, 'app'),
   devtool : debug ? 'inline-sourcemap' : null,
-  entry   : './index.js',
+  entry   : './app.js',
   module  : {
     loaders : [
       {

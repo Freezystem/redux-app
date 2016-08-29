@@ -3,7 +3,7 @@
 export const INCREMENT_COUNT  = 'INCREMENT_COUNT';
 export const DECREMENT_COUNT  = 'DECREMENT_COUNT';
 
-export const counter = ( state = 0, action ) => {
+const counter = ( state = 0, action ) => {
   switch ( action.type ) {
     case INCREMENT_COUNT:
       return parseInt(state, 10) + 1;
@@ -13,3 +13,5 @@ export const counter = ( state = 0, action ) => {
       return state;
   }
 };
+
+export default counter;

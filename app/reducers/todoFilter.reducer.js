@@ -11,7 +11,7 @@ export const todoFilters = {
 };
 
 // Reducer
-export const todoFilter = ( state = 'SHOW_ALL', action ) => {
+const todoFilter = ( state = 'SHOW_ALL', action ) => {
   switch ( action.type ) {
     case SET_TODO_FILTER:
       return action.filter in todoFilters ? action.filter : state;
@@ -19,3 +19,5 @@ export const todoFilter = ( state = 'SHOW_ALL', action ) => {
       return state;
   }
 };
+
+export default todoFilter;
