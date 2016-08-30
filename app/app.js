@@ -13,25 +13,25 @@ import todoFilter     from './reducers/todoFilter.reducer';
 import todos          from './reducers/todos.reducer';
 
 // Components
-import TodoApp        from './components/todoApp.component';
+import TodoApp        from './components/TodoApp.component';
 
 const initialState = {
   todos       : [],
   todoFilter  : 'SHOW_ALL'
 };
 
-const mainReducer = combineReducers({
+const rootReducer = combineReducers({
   todos,
   todoFilter
 });
 
-const store = createStore(mainReducer, initialState);
+const store = createStore(rootReducer, initialState);
 
 const renderApp = () => {
   console.log('store:',store.getState());
 
   return ReactDOM.render(
-    <TodoApp todos={store.getState().todos}/>,
+    <TodoApp todos={store.getState().todos} filter={store.getState().todoFilter}/>,
     document.getElementById('app')
   );
 };

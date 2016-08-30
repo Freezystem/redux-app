@@ -1,12 +1,20 @@
-import React      from 'react';
-import store      from '../app';
+import React          from 'react';
+import store          from '../app';
+
 import {
   ADD_TODO,
   TOGGLE_TODO
-}                 from '../reducers/todos.reducer';
+}                     from '../reducers/todos.reducer';
+import {
+  todoFilters
+}                     from '../reducers/todoFilter.reducer';
 
-export default class TodoApp extends React.Component {
+let { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
+
+export default class TodoList extends React.Component {
   render() {
+    let todos = this._getFilteredTodos(this.props.todos, this.props.filter);
+
     return (
       <div>
         <input ref={input => this._label = input}/>
@@ -19,7 +27,7 @@ export default class TodoApp extends React.Component {
         }}>Add Todo</button>
         <ul>
           {
-            this.props.todos.map(todo =>
+            todos.map(todo =>
               <li key={todo.id}
                   onClick={() => {
                     store.dispatch({
@@ -36,5 +44,16 @@ export default class TodoApp extends React.Component {
         </ul>
       </div>
     );
+  }
+
+  _getFilteredTodos (todos, filter = SHOW_ALL) {
+    switch ( filter ) {
+      case SHOW_PENDING:
+        return todos.filter(t => !t.completed);
+      case SHOW_COMPLETED:
+        return todos.filter(t => t.completed);
+      default:
+        return todos;
+    }
   }
 }
