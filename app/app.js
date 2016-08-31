@@ -12,11 +12,11 @@ import {
 }                     from 'react-redux';
 
 // Reducers
-import todoFilter     from './reducers/todoFilter.reducer';
-import todos          from './reducers/todos.reducer';
+import todoFilter     from './modules/todos/reducers/todoFilter.reducer';
+import todos          from './modules/todos/reducers/todos.reducer';
 
 // Components
-import TodoApp        from './components/todo-app/TodoApp.component';
+import TodoApp        from './modules/todos/TodoApp.component';
 
 const initialState = {
   todos       : [],

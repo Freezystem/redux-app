@@ -11,16 +11,16 @@ import {
   ADD_TODO,
   TOGGLE_TODO,
   REMOVE_TODO
-}                     from '../../reducers/todos.reducer';
+}                     from './reducers/todos.reducer';
 import {
   todoFilters,
   SET_TODO_FILTER
-}                     from '../../reducers/todoFilter.reducer';
+}                     from './reducers/todoFilter.reducer';
 
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
 
-//components
+//presentational components
 export const TodoButton = (
   { onClick }
 ) => (
@@ -96,7 +96,7 @@ export const TodoFilterLinks = (
   </div>
 );
 
-//main component
+//container components
 let TodoApp = ({
   filter,
   filterList,
