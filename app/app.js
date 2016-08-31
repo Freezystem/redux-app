@@ -31,7 +31,7 @@ const renderApp = () => {
   console.log('store:',store.getState());
 
   return ReactDOM.render(
-    <TodoApp todos={store.getState().todos} filter={store.getState().todoFilter}/>,
+    <TodoApp store={store} todos={store.getState().todos} filter={store.getState().todoFilter}/>,
     document.getElementById('app')
   );
 };

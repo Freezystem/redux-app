@@ -5,7 +5,6 @@ import './TodoApp.scss';
 
 //dependencies
 import React          from 'react';
-import store          from '../../app';
 
 import {
   ADD_TODO,
@@ -13,7 +12,8 @@ import {
   REMOVE_TODO
 }                     from '../../reducers/todos.reducer';
 import {
-  todoFilters
+  todoFilters,
+  SET_TODO_FILTER
 }                     from '../../reducers/todoFilter.reducer';
 
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
@@ -36,7 +36,7 @@ export const Todo = (
 );
 
 export const TodoList = (
-  { todos, onTodoClick }
+  { todos, onTodoClick, onTodoButtonClick }
 ) => (
   <ul className="todoList">
     {
@@ -44,7 +44,7 @@ export const TodoList = (
         <Todo key={todo.id}
               {...todo}
               onClick={() => onTodoClick(todo.id)}
-              onTodoButtonClick={id => store.dispatch({ type : REMOVE_TODO, id : todo.id })}/>
+              onTodoButtonClick={() => onTodoButtonClick(todo.id)}/>
       )
     }
   </ul>
@@ -78,33 +78,29 @@ export const Link = (
 );
 
 export const FilterLink = (
-  { active, filter }
+  { active, filter, onLinkClick }
 ) => {
   return active ?
     (<a className="filterList_item filterList_item-active">{filter.replace(/SHOW_/, '')}</a>)
     :
     (<Link to={`#${filter}`}
            label={filter.replace(/SHOW_/, '')}
-           onClick={
-             (e) => {
-               e.preventDefault();
-               store.dispatch({
-                 type   : 'SET_TODO_FILTER',
-                 filter : filter
-               });
-             }
-           }/>);
+           onClick={e => {
+             e.preventDefault();
+             onLinkClick(filter);
+           }}/>);
 };
 
-export const TodoFilterLink = (
-  { filterList, currentFilter }
+export const TodoFilterLinks = (
+  { filterList, currentFilter, onLinkClick }
 ) => (
   <div className="filterList">
     {
       filterList.map((filter, index) => (
         <FilterLink key={index}
                     filter={filter}
-                    active={filter === currentFilter}/>
+                    active={filter === currentFilter}
+                    onLinkClick={onLinkClick}/>
       ))
     }
   </div>
@@ -112,13 +108,18 @@ export const TodoFilterLink = (
 
 //main component
 const TodoApp = (
-  { todos, filter }
+  { store, todos, filter }
 ) => (
   <section className="todoApp">
     <TodoForm onSubmit={label => store.dispatch({ type : ADD_TODO, label })}/>
     <TodoList todos={_getFilteredTodos(todos, filter)}
-              onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}/>
-    <TodoFilterLink filterList={Object.keys(todoFilters)} currentFilter={filter}/>
+              onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}
+              onTodoButtonClick={id => store.dispatch({ type : REMOVE_TODO, id })}/>
+    <TodoFilterLinks filterList={Object.keys(todoFilters)}
+                     currentFilter={filter}
+                     onLinkClick={
+                       filter => store.dispatch({ type : SET_TODO_FILTER, filter })
+                     }/>
   </section>
 );
 
