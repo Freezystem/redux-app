@@ -13,7 +13,7 @@ import todoFilter     from './reducers/todoFilter.reducer';
 import todos          from './reducers/todos.reducer';
 
 // Components
-import TodoApp        from './components/TodoApp.component';
+import TodoApp        from './components/todo-app/TodoApp.component';
 
 const initialState = {
   todos       : [],

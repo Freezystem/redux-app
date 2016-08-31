@@ -1,0 +1,17 @@
+.todoApp {
+  .todoList {
+    &_item {
+      &-completed {
+        text-decoration : line-through;
+      }
+      &-pending {
+        text-decoration : none;
+      }
+    }
+  }
+  .filterList {
+    &_item {
+      margin-right : 10px;
+    }
+  }
+}

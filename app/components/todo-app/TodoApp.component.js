@@ -1,26 +1,29 @@
 'use strict';
 
+//styles
+import './TodoApp.scss';
+
+//dependencies
 import React          from 'react';
-import store          from '../app';
+import store          from '../../app';
 
 import {
   ADD_TODO,
   TOGGLE_TODO
-}                     from '../reducers/todos.reducer';
+}                     from '../../reducers/todos.reducer';
 import {
   todoFilters
-}                     from '../reducers/todoFilter.reducer';
+}                     from '../../reducers/todoFilter.reducer';
 
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
+
+//components
 export const Todo = (
   { completed, label, onClick }
 ) => (
-  <li className="todoList_item"
-      onClick={onClick}
-      style={{
-        textDecoration : completed ? 'line-through' : 'none'
-      }}>{label}</li>
+  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}
+      onClick={onClick}>{label}</li>
 );
 
 export const TodoList = (
@@ -101,7 +104,7 @@ export const TodoFilterLink = (
 const TodoApp = (
   { todos, filter }
 ) => (
-  <section id="todoApp">
+  <section className="todoApp">
     <TodoForm onSubmit={label => store.dispatch({ type : ADD_TODO, label })}/>
     <TodoList todos={_getFilteredTodos(todos, filter)}
               onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}/>
