@@ -1,26 +1,26 @@
 'use strict';
 
-//styles
+// Styles
 import './TodoApp.scss';
 
-//dependencies
+// Dependencies
 import React          from 'react';
 import { connect }    from 'react-redux';
 
 import {
-  ADD_TODO,
-  TOGGLE_TODO,
-  REMOVE_TODO
+  addTodo,
+  removeTodo,
+  toggleTodo
 }                     from './reducers/todos.reducer';
 import {
   todoFilters,
-  SET_TODO_FILTER
+  setTodoFilter
 }                     from './reducers/todoFilter.reducer';
 
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
 
-//presentational components
+// Presentational Components
 export const TodoButton = (
   { onClick }
 ) => (
@@ -96,7 +96,7 @@ export const TodoFilterLinks = (
   </div>
 );
 
-//container components
+// Container Components
 let TodoApp = ({
   filter,
   filterList,
@@ -127,10 +127,10 @@ const MapStateToProps = ( state ) => {
 
 const MapDispatchToProps = ( dispatch ) => {
   return {
-    onTodoFormSubmit  : label => dispatch({ type : ADD_TODO, label }),
-    onTodoClick       : id => dispatch({ type : TOGGLE_TODO, id }),
-    onTodoButtonClick : id => dispatch({ type : REMOVE_TODO, id }),
-    onLinkClick       : filter => dispatch({ type : SET_TODO_FILTER, filter })
+    onTodoFormSubmit  : label => dispatch(addTodo(label)),
+    onTodoClick       : id => dispatch(toggleTodo(id)),
+    onTodoButtonClick : id => dispatch(removeTodo(id)),
+    onLinkClick       : filter => dispatch(setTodoFilter(filter))
   };
 };
 
