@@ -20,10 +20,7 @@ const todos = ( state = [], action ) => {
         }
       ];
     case REMOVE_TODO:
-      return [
-        ...state.slice(action.id, 1),
-        ...state.slice(action.id + 1)
-      ];
+      return state.filter(todo => todo.id !== action.id);
     case TOGGLE_TODO:
       return state.map(todo => {
         return action.id === todo.id ? Object.assign({}, todo, { completed : !todo.completed}) : todo;

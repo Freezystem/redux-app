@@ -9,7 +9,8 @@ import store          from '../../app';
 
 import {
   ADD_TODO,
-  TOGGLE_TODO
+  TOGGLE_TODO,
+  REMOVE_TODO
 }                     from '../../reducers/todos.reducer';
 import {
   todoFilters
@@ -19,11 +20,19 @@ const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
 
 //components
-export const Todo = (
-  { completed, label, onClick }
+export const TodoButton = (
+  { onClick }
 ) => (
-  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}
-      onClick={onClick}>{label}</li>
+  <button onClick={onClick}>X</button>
+);
+
+export const Todo = (
+  { completed, label, onClick, onTodoButtonClick }
+) => (
+  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>
+    <span onClick={onClick}>{label}</span>
+    <TodoButton onClick={onTodoButtonClick}/>
+  </li>
 );
 
 export const TodoList = (
@@ -34,7 +43,8 @@ export const TodoList = (
       todos.map(todo =>
         <Todo key={todo.id}
               {...todo}
-              onClick={() => onTodoClick(todo.id)}/>
+              onClick={() => onTodoClick(todo.id)}
+              onTodoButtonClick={id => store.dispatch({ type : REMOVE_TODO, id : todo.id })}/>
       )
     }
   </ul>
@@ -60,10 +70,10 @@ export const TodoForm = (
 };
 
 export const Link = (
-  { href, label, onClick }
+  { to, label, onClick }
 ) => (
   <a className="filterList_item filterList_item-inactive"
-     href={href}
+     href={to}
      onClick={onClick}>{label}</a>
 );
 
@@ -73,7 +83,7 @@ export const FilterLink = (
   return active ?
     (<a className="filterList_item filterList_item-active">{filter.replace(/SHOW_/, '')}</a>)
     :
-    (<Link href={`#${filter}`}
+    (<Link to={`#${filter}`}
            label={filter.replace(/SHOW_/, '')}
            onClick={
              (e) => {
