@@ -109,7 +109,7 @@ export const TodoFilterLinks = (
 //main component
 class TodoApp extends React.Component {
   componentDidMount () {
-    let { store } = this.props;
+    let { store } = this.context;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -129,7 +129,7 @@ class TodoApp extends React.Component {
   }
 
   render () {
-    let { store } = this.props;
+    let { store } = this.context;
     let { todos, todoFilter : filter } = store.getState();
 
     return (
@@ -147,5 +147,9 @@ class TodoApp extends React.Component {
     );
   }
 }
+
+TodoApp.contextTypes = {
+  store : React.PropTypes.object
+};
 
 export default TodoApp;

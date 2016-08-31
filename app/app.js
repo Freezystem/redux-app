@@ -25,7 +25,25 @@ const rootReducer = combineReducers({
   todoFilter
 });
 
+class Provider extends React.Component {
+  getChildContext () {
+    return {
+      store : this.props.store
+    }
+  }
+
+  render () {
+    return this.props.children;
+  }
+}
+
+Provider.childContextTypes = {
+  store : React.PropTypes.object
+};
+
 ReactDOM.render(
-  <TodoApp store={createStore(rootReducer, initialState)}/>,
+  <Provider store={createStore(rootReducer, initialState)}>
+    <TodoApp/>
+  </Provider>,
   document.getElementById('app')
 );
