@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // Libs
 import React          from 'react';

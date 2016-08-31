@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // Actions
 export const SET_TODO_FILTER = 'SET_TODO_FILTER';

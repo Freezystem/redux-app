@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // Actions
 export const ADD_TODO     = 'ADD_TODO';

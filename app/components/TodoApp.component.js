@@ -1,3 +1,5 @@
+'use strict';
+
 import React          from 'react';
 import store          from '../app';
 
@@ -9,12 +11,10 @@ import {
   todoFilters
 }                     from '../reducers/todoFilter.reducer';
 
-let { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
-
-import TodoFilterLink from './TodoFilterLinks.component';
+const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
 export const Todo = (
-  { onClick, completed, label }
+  { completed, label, onClick }
 ) => (
   <li className="todoList_item"
       onClick={onClick}
@@ -56,6 +56,48 @@ export const TodoForm = (
   )
 };
 
+export const Link = (
+  { href, label, onClick }
+) => (
+  <a className="filterList_item filterList_item-inactive"
+     href={href}
+     onClick={onClick}>{label}</a>
+);
+
+export const FilterLink = (
+  { active, filter }
+) => {
+  return active ?
+    (<a className="filterList_item filterList_item-active">{filter.replace(/SHOW_/, '')}</a>)
+    :
+    (<Link href={`#${filter}`}
+           label={filter.replace(/SHOW_/, '')}
+           onClick={
+             (e) => {
+               e.preventDefault();
+               store.dispatch({
+                 type   : 'SET_TODO_FILTER',
+                 filter : filter
+               });
+             }
+           }/>);
+};
+
+export const TodoFilterLink = (
+  { filterList, currentFilter }
+) => (
+  <div className="filterList">
+    {
+      filterList.map((filter, index) => (
+        <FilterLink key={index}
+                    filter={filter}
+                    active={filter === currentFilter}/>
+      ))
+    }
+  </div>
+);
+
+//main component
 const TodoApp = (
   { todos, filter }
 ) => (
@@ -63,10 +105,11 @@ const TodoApp = (
     <TodoForm onSubmit={label => store.dispatch({ type : ADD_TODO, label })}/>
     <TodoList todos={_getFilteredTodos(todos, filter)}
               onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}/>
-    <TodoFilterLink filter={filter}/>
+    <TodoFilterLink filterList={Object.keys(todoFilters)} currentFilter={filter}/>
   </section>
 );
 
+//private functions
 function _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
   switch ( filter ) {
     case SHOW_PENDING:
