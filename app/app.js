@@ -7,6 +7,9 @@ import {
   createStore,
   combineReducers
 }                     from 'redux';
+import {
+  Provider
+}                     from 'react-redux';
 
 // Reducers
 import todoFilter     from './reducers/todoFilter.reducer';
@@ -24,22 +27,6 @@ const rootReducer = combineReducers({
   todos,
   todoFilter
 });
-
-class Provider extends React.Component {
-  getChildContext () {
-    return {
-      store : this.props.store
-    }
-  }
-
-  render () {
-    return this.props.children;
-  }
-}
-
-Provider.childContextTypes = {
-  store : React.PropTypes.object
-};
 
 ReactDOM.render(
   <Provider store={createStore(rootReducer, initialState)}>
