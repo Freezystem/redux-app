@@ -5,6 +5,7 @@ import './TodoApp.scss';
 
 //dependencies
 import React          from 'react';
+import { connect }    from 'react-redux';
 
 import {
   ADD_TODO,
@@ -36,11 +37,11 @@ export const Todo = (
 );
 
 export const TodoList = (
-  { todos, onTodoClick, onTodoButtonClick }
+  { filteredTodos, onTodoClick, onTodoButtonClick }
 ) => (
   <ul className="todoList">
     {
-      todos.map(todo =>
+      filteredTodos.map(todo =>
         <Todo key={todo.id}
               {...todo}
               onClick={() => onTodoClick(todo.id)}
@@ -51,7 +52,7 @@ export const TodoList = (
 );
 
 export const TodoForm = (
-  { onSubmit }
+  { onTodoFormSubmit }
 ) => {
   let _label;
 
@@ -59,7 +60,7 @@ export const TodoForm = (
     <form className="todoForm"
           onSubmit={(e) => {
             e.preventDefault();
-            _label.value.trim() && onSubmit(_label.value.trim());
+            _label.value.trim() && onTodoFormSubmit(_label.value.trim());
             _label.value = '';
           }}>
       <input className="todoForm_label"
@@ -69,27 +70,16 @@ export const TodoForm = (
   )
 };
 
-export const Link = (
-  { to, label, onClick }
-) => (
-  <a className="filterList_item filterList_item-inactive"
-     href={to}
-     onClick={onClick}>{label}</a>
-);
-
 export const FilterLink = (
-  { active, filter, onLinkClick }
-) => {
-  return active ?
-    (<a className="filterList_item filterList_item-active">{filter.replace(/SHOW_/, '')}</a>)
-    :
-    (<Link to={`#${filter}`}
-           label={filter.replace(/SHOW_/, '')}
-           onClick={e => {
-             e.preventDefault();
-             onLinkClick(filter);
-           }}/>);
-};
+  { active, filter, onClick }
+) => (
+  <a className={`filterList_item filterList_item-${active ? 'active' : 'inactive'}`}
+     href={`${filter}`}
+     onClick={e => {
+       e.preventDefault();
+       !active && onClick(filter);
+     }}>{filter.replace(/SHOW_/, '')}</a>
+);
 
 export const TodoFilterLinks = (
   { filterList, currentFilter, onLinkClick }
@@ -100,56 +90,64 @@ export const TodoFilterLinks = (
         <FilterLink key={index}
                     filter={filter}
                     active={filter === currentFilter}
-                    onLinkClick={onLinkClick}/>
+                    onClick={onLinkClick}/>
       ))
     }
   </div>
 );
 
 //main component
-class TodoApp extends React.Component {
-  componentDidMount () {
-    let { store } = this.context;
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
+let TodoApp = ({
+  filter,
+  filterList,
+  filteredTodos,
+  onTodoFormSubmit,
+  onTodoClick,
+  onTodoButtonClick,
+  onLinkClick
+}) => (
+  <section className="todoApp">
+    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>
+    <TodoList filteredTodos={filteredTodos}
+              onTodoClick={onTodoClick}
+              onTodoButtonClick={onTodoButtonClick}/>
+    <TodoFilterLinks filterList={filterList}
+                     currentFilter={filter}
+                     onLinkClick={onLinkClick}/>
+  </section>
+);
 
-  componentWillUnmount () {
-    this.unsubscribe();
-  }
+const MapStateToProps = ( state ) => {
+  return {
+    filter        : state.todoFilter,
+    filterList    : Object.keys(todoFilters),
+    filteredTodos : _getFilteredTodos(state.todos, state.todoFilter)
+  };
+};
 
-  _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
-    switch ( filter ) {
-      case SHOW_PENDING:
-        return todos.filter(t => !t.completed);
-      case SHOW_COMPLETED:
-        return todos.filter(t => t.completed);
-      default:
-        return todos;
-    }
-  }
+const MapDispatchToProps = ( dispatch ) => {
+  return {
+    onTodoFormSubmit  : label => dispatch({ type : ADD_TODO, label }),
+    onTodoClick       : id => dispatch({ type : TOGGLE_TODO, id }),
+    onTodoButtonClick : id => dispatch({ type : REMOVE_TODO, id }),
+    onLinkClick       : filter => dispatch({ type : SET_TODO_FILTER, filter })
+  };
+};
 
-  render () {
-    let { store } = this.context;
-    let { todos, todoFilter : filter } = store.getState();
+TodoApp = connect(
+  MapStateToProps,
+  MapDispatchToProps
+)(TodoApp);
 
-    return (
-      <section className="todoApp">
-        <TodoForm onSubmit={label => store.dispatch({ type : ADD_TODO, label })}/>
-        <TodoList todos={this._getFilteredTodos(todos, filter)}
-                  onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}
-                  onTodoButtonClick={id => store.dispatch({ type : REMOVE_TODO, id })}/>
-        <TodoFilterLinks filterList={Object.keys(todoFilters)}
-                         currentFilter={filter}
-                         onLinkClick={
-                           filter => store.dispatch({ type : SET_TODO_FILTER, filter })
-                         }/>
-      </section>
-    );
+function _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
+  switch ( filter ) {
+    case SHOW_PENDING:
+      return todos.filter(t => !t.completed);
+    case SHOW_COMPLETED:
+      return todos.filter(t => t.completed);
+    default:
+      return todos;
   }
 }
-
-TodoApp.contextTypes = {
-  store : React.PropTypes.object
-};
 
 export default TodoApp;

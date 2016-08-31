@@ -7,11 +7,22 @@
       &-pending {
         text-decoration : none;
       }
+      span {
+        cursor : default;
+      }
+      button {
+        cursor : pointer;
+      }
     }
   }
   .filterList {
     &_item {
       margin-right : 10px;
+      &-active {
+        text-decoration : none;
+        color           : #000;
+        cursor          : default;
+      }
     }
   }
 }
