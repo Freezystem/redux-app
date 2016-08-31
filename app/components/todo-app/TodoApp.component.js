@@ -107,31 +107,44 @@ export const TodoFilterLinks = (
 );
 
 //main component
-const TodoApp = (
-  { store, todos, filter }
-) => (
-  <section className="todoApp">
-    <TodoForm onSubmit={label => store.dispatch({ type : ADD_TODO, label })}/>
-    <TodoList todos={_getFilteredTodos(todos, filter)}
-              onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}
-              onTodoButtonClick={id => store.dispatch({ type : REMOVE_TODO, id })}/>
-    <TodoFilterLinks filterList={Object.keys(todoFilters)}
-                     currentFilter={filter}
-                     onLinkClick={
-                       filter => store.dispatch({ type : SET_TODO_FILTER, filter })
-                     }/>
-  </section>
-);
+class TodoApp extends React.Component {
+  componentDidMount () {
+    let { store } = this.props;
+    this.unsubscribe = store.subscribe(() => this.forceUpdate());
+  }
 
-//private functions
-function _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
-  switch ( filter ) {
-    case SHOW_PENDING:
-      return todos.filter(t => !t.completed);
-    case SHOW_COMPLETED:
-      return todos.filter(t => t.completed);
-    default:
-      return todos;
+  componentWillUnmount () {
+    this.unsubscribe();
+  }
+
+  _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
+    switch ( filter ) {
+      case SHOW_PENDING:
+        return todos.filter(t => !t.completed);
+      case SHOW_COMPLETED:
+        return todos.filter(t => t.completed);
+      default:
+        return todos;
+    }
+  }
+
+  render () {
+    let { store } = this.props;
+    let { todos, todoFilter : filter } = store.getState();
+
+    return (
+      <section className="todoApp">
+        <TodoForm onSubmit={label => store.dispatch({ type : ADD_TODO, label })}/>
+        <TodoList todos={this._getFilteredTodos(todos, filter)}
+                  onTodoClick={id => store.dispatch({ type : TOGGLE_TODO, id })}
+                  onTodoButtonClick={id => store.dispatch({ type : REMOVE_TODO, id })}/>
+        <TodoFilterLinks filterList={Object.keys(todoFilters)}
+                         currentFilter={filter}
+                         onLinkClick={
+                           filter => store.dispatch({ type : SET_TODO_FILTER, filter })
+                         }/>
+      </section>
+    );
   }
 }
 

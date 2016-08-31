@@ -25,18 +25,7 @@ const rootReducer = combineReducers({
   todoFilter
 });
 
-const store = createStore(rootReducer, initialState);
-
-const renderApp = () => {
-  console.log('store:',store.getState());
-
-  return ReactDOM.render(
-    <TodoApp store={store} todos={store.getState().todos} filter={store.getState().todoFilter}/>,
-    document.getElementById('app')
-  );
-};
-
-store.subscribe(renderApp);
-renderApp();
-
-export default store;
+ReactDOM.render(
+  <TodoApp store={createStore(rootReducer, initialState)}/>,
+  document.getElementById('app')
+);
