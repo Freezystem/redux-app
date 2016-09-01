@@ -7,7 +7,7 @@ var debug   = process.env.NODE_ENV !== 'production',
 module.exports = {
   context : path.join(__dirname, 'app'),
   devtool : debug ? 'inline-sourcemap' : null,
-  entry   : './app.js',
+  entry   : './index.js',
   module  : {
     loaders : [
       {

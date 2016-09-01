@@ -4,29 +4,20 @@
 import React          from 'react';
 import ReactDOM       from 'react-dom';
 import {
-  createStore,
-  combineReducers
+  createStore
 }                     from 'redux';
 import {
   Provider
 }                     from 'react-redux';
 
-// Reducers
-import todoFilter     from './modules/todos/reducers/todoFilter.reducer';
-import todos          from './modules/todos/reducers/todos.reducer';
-
 // Components
 import TodoApp        from './modules/todos/TodoApp.component';
 
-const initialState = {
-  todos       : [],
-  todoFilter  : 'SHOW_ALL'
-};
-
-const rootReducer = combineReducers({
-  todos,
-  todoFilter
-});
+// Reducer
+import {
+  rootReducer,
+  initialState
+}                     from './reducer';
 
 ReactDOM.render(
   <Provider store={createStore(rootReducer, initialState)}>

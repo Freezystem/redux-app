@@ -19,7 +19,6 @@ import {
 
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
-
 // Presentational Components
 export const TodoButton = (
   { onClick }

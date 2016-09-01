@@ -19,15 +19,13 @@ export const toggleTodo = ( id ) => {
 };
 
 // Reducer
-let nextTodoId = -1;
-
 const todos = ( state = [], action ) => {
   switch ( action.type ) {
     case ADD_TODO:
       return [
         ...state,
         {
-          id        : nextTodoId++,
+          id        : state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
           label     : action.label,
           completed : false
         }
