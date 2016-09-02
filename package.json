@@ -45,7 +45,8 @@
   "scripts": {
     "clean-install": "rm -rf ./node_modules && npm i",
     "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host redux.app.io --open",
-    "build": "npm run clean-install && webpack -p",
+    "build": "npm i && webpack -p",
+    "build:clean": "npm run clean-install && webpack -p",
     "test": "mocha --compilers js:babel-register --recursive --es_staging --use_strict --require ignore-styles",
     "test:watch": "npm test -- --watch"
   },
