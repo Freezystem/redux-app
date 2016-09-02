@@ -59,6 +59,8 @@ export const TodoForm = (
             _label.value = '';
           }}>
       <input className="todoForm_label"
+             type="text"
+             value=""
              ref={input => _label = input}/>
       <button className="todoForm_submit">Add Todo</button>
     </form>

@@ -6,19 +6,45 @@ import jsDOM        from 'jsdom';
 import { mount }    from 'enzyme';
 
 import {
+  TodoForm,
   TodoList,
   Todo
 }                   from '../../app/modules/todos/TodoApp.component';
-
-import {
-  todoFilters
-}                   from '../../app/modules/todos/reducers/todoFilter.reducer';
 
 global.document = jsDOM.jsdom('<body/>');
 global.window   = document.defaultView;
 global.navigator= window.navigator;
 
 describe('components', () => {
+  describe('<TodoForm />', () => {
+    let attrs = {},
+      wrapper = null;
+
+    beforeEach(() => {
+      attrs = {
+        onTodoFormSubmit : expect.createSpy()
+      };
+
+      wrapper = mount(<TodoForm {...attrs} />);
+    });
+
+    it('should render a form to add a todo', () => {
+      const form    = wrapper.find('.todoForm');
+      const input   = form.find('.todoForm_label');
+      const button  = form.find('.todoForm_submit');
+
+      expect(form.type()).toBe('form');
+      expect(form.props().onSubmit).toBeA('function');
+
+      expect(input.length).toBe(1);
+      expect(input.type()).toBe('input');
+      expect(input.props().type).toBe('text');
+
+      expect(button.length).toBe(1);
+      expect(button.type()).toBe('button');
+    });
+  });
+
   describe('<TodoList />', () => {
     let attrs = {},
       wrapper = null;
@@ -37,10 +63,20 @@ describe('components', () => {
       wrapper = mount(<TodoList {...attrs} />);
     });
 
-    it('should have rendered filtered todos', () => {
-      expect(wrapper.find('.todoList_item').at(0).find('.todoList_itemLabel').text()).toBe('todo1');
-      expect(wrapper.find('.todoList_item').at(1).find('.todoList_itemLabel').text()).toBe('todo2');
-      expect(wrapper.find('.todoList_item').at(2).find('.todoList_itemLabel').text()).toBe('todo3');
+    it('should render filtered todos', () => {
+      const firstTodo = wrapper.find(Todo).at(0);
+      const secondTodo = wrapper.find(Todo).at(1);
+      const thirdTodo = wrapper.find(Todo).at(2);
+
+      expect(wrapper.find('.todoList').children().length).toBe(3);
+
+      expect(firstTodo.key()).toBe('111');
+      expect(secondTodo.key()).toBe('222');
+      expect(thirdTodo.key()).toBe('333');
+
+      expect(firstTodo.find('.todoList_itemLabel').text()).toBe('todo1');
+      expect(secondTodo.find('.todoList_itemLabel').text()).toBe('todo2');
+      expect(thirdTodo.find('.todoList_itemLabel').text()).toBe('todo3');
     });
   });
 
@@ -59,7 +95,7 @@ describe('components', () => {
       wrapper = mount(<Todo {...attrs} />);
     });
 
-    it('should have rendered a todo', () => {
+    it('should render a todo', () => {
       expect(wrapper.find('.todoList_itemLabel').text()).toBe('todo');
       expect(wrapper.find('.todoList_itemButton').text()).toExist();
     });
