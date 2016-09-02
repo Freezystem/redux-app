@@ -20,18 +20,14 @@ import {
 const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
 // Presentational Components
-export const TodoButton = (
-  { onClick }
-) => (
-  <button onClick={onClick}>X</button>
-);
-
 export const Todo = (
-  { completed, label, onClick, onTodoButtonClick }
+  { completed, label, onClick, onButtonClick }
 ) => (
   <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>
-    <span onClick={onClick}>{label}</span>
-    <TodoButton onClick={onTodoButtonClick}/>
+    <span className="todoList_itemLabel"
+          onClick={onClick}>{label}</span>
+    <button className="todoList_itemButton"
+            onClick={onButtonClick}>X</button>
   </li>
 );
 
@@ -96,7 +92,7 @@ export const TodoFilterLinks = (
 );
 
 // Container Components
-let TodoApp = ({
+export const TodoApp = ({
   filter,
   filterList,
   filteredTodos,
@@ -133,7 +129,7 @@ const MapDispatchToProps = ( dispatch ) => {
   };
 };
 
-TodoApp = connect(
+export default connect(
   MapStateToProps,
   MapDispatchToProps
 )(TodoApp);
@@ -148,5 +144,3 @@ function _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
       return todos;
   }
 }
-
-export default TodoApp;
