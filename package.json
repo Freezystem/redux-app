@@ -43,7 +43,7 @@
     "webpack-dev-server": "^1.15.1"
   },
   "scripts": {
-    "clean-install": "rm -rf ./node_modules && npm i",
+    "clean-install": "rm -rf ./node_modules && npm cache clean && npm i",
     "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host redux.app.io --open",
     "build": "npm i && webpack -p",
     "build:clean": "npm run clean-install && webpack -p",

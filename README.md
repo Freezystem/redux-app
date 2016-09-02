@@ -23,17 +23,24 @@ npm install
 
 ####Run development app
 ```
-npm i -g webpack-dev-server
 npm run dev
 ```
 
 ####Build production app
 ```
-npm i -g webpack
 npm run build
 ```
 
-####Run tests app
+or for a clean install
+```
+npm run build:clean
+```
+
+####Run tests
 ```
 npm test
+```
+or with watch option
+```
+npm test:watch
 ```
