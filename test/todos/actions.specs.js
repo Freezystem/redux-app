@@ -18,13 +18,16 @@ import {
 describe('actions', () => {
   describe('addTodo()', () => {
     it('should create an action to add a todo', () => {
-      const label = 'Write Tests';
+      const label = 'write tests';
       const expectedAction = {
         type : ADD_TODO,
         label
       };
+      const addTodoSpy = expect.createSpy().andCall(addTodo);
 
-      expect(addTodo(label)).toEqual(expectedAction);
+
+      expect(addTodoSpy(label)).toEqual(expectedAction);
+      expect(addTodoSpy).toHaveBeenCalledWith('write tests');
     });
   });
 
@@ -35,8 +38,10 @@ describe('actions', () => {
         type : REMOVE_TODO,
         id
       };
+      const removeTodoSpy = expect.createSpy().andCall(removeTodo);
 
-      expect(removeTodo(id)).toEqual(expectedAction);
+      expect(removeTodoSpy(id)).toEqual(expectedAction);
+      expect(removeTodoSpy).toHaveBeenCalledWith(42);
     });
   });
 
@@ -47,8 +52,10 @@ describe('actions', () => {
         type : TOGGLE_TODO,
         id
       };
+      const toggleTodoSpy = expect.createSpy().andCall(toggleTodo);
 
-      expect(toggleTodo(id)).toEqual(expectedAction);
+      expect(toggleTodoSpy(id)).toEqual(expectedAction);
+      expect(toggleTodoSpy).toHaveBeenCalledWith(42);
     });
   });
 
@@ -59,8 +66,10 @@ describe('actions', () => {
         type : SET_TODO_FILTER,
         filter
       };
+      const setTodoFilterSpy = expect.createSpy().andCall(setTodoFilter);
 
-      expect(setTodoFilter(filter)).toEqual(expectedAction);
+      expect(setTodoFilterSpy(filter)).toEqual(expectedAction);
+      expect(setTodoFilterSpy).toHaveBeenCalledWith(todoFilters.SHOW_ALL);
     });
   });
 });
