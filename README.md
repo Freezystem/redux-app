@@ -9,11 +9,12 @@
 Here is the features I inted to have on this project
 - [x] Configure a full webpack build
 - [x] Create a simple redux app
+- [ ] Add and use complex forms
 - [ ] Add some styles
 - [ ] Add routing and history
-- [ ] Add async calls to API
+- [ ] Add async (or observer-like) calls to API
 - [x] Add unit tests on actions, reducers and components
-- [ ] Add e2e tests on components
+- [ ] Add e2e tests on application
 - [x] Add automated continuous integration
 
 ###Libs
