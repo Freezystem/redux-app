@@ -47,7 +47,7 @@ export const TodoList = (
 );
 
 export const TodoForm = (
-  { onTodoFormSubmit }
+  { onTodoFormSubmit, defaultValue = '' }
 ) => {
   let _label;
 
@@ -60,7 +60,8 @@ export const TodoForm = (
           }}>
       <input className="todoForm_label"
              type="text"
-             value=""
+             value={defaultValue}
+             placeholder="What's need to be done today ?"
              ref={input => _label = input}/>
       <button className="todoForm_submit">Add Todo</button>
     </form>

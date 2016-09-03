@@ -11,9 +11,9 @@ import {
   Todo
 }                   from '../../app/modules/todos/TodoApp.component';
 
-global.document = jsDOM.jsdom('<body/>');
-global.window   = document.defaultView;
-global.navigator= window.navigator;
+global.document   = jsDOM.jsdom('<!doctype html><html><body></body></html>');
+global.window     = document.defaultView;
+global.navigator  = window.navigator;
 
 describe('components', () => {
   describe('<TodoForm />', () => {
@@ -42,6 +42,25 @@ describe('components', () => {
 
       expect(button.length).toBe(1);
       expect(button.type()).toBe('button');
+    });
+
+    it('should not submit form with an empty label', () => {
+      const form    = wrapper.find('.todoForm');
+
+      form.simulate('submit');
+
+      expect(attrs.onTodoFormSubmit).toNotHaveBeenCalled();
+    });
+
+    it('should submit form when a label is given', () => {
+      attrs.defaultValue = 'write test';
+      wrapper = mount(<TodoForm {...attrs} />);
+
+      const form = wrapper.find('.todoForm');
+
+      form.simulate('submit');
+
+      expect(attrs.onTodoFormSubmit).toHaveBeenCalledWith('write test');
     });
   });
 
