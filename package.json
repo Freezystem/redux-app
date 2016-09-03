@@ -33,6 +33,7 @@
     "html-webpack-plugin": "^2.22.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^9.4.5",
+    "jsdom-global": "^2.1.0",
     "mocha": "^3.0.2",
     "node-sass": "^3.8.0",
     "react-addons-test-utils": "^15.3.1",
@@ -47,7 +48,7 @@
     "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host redux.app.io --open",
     "build": "npm i && webpack -p",
     "build:clean": "npm run clean-install && webpack -p",
-    "test": "mocha --compilers js:babel-register --recursive --es_staging --use_strict --require ignore-styles",
+    "test": "mocha --compilers js:babel-register --recursive --es_staging --use_strict -r ignore-styles -r jsdom-global/register",
     "test:watch": "npm test -- --watch"
   },
   "author": "freezystem@gmail.com",

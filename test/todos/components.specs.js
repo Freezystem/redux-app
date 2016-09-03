@@ -2,7 +2,6 @@
 
 import React        from 'react';
 import expect       from 'expect';
-import jsDOM        from 'jsdom';
 import { mount }    from 'enzyme';
 
 import {
@@ -10,10 +9,6 @@ import {
   TodoList,
   Todo
 }                   from '../../app/modules/todos/TodoApp.component';
-
-global.document   = jsDOM.jsdom('<!doctype html><html><body></body></html>');
-global.window     = document.defaultView;
-global.navigator  = window.navigator;
 
 describe('components', () => {
   describe('<TodoForm />', () => {
