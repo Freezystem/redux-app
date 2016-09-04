@@ -8,7 +8,8 @@ import {
   Todo,
   TodoList,
   TodoForm,
-  FilterLink
+  FilterLink,
+  TodoFilterLinks
 }                   from '../../app/modules/todos/TodoApp.component';
 
 import {
@@ -143,7 +144,7 @@ describe('components', () => {
     });
 
     it('should generate a clickable link to filter todos', () => {
-      const link  = wrapper.find('.filterList_item').at(0),
+      const link  = wrapper.find('.filterList_item').first(),
         linkProps = link.props();
 
       expect(linkProps.href).toBe(`#${todoFilters.SHOW_ALL}`);
@@ -157,7 +158,7 @@ describe('components', () => {
 
     it('should not be clickable if filter is already active', () => {
       wrapper.setProps({ active : true });
-      const link  = wrapper.find('.filterList_item').at(0),
+      const link  = wrapper.find('.filterList_item').first(),
         linkProps = link.props();
 
       expect(linkProps.href).toBe(`#${todoFilters.SHOW_ALL}`);
@@ -170,9 +171,40 @@ describe('components', () => {
     });
 
     it('should display the filter name properly', () => {
-      const link = wrapper.find('.filterList_item').at(0);
+      const link = wrapper.find('.filterList_item').first();
 
       expect(link.text()).toBe('ALL');
+    });
+  });
+
+  describe('<TodoFilterLinks />', () => {
+    let attrs = {},
+      wrapper = null;
+
+    beforeEach(() => {
+      attrs = {
+        filterList    : Object.keys(todoFilters),
+        currentFilter : todoFilters.SHOW_ALL,
+        onLinkClick   : expect.createSpy()
+      };
+
+      wrapper = mount(<TodoFilterLinks {...attrs} />);
+    });
+
+    it('should render all filter links', () => {
+      expect(wrapper.find('.filterList_item').length).toBe(attrs.filterList.length);
+    });
+
+    it('should set proper filter as active', () => {
+      expect(wrapper.find('.filterList_item-active').length).toBe(1);
+      expect(wrapper.find('.filterList_item-inactive').length).toBe(attrs.filterList.length - 1);
+      expect(wrapper.find('.filterList_item-active').first().text()).toBe('ALL');
+    });
+
+    it('should pass a fonction as onClick property', () => {
+      wrapper.find('.filterList_item-inactive').first().simulate('click');
+
+      expect(attrs.onLinkClick).toHaveBeenCalled();
     });
   });
 });
