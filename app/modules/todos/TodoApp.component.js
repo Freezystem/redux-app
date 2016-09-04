@@ -72,7 +72,7 @@ export const FilterLink = (
   { active, filter, onClick }
 ) => (
   <a className={`filterList_item filterList_item-${active ? 'active' : 'inactive'}`}
-     href={`${filter}`}
+     href={`#${filter}`}
      onClick={e => {
        e.preventDefault();
        !active && onClick(filter);

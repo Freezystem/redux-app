@@ -5,10 +5,15 @@ import expect       from 'expect';
 import { mount }    from 'enzyme';
 
 import {
-  TodoForm,
+  Todo,
   TodoList,
-  Todo
+  TodoForm,
+  FilterLink
 }                   from '../../app/modules/todos/TodoApp.component';
+
+import {
+  todoFilters
+}                   from '../../app/modules/todos/reducers/todoFilter.reducer';
 
 describe('components', () => {
   describe('<Todo />', () => {
@@ -116,14 +121,58 @@ describe('components', () => {
     });
 
     it('should submit form when a label is given', () => {
-      attrs.defaultValue = 'write test';
-      wrapper = mount(<TodoForm {...attrs} />);
-
-      const form = wrapper.find('.todoForm');
-
-      form.simulate('submit');
+      wrapper.setProps({defaultValue : 'write test'})
+        .find('.todoForm').simulate('submit');
 
       expect(attrs.onTodoFormSubmit).toHaveBeenCalledWith('write test');
+    });
+  });
+
+  describe('<FilterLink />', () => {
+    let attrs = {},
+    wrapper = null;
+
+    beforeEach(() => {
+      attrs = {
+        active  : false,
+        filter  : todoFilters.SHOW_ALL,
+        onClick : expect.createSpy()
+      };
+
+      wrapper = mount(<FilterLink {...attrs} />);
+    });
+
+    it('should generate a clickable link to filter todos', () => {
+      const link  = wrapper.find('.filterList_item').at(0),
+        linkProps = link.props();
+
+      expect(linkProps.href).toBe(`#${todoFilters.SHOW_ALL}`);
+      expect(~linkProps.className.split(' ').indexOf('filterList_item-inactive')).toBeTruthy();
+      expect(~linkProps.className.split(' ').indexOf('filterList_item-active')).toBeFalsy();
+
+      link.simulate('click');
+
+      expect(attrs.onClick).toHaveBeenCalledWith(todoFilters.SHOW_ALL);
+    });
+
+    it('should not be clickable if filter is already active', () => {
+      wrapper.setProps({ active : true });
+      const link  = wrapper.find('.filterList_item').at(0),
+        linkProps = link.props();
+
+      expect(linkProps.href).toBe(`#${todoFilters.SHOW_ALL}`);
+      expect(~linkProps.className.split(' ').indexOf('filterList_item-active')).toBeTruthy();
+      expect(~linkProps.className.split(' ').indexOf('filterList_item-inactive')).toBeFalsy();
+
+      link.simulate('click');
+
+      expect(attrs.onClick).toNotHaveBeenCalled();
+    });
+
+    it('should display the filter name properly', () => {
+      const link = wrapper.find('.filterList_item').at(0);
+
+      expect(link.text()).toBe('ALL');
     });
   });
 });
