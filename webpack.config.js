@@ -5,10 +5,13 @@ var debug   = process.env.NODE_ENV !== 'production',
   HWPConfig = new HWP({ template : __dirname + '/app/index.html', filename : 'index.html', inject : 'body' });
 
 module.exports = {
-  context : path.join(__dirname, 'app'),
-  devtool : debug ? 'inline-sourcemap' : null,
-  entry   : './index.js',
-  module  : {
+  context   : path.join(__dirname, 'app'),
+  devtool   : debug ? 'inline-sourcemap' : null,
+  devServer : {
+    historyApiFallback: true
+  },
+  entry     : './index.js',
+  module    : {
     loaders : [
       {
         test    : /\.jsx?$/,
@@ -26,11 +29,11 @@ module.exports = {
       }
     ]
   },
-  output  : {
+  output    : {
     path      : path.resolve(__dirname, 'dist'),
     filename  : 'client.min.js'
   },
-  plugins : debug ? [
+  plugins   : debug ? [
     HWPConfig
   ] : [
     new webpack.optimize.DedupePlugin(),
