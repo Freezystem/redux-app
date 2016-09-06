@@ -27,7 +27,7 @@ export const Todo = (
     <span className="todoList_itemLabel"
           onClick={onClick}>{label}</span>
     <button className="todoList_itemButton"
-            onClick={onButtonClick}>X</button>
+            onClick={onButtonClick}>+</button>
   </li>
 );
 

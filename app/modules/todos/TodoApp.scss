@@ -3,18 +3,17 @@
 .todoApp {
   display   : inline-flex;
   flex-flow : column nowrap;
-  width     : 100%;
+  width     : 400px;
   padding   : 10px;
   .todoForm {
     display : inline-flex;
     width   : 100%;
     &_label {
-      width         : 400px;
+      flex          : 1;
       padding       : 2px 10px;
       color         : #454545;
       border        : none;
       border-bottom : 2px solid #5896FD;
-      font-family   : 'Short Stack', cursive;
       font-size     : 20px;
     }
     &_submit {
@@ -30,21 +29,46 @@
     }
   }
   .todoList {
+    display   : inline-flex;
+    flex-flow : column nowrap;
     &_item {
+      display       : inline-flex;
+      height        : 24px;
+      line-height   : 20px;
+      margin-top    : 10px;
       &-completed {
-        text-decoration : line-through;
+        span {
+          text-decoration : line-through;
+        }
       }
       &-pending {
-        text-decoration : none;
+        span {
+          text-decoration : none;
+        }
       }
       span {
-        font-family : 'Short Stack', cursive;
-        font-size   : 20px;
-        color       : #454545;
-        cursor      : default;
+        flex          : 1;
+        padding-left  : 10px;
+        font-family   : 'Short Stack', cursive;
+        font-size     : 14px;
+        color         : #454545;
+        cursor        : default;
+        height        : inherit;
+        line-height   : 24px;
       }
       button {
-        cursor : pointer;
+        cursor            : pointer;
+        text-align        : center;
+        font-size         : 20px;
+        font-weight       : 700;
+        color             : #5896FD;
+        background-color  : #fff;
+        border            : 2px solid #5896FD;
+        border-radius     : 50%;
+        width             : 24px;
+        height            : inherit;
+        line-height       : inherit;
+        transform         : rotate(45deg);
       }
     }
   }
