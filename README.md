@@ -47,7 +47,7 @@ Tests
 
 ####Setup the app
 ```
-git clone https://github.com/Freezystem/redux-app.git;
+git clone https://github.com/Freezystem/redux-app.git
 npm install
 ```
 
