@@ -122,8 +122,8 @@ describe('components', () => {
     });
 
     it('should submit form when a label is given', () => {
-      wrapper.setProps({defaultValue : 'write test'})
-        .find('.todoForm').simulate('submit');
+      wrapper.find('.todoForm_label').get(0).value = 'write test';
+      wrapper.find('.todoForm').simulate('submit');
 
       expect(attrs.onTodoFormSubmit).toHaveBeenCalledWith('write test');
     });

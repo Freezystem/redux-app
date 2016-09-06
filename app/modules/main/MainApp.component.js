@@ -1,24 +1,35 @@
+'use strict';
+
+import './MainApp.scss';
+
 import React  from 'react';
+import {
+  Link
+}             from 'react-router';
 
 export const Menu = () => (
-  <nav>
-    <Link to="/">Home</Link>
-    <Link to="todo">Todo</Link>
+  <nav className="appMenu">
+    <Link className="appMenu_item" activeClassName={'appMenu_item-active'} to="/">Home</Link>
+    <Link className="appMenu_item" activeClassName={'appMenu_item-active'} to="todo">Todo</Link>
   </nav>
 );
 
-export const Home = () => (
-  <h1>Hello Redux!</h1>
+export const HomePage = () => (
+  <div class="homePage">
+    <h1>Hello Redux!</h1>
+  </div>
 );
 
-export const FallBack = () => (
-  <h1>Error 404 : Page Not Found</h1>
+export const NotFound = () => (
+  <div class="notFound">
+    <h1>Error 404 : Page Not Found</h1>
+  </div>
 );
 
 const MainApp = ({
   children
 }) => (
-  <div id="App">
+  <div class="mainApp">
     <Menu/>
     {children}
   </div>

@@ -1,0 +1,37 @@
+* {
+  padding         : 0;
+  margin          : 0;
+  text-decoration : none;
+  box-sizing      : border-box;
+  font-family     : Lato, sans-serif;
+}
+
+html {
+
+}
+
+body {
+  margin : 0;
+}
+
+.mainApp {
+  .appMenu {
+    display           : inline-flex;
+    width             : 100%;
+    background-color  : #253645;
+    height            : 30px;
+    line-height       : 30px;
+    &_item {
+      padding     : 0 20px;
+      color       : #fff;
+      height      : inherit;
+      line-height : inherit;
+      &-active {
+        background-color : lighten(#253645, 10%);
+      }
+    }
+  }
+  .homePage {
+    padding : 10px;
+  }
+}
