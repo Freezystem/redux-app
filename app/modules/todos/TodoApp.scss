@@ -14,7 +14,7 @@
       color         : #454545;
       border        : none;
       border-bottom : 2px solid #5896FD;
-      font-size     : 20px;
+      font-size     : 16px;
     }
     &_submit {
       border            : 2px solid #5896FD;
@@ -73,7 +73,8 @@
     }
   }
   .filterList {
-    display : inline-flex;
+    display     : inline-flex;
+    margin-top  : 10px;
     &_label {
       margin-right      : 10px;
       padding-left      : 10px;
@@ -81,6 +82,9 @@
     }
     &_item {
       margin-right : 10px;
+      &:hover {
+        color : #5896FD;
+      }
       &-active {
         text-decoration : none;
         color           : #5896FD;
@@ -88,6 +92,23 @@
       }
       &-inactive {
         color : #454545;
+      }
+    }
+  }
+  .todoFooter {
+    display     : inline-flex;
+    width       : 100%;
+    margin-top  : 10px;
+    &_count {
+      flex          : 1;
+      padding-left  : 10px;
+      color         : #5896FD;
+    }
+    &_clear {
+      color       : #454545;
+      cursor      : pointer;
+      &:hover {
+        color : #5896FD;
       }
     }
   }

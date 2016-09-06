@@ -10,14 +10,14 @@ import { connect }    from 'react-redux';
 import {
   addTodo,
   removeTodo,
-  toggleTodo
+  toggleTodo,
+  clearTodo
 }                     from './reducers/todos.reducer';
 import {
   todoFilters,
-  setTodoFilter
+  setTodoFilter,
+  getFilteredTodos
 }                     from './reducers/todoFilter.reducer';
-
-const { SHOW_ALL, SHOW_COMPLETED, SHOW_PENDING } = todoFilters;
 
 // Presentational Components
 export const Todo = (
@@ -94,14 +94,33 @@ export const TodoFilterLinks = (
   </div>
 );
 
+export const TodoFooter = (
+  { todos, onTodoClearClick }
+) => {
+  let completed = todos.filter(t => t.completed).length,
+    total       = todos.length,
+    text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';
+
+  return (
+    <p className="todoFooter">
+      <span className="todoFooter_count">{text}</span>
+      {
+        completed ? <a className="todoFooter_clear" onClick={onTodoClearClick}>clear completed</a> : ''
+      }
+    </p>
+  );
+};
+
+
 // Container Components
 export const TodoApp = ({
+  todos,
   filter,
   filterList,
-  filteredTodos,
   onTodoFormSubmit,
   onTodoClick,
   onTodoButtonClick,
+  onTodoClearClick,
   onLinkClick
 }) => (
   <section className="todoApp">
@@ -109,17 +128,18 @@ export const TodoApp = ({
     <TodoFilterLinks filterList={filterList}
                      currentFilter={filter}
                      onLinkClick={onLinkClick}/>
-    <TodoList filteredTodos={filteredTodos}
+    <TodoList filteredTodos={getFilteredTodos(todos, filter)}
               onTodoClick={onTodoClick}
               onTodoButtonClick={onTodoButtonClick}/>
+    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>
   </section>
 );
 
 const MapStateToProps = ( state ) => {
   return {
+    todos         : state.todos,
     filter        : state.todoFilter,
-    filterList    : Object.keys(todoFilters),
-    filteredTodos : _getFilteredTodos(state.todos, state.todoFilter)
+    filterList    : Object.keys(todoFilters)
   };
 };
 
@@ -128,6 +148,7 @@ const MapDispatchToProps = ( dispatch ) => {
     onTodoFormSubmit  : label => dispatch(addTodo(label)),
     onTodoClick       : id => dispatch(toggleTodo(id)),
     onTodoButtonClick : id => dispatch(removeTodo(id)),
+    onTodoClearClick  : () => dispatch(clearTodo()),
     onLinkClick       : filter => dispatch(setTodoFilter(filter))
   };
 };
@@ -136,14 +157,3 @@ export default connect(
   MapStateToProps,
   MapDispatchToProps
 )(TodoApp);
-
-function _getFilteredTodos ( todos = [], filter = SHOW_ALL ) {
-  switch ( filter ) {
-    case SHOW_PENDING:
-      return todos.filter(t => !t.completed);
-    case SHOW_COMPLETED:
-      return todos.filter(t => t.completed);
-    default:
-      return todos;
-  }
-}

@@ -13,6 +13,17 @@ export const setTodoFilter = ( filter ) => {
   return { type : SET_TODO_FILTER, filter };
 };
 
+export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) => {
+  switch ( filter ) {
+    case todoFilters.SHOW_PENDING:
+      return todos.filter(todo => !todo.completed);
+    case todoFilters.SHOW_COMPLETED:
+      return todos.filter(todo => todo.completed);
+    default:
+      return todos;
+  }
+};
+
 // Reducer
 const todoFilter = ( state = 'SHOW_ALL', action ) => {
   switch ( action.type ) {
