@@ -5,9 +5,11 @@ import {
   ADD_TODO,
   REMOVE_TODO,
   TOGGLE_TODO,
+  CLEAR_TODO,
   addTodo,
   removeTodo,
-  toggleTodo
+  toggleTodo,
+  clearTodo
 }                 from '../../app/modules/todos/reducers/todos.reducer';
 import {
   SET_TODO_FILTER,
@@ -56,6 +58,18 @@ describe('actions', () => {
 
       expect(toggleTodoSpy(id)).toEqual(expectedAction);
       expect(toggleTodoSpy).toHaveBeenCalledWith(42);
+    });
+  });
+
+  describe('clearTodo()', () => {
+    it('should create an action to clear completed todo', () => {
+      const expectedAction = {
+        type : CLEAR_TODO
+      };
+      const clearTodoSpy = expect.createSpy().andCall(clearTodo);
+
+      expect(clearTodoSpy()).toEqual(expectedAction);
+      expect(clearTodoSpy).toHaveBeenCalled();
     });
   });
 

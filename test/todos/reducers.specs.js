@@ -12,7 +12,8 @@ import todos,
 {
   addTodo,
   removeTodo,
-  toggleTodo
+  toggleTodo,
+  clearTodo
 }                           from '../../app/modules/todos/reducers/todos.reducer';
 
 import todoFilter,
@@ -75,6 +76,35 @@ describe('reducers', () => {
       ];
 
       expect(todos(stateBefore, toggleTodo(id))).toEqual(stateAfter);
+    });
+
+    it('should handle CLEAR_TODO', () => {
+      const stateBefore = deepFreeze([
+        {
+          id        : 33,
+          label     : 'Write Tests',
+          completed : true
+        },
+        {
+          id        : 42,
+          label     : 'Do Things',
+          completed : false
+        },
+        {
+          id        : 53,
+          label     : 'Make Stuff',
+          completed : true
+        },
+      ]);
+      const stateAfter  = [
+        {
+          id        : 42,
+          label     : 'Do Things',
+          completed : false
+        }
+      ];
+
+      expect(todos(stateBefore, clearTodo())).toEqual(stateAfter);
     });
   });
 
