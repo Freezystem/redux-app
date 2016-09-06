@@ -40,7 +40,7 @@ export const TodoList = (
         <Todo key={todo.id}
               {...todo}
               onClick={() => onTodoClick(todo.id)}
-              onTodoButtonClick={() => onTodoButtonClick(todo.id)}/>
+              onButtonClick={() => onTodoButtonClick(todo.id)}/>
       )
     }
   </ul>
@@ -62,7 +62,7 @@ export const TodoForm = (
              type="text"
              placeholder="What's need to be done today ?"
              ref={input => _label = input}/>
-      <button className="todoForm_submit">Add Todo</button>
+      <button className="todoForm_submit">add</button>
     </form>
   )
 };
@@ -82,6 +82,7 @@ export const TodoFilterLinks = (
   { filterList, currentFilter, onLinkClick }
 ) => (
   <div className="filterList">
+    <span class="filterList_label">see:</span>
     {
       filterList.map((filter, index) => (
         <FilterLink key={index}
@@ -105,12 +106,12 @@ export const TodoApp = ({
 }) => (
   <section className="todoApp">
     <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>
-    <TodoList filteredTodos={filteredTodos}
-              onTodoClick={onTodoClick}
-              onTodoButtonClick={onTodoButtonClick}/>
     <TodoFilterLinks filterList={filterList}
                      currentFilter={filter}
                      onLinkClick={onLinkClick}/>
+    <TodoList filteredTodos={filteredTodos}
+              onTodoClick={onTodoClick}
+              onTodoButtonClick={onTodoButtonClick}/>
   </section>
 );
 

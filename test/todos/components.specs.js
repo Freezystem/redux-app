@@ -25,6 +25,7 @@ describe('components', () => {
       attrs = {
         completed      : true,
         label          : 'todo',
+        id             : 42,
         onClick        : expect.createSpy(),
         onButtonClick  : expect.createSpy()
       };
@@ -59,7 +60,7 @@ describe('components', () => {
         filteredTodos       : [
           {label: 'todo1', id: 111, complete: false},
           {label: 'todo2', id: 222, complete: false},
-          {label: 'todo3', id: 333, complete: false},
+          {label: 'todo3', id: 333, complete: true},
         ],
         onTodoClick         : expect.createSpy(),
         onTodoButtonClick   : expect.createSpy()

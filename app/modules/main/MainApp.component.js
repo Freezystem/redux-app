@@ -15,13 +15,13 @@ export const Menu = () => (
 );
 
 export const HomePage = () => (
-  <div class="homePage">
+  <div className="homePage">
     <h1>Hello Redux!</h1>
   </div>
 );
 
 export const NotFound = () => (
-  <div class="notFound">
+  <div className="notFound">
     <h1>Error 404 : Page Not Found</h1>
   </div>
 );

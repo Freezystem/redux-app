@@ -10,7 +10,7 @@ Here is the features I intend to have on this project
 - [x] Configure a full webpack build
 - [x] Create a simple redux app
 - [ ] Add and use complex forms
-- [ ] Add some styles
+- [x] Add some styles
 - [x] Add routing and history
 - [ ] Add async (or observer-like) calls to API
 - [x] Add unit tests on actions, reducers and components
