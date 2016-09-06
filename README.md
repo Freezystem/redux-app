@@ -2,11 +2,11 @@
 
 [![Build Status](https://semaphoreci.com/api/v1/freezystem/redux-app/branches/master/badge.svg)](https://semaphoreci.com/freezystem/redux-app)
 
-> Just a simple redux app with routing, tests and stuff to learn Redux.
+> Just a simple app with routing, tests and stuff to learn Redux.
 
 ###Features
 
-Here is the features I inted to have on this project
+Here is the features I intend to have on this project
 - [x] Configure a full webpack build
 - [x] Create a simple redux app
 - [ ] Add and use complex forms
