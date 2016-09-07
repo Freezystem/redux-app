@@ -111,7 +111,6 @@ export const TodoFooter = (
   );
 };
 
-
 // Container Components
 export const TodoApp = ({
   todos,

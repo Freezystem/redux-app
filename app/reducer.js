@@ -5,19 +5,19 @@ import { combineReducers }  from 'redux';
 
 // Reducers
 import {
-  routerStateReducer
-}                           from 'redux-router';
+  routerReducer
+}                           from 'react-router-redux';
 import todos                from './modules/todos/reducers/todos.reducer';
 import todoFilter           from './modules/todos/reducers/todoFilter.reducer';
 
 export const initialState = {
-  router      : null,
+  routing     : { locationBeforeTransitions : null },
   todos       : [],
   todoFilter  : 'SHOW_ALL'
 };
 
 export const rootReducer = combineReducers({
-  router: routerStateReducer,
+  routing : routerReducer,
   todos,
   todoFilter
 });

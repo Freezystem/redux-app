@@ -14,6 +14,9 @@ import {
 import {
   browserHistory
 }                     from 'react-router';
+import {
+  syncHistoryWithStore
+}                     from 'react-router-redux'
 
 // Components
 import {
@@ -33,9 +36,12 @@ import {
   initialState
 }                     from './reducer';
 
+export const store    = createStore(rootReducer, initialState);
+export const history  = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
-  <Provider store={createStore(rootReducer, initialState)}>
-    <Router history={browserHistory}>
+  <Provider store={store}>
+    <Router history={history}>
       <Route component={MainApp}>
         <Route path="/" component={HomePage}/>
         <Route path="todo" component={TodoApp}/>
