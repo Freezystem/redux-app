@@ -6,6 +6,7 @@ import './TodoApp.scss';
 // Dependencies
 import React          from 'react';
 import { connect }    from 'react-redux';
+import classNames     from 'classnames';
 
 import {
   addTodo,
@@ -70,7 +71,7 @@ export const TodoForm = (
 export const FilterLink = (
   { active, filter, onClick }
 ) => (
-  <a className={`filterList_item filterList_item-${active ? 'active' : 'inactive'}`}
+  <a className={classNames('filterList_item', { 'filterList_item-active' : active})}
      href={`#${filter}`}
      onClick={e => {
        e.preventDefault();
@@ -97,16 +98,18 @@ export const TodoFilterLinks = (
 export const TodoFooter = (
   { todos, onTodoClearClick }
 ) => {
-  let completed = todos.filter(t => t.completed).length,
+  let completed = todos.filter(todo => todo.completed).length,
     total       = todos.length,
     text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';
 
   return (
     <p className="todoFooter">
       <span className="todoFooter_count">{text}</span>
-      {
-        completed ? <a className="todoFooter_clear" onClick={onTodoClearClick}>clear completed</a> : ''
-      }
+      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}
+         onClick={(e) => {
+           e.preventDefault();
+           completed && onTodoClearClick();
+         }}>clear completed</a>
     </p>
   );
 };

@@ -81,7 +81,8 @@
       color             : #5896FD;
     }
     &_item {
-      margin-right : 10px;
+      margin-right  : 10px;
+      color         : #454545;
       &:hover {
         color : #5896FD;
       }
@@ -89,9 +90,6 @@
         text-decoration : none;
         color           : #5896FD;
         cursor          : default;
-      }
-      &-inactive {
-        color : #454545;
       }
     }
   }
@@ -109,6 +107,9 @@
       cursor      : pointer;
       &:hover {
         color : #5896FD;
+      }
+      &-hide {
+        display : none !important;
       }
     }
   }

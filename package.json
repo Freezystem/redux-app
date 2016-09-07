@@ -8,6 +8,7 @@
     "url": "https://github.com/Freezystem/redux-app.git"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "history": "^2.1.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",

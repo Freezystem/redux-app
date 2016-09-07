@@ -8,6 +8,7 @@ import {
   Todo,
   TodoList,
   TodoForm,
+  TodoFooter,
   FilterLink,
   TodoFilterLinks
 }                   from '../../app/modules/todos/TodoApp.component';
@@ -58,9 +59,9 @@ describe('components', () => {
     beforeEach(() => {
       attrs = {
         filteredTodos       : [
-          {label: 'todo1', id: 111, complete: false},
-          {label: 'todo2', id: 222, complete: false},
-          {label: 'todo3', id: 333, complete: true},
+          {label: 'todo1', id: 111, completed: false},
+          {label: 'todo2', id: 222, completed: false},
+          {label: 'todo3', id: 333, completed: true},
         ],
         onTodoClick         : expect.createSpy(),
         onTodoButtonClick   : expect.createSpy()
@@ -145,12 +146,10 @@ describe('components', () => {
     });
 
     it('should generate a clickable link to filter todos', () => {
-      const link  = wrapper.find('.filterList_item').first(),
-        linkProps = link.props();
+      const link  = wrapper.find('.filterList_item').first();
 
-      expect(linkProps.href).toBe(`#${todoFilters.SHOW_ALL}`);
-      expect(~linkProps.className.split(' ').indexOf('filterList_item-inactive')).toBeTruthy();
-      expect(~linkProps.className.split(' ').indexOf('filterList_item-active')).toBeFalsy();
+      expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);
+      expect(link.hasClass('filterList_item-active')).toBeFalsy();
 
       link.simulate('click');
 
@@ -159,12 +158,10 @@ describe('components', () => {
 
     it('should not be clickable if filter is already active', () => {
       wrapper.setProps({ active : true });
-      const link  = wrapper.find('.filterList_item').first(),
-        linkProps = link.props();
+      const link  = wrapper.find('.filterList_item').first();
 
-      expect(linkProps.href).toBe(`#${todoFilters.SHOW_ALL}`);
-      expect(~linkProps.className.split(' ').indexOf('filterList_item-active')).toBeTruthy();
-      expect(~linkProps.className.split(' ').indexOf('filterList_item-inactive')).toBeFalsy();
+      expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);
+      expect(link.hasClass('filterList_item-active')).toBeTruthy();
 
       link.simulate('click');
 
@@ -198,14 +195,54 @@ describe('components', () => {
 
     it('should set proper filter as active', () => {
       expect(wrapper.find('.filterList_item-active').length).toBe(1);
-      expect(wrapper.find('.filterList_item-inactive').length).toBe(attrs.filterList.length - 1);
-      expect(wrapper.find('.filterList_item-active').first().text()).toBe('ALL');
+      expect(wrapper.find('.filterList_item').not('.filterList_item-active').length).toBe(attrs.filterList.length - 1);
+      expect(wrapper.find('.filterList_item-active').text()).toBe('ALL');
     });
 
     it('should pass a fonction as onClick property', () => {
-      wrapper.find('.filterList_item-inactive').first().simulate('click');
+      wrapper.find('.filterList_item').not('.filterList_item-active').first().simulate('click');
 
       expect(attrs.onLinkClick).toHaveBeenCalled();
+    });
+  });
+
+  describe('<TodoFooter />', () => {
+    let attrs = {},
+      wrapper = null;
+
+    beforeEach(() => {
+      attrs = {
+        todos : [
+          {label: 'todo1', id: 111, completed: false},
+          {label: 'todo2', id: 222, completed: true},
+          {label: 'todo3', id: 333, completed: false},
+        ],
+        onTodoClearClick : expect.createSpy()
+      };
+
+      wrapper = mount(<TodoFooter {...attrs} />);
+    });
+
+    it('should not display clear link if there isn\'t completed todo', () => {
+      wrapper.setProps({
+        todos : [
+          {label: 'todo1', id: 111, completed: false},
+          {label: 'todo2', id: 222, completed: false},
+          {label: 'todo3', id: 333, completed: false},
+        ]
+      });
+
+      expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeTruthy();
+    });
+
+    it('should display clear link if there is completed todo', () => {
+      expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeFalsy();
+    });
+
+    it('should call onTodoClearClick on clear link click', () => {
+      wrapper.find('.todoFooter_clear').first().simulate('click');
+
+      expect(attrs.onTodoClearClick).toHaveBeenCalled();
     });
   });
 });
