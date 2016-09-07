@@ -16,8 +16,9 @@ Here is the features I intend to have on this project
 - [x] Add unit tests on actions, reducers and components
 - [ ] Add e2e tests on application
 - [x] Add automated continuous integration
-- [ ] Add Redux Dev Tools
+- [x] Add Redux Dev Tools
 - [ ] Create production ready build in NPM scripts
+- [ ] Make some data persistent (LocalStorage / SessionStorage)
 
 ###Libs
 

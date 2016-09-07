@@ -36,8 +36,9 @@ import {
   initialState
 }                     from './reducer';
 
-export const store    = createStore(rootReducer, initialState);
-export const history  = syncHistoryWithStore(browserHistory, store);
+const devTool  = window.devToolsExtension && window.devToolsExtension();
+const store    = createStore(rootReducer, initialState, devTool);
+const history  = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
