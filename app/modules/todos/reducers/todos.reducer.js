@@ -27,14 +27,13 @@ export const clearTodo = () => {
 const todos = ( state = [], action ) => {
   switch ( action.type ) {
     case ADD_TODO:
-      return [
-        ...state,
+      return state.concat(
         {
           id        : state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
           label     : action.label,
           completed : false
         }
-      ];
+      );
     case REMOVE_TODO:
       return state.filter(todo => todo.id !== action.id);
     case TOGGLE_TODO:
