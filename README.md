@@ -16,6 +16,8 @@ Here is the features I intend to have on this project
 - [x] Add unit tests on actions, reducers and components
 - [ ] Add e2e tests on application
 - [x] Add automated continuous integration
+- [ ] Add Redux Dev Tools
+- [ ] Create production ready build in NPM scripts
 
 ###Libs
 
@@ -29,6 +31,7 @@ Build
 Framework
 - [React](https://github.com/facebook/react)
 - [React-redux](https://github.com/reactjs/react-redux)
+- [React-router](https://github.com/reactjs/react-router)
 - [React-router-redux](https://github.com/reactjs/react-router-redux)
 - [Redux](https://github.com/reactjs/redux)
 - [History](https://github.com/mjackson/history)
