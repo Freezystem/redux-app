@@ -1,6 +1,7 @@
 ##Redux App
 
 [![Build Status](https://semaphoreci.com/api/v1/freezystem/redux-app/branches/master/shields_badge.svg)](https://semaphoreci.com/freezystem/redux-app)
+![NPM Deps](https://david-dm.org/freezystem/redux-app.svg)
 
 > Just a simple app with routing, tests and stuff to learn Redux.
 
