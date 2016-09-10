@@ -1,0 +1,1501 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "app/index.js",
+    "memberof": null,
+    "longname": "app/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\n// Libs\nimport React          from 'react';\nimport ReactDOM       from 'react-dom';\nimport {\n  createStore,\n  applyMiddleware,\n  compose\n}                     from 'redux';\nimport {\n  Provider\n}                     from 'react-redux';\nimport {\n  browserHistory\n}                     from 'react-router';\nimport {\n  syncHistoryWithStore\n}                     from 'react-router-redux'\n\n// Components\nimport {\n  Router,\n  Route\n}                     from 'react-router';\nimport TodoApp        from './modules/todos/TodoApp.component';\nimport MainApp,\n{\n  HomePage,\n  NotFound\n}                     from './modules/main/MainApp.component';\n\n// Reducer\nimport {\n  rootReducer,\n  initialState\n}                     from './reducer';\n\nconst devTool  = window.devToolsExtension && window.devToolsExtension();\nconst store    = createStore(rootReducer, initialState, devTool);\nconst history  = syncHistoryWithStore(browserHistory, store);\n\nReactDOM.render(\n  <Provider store={store}>\n    <Router history={history}>\n      <Route component={MainApp}>\n        <Route path=\"/\" component={HomePage}/>\n        <Route path=\"todo\" component={TodoApp}/>\n      </Route>\n      <Route path=\"*\" component={NotFound}/>\n    </Router>\n  </Provider>,\n  document.getElementById('app')\n);\n"
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "devTool",
+    "memberof": "app/index.js",
+    "longname": "app/index.js~devTool",
+    "access": null,
+    "export": false,
+    "importPath": "redux",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 39,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "store",
+    "memberof": "app/index.js",
+    "longname": "app/index.js~store",
+    "access": null,
+    "export": false,
+    "importPath": "redux",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 3,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "history",
+    "memberof": "app/index.js",
+    "longname": "app/index.js~history",
+    "access": null,
+    "export": false,
+    "importPath": "redux",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 4,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "app/modules/main/MainApp.component.js",
+    "memberof": null,
+    "longname": "app/modules/main/MainApp.component.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\nimport './MainApp.scss';\n\nimport React  from 'react';\nimport {\n  Link\n}             from 'react-router';\n\n/**\n * Generate site navigation\n * @return {ReactElement} <nav/> Markup\n */\nexport const Menu = () => (\n  <nav className=\"appMenu\">\n    <Link className=\"appMenu_item\" activeClassName={'appMenu_item-active'} to=\"/\">Home</Link>\n    <Link className=\"appMenu_item\" activeClassName={'appMenu_item-active'} to=\"todo\">Todo</Link>\n  </nav>\n);\n\n/**\n * Temporary home page\n * @return {ReactElement} <div class=\"homePage\"/> Markup\n */\nexport const HomePage = () => (\n  <div className=\"homePage\">\n    <h1>Hello Redux!</h1>\n  </div>\n);\n\n/**\n * Error 404 fallback page\n * @return {ReactElement} <div class=\"notFound\"/> Markup\n */\nexport const NotFound = () => (\n  <div className=\"notFound\">\n    <h1>Error 404 : Page Not Found</h1>\n  </div>\n);\n\n/**\n * Main wrapper\n * @params {ReactElement} children - all components called from router\n * @return {ReactElement} <div class=\"notFound\"/> Markup\n */\nconst MainApp = ({\n  children\n}) => (\n  <div class=\"mainApp\">\n    <Menu/>\n    {children}\n  </div>\n);\n\nexport default MainApp;"
+  },
+  {
+    "__docId__": 5,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "Menu",
+    "memberof": "app/modules/main/MainApp.component.js",
+    "longname": "app/modules/main/MainApp.component.js~Menu",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/main/MainApp.component.js",
+    "importStyle": "{Menu}",
+    "description": "Generate site navigation",
+    "lineNumber": 14,
+    "return": {
+      "nullable": null,
+      "types": [
+        "ReactElement"
+      ],
+      "spread": false,
+      "description": "<nav/> Markup"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 6,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "HomePage",
+    "memberof": "app/modules/main/MainApp.component.js",
+    "longname": "app/modules/main/MainApp.component.js~HomePage",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/main/MainApp.component.js",
+    "importStyle": "{HomePage}",
+    "description": "Temporary home page",
+    "lineNumber": 25,
+    "return": {
+      "nullable": null,
+      "types": [
+        "ReactElement"
+      ],
+      "spread": false,
+      "description": "<div class=\"homePage\"/> Markup"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 7,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "NotFound",
+    "memberof": "app/modules/main/MainApp.component.js",
+    "longname": "app/modules/main/MainApp.component.js~NotFound",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/main/MainApp.component.js",
+    "importStyle": "{NotFound}",
+    "description": "Error 404 fallback page",
+    "lineNumber": 35,
+    "return": {
+      "nullable": null,
+      "types": [
+        "ReactElement"
+      ],
+      "spread": false,
+      "description": "<div class=\"notFound\"/> Markup"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 8,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "MainApp",
+    "memberof": "app/modules/main/MainApp.component.js",
+    "longname": "app/modules/main/MainApp.component.js~MainApp",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/main/MainApp.component.js",
+    "importStyle": "MainApp",
+    "description": "Main wrapper",
+    "lineNumber": 46,
+    "unknown": [
+      {
+        "tagName": "@params",
+        "tagValue": "{ReactElement} children - all components called from router"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "ReactElement"
+      ],
+      "spread": false,
+      "description": "<div class=\"notFound\"/> Markup"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 9,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "app/modules/todos/TodoApp.component.js",
+    "memberof": null,
+    "longname": "app/modules/todos/TodoApp.component.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\n// Styles\nimport './TodoApp.scss';\n\n// Dependencies\nimport React          from 'react';\nimport { connect }    from 'react-redux';\nimport classNames     from 'classnames';\n\nimport {\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                     from './reducers/todos.reducer';\nimport {\n  todoFilters,\n  setTodoFilter,\n  getFilteredTodos\n}                     from './reducers/todoFilter.reducer';\n\n// Presentational Components\nexport const Todo = (\n  { completed, label, onClick, onButtonClick }\n) => (\n  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>\n    <span className=\"todoList_itemLabel\"\n          onClick={onClick}>{label}</span>\n    <button className=\"todoList_itemButton\"\n            onClick={onButtonClick}>+</button>\n  </li>\n);\n\nexport const TodoList = (\n  { filteredTodos, onTodoClick, onTodoButtonClick }\n) => (\n  <ul className=\"todoList\">\n    {\n      filteredTodos.map(todo =>\n        <Todo key={todo.id}\n              {...todo}\n              onClick={() => onTodoClick(todo.id)}\n              onButtonClick={() => onTodoButtonClick(todo.id)}/>\n      )\n    }\n  </ul>\n);\n\nexport const TodoForm = (\n  { onTodoFormSubmit }\n) => {\n  let _label;\n\n  return (\n    <form className=\"todoForm\"\n          onSubmit={(e) => {\n            e.preventDefault();\n            _label.value.trim() && onTodoFormSubmit(_label.value.trim());\n            _label.value = '';\n          }}>\n      <input className=\"todoForm_label\"\n             type=\"text\"\n             placeholder=\"What's need to be done today ?\"\n             ref={input => _label = input}/>\n      <button className=\"todoForm_submit\">add</button>\n    </form>\n  )\n};\n\nexport const FilterLink = (\n  { active, filter, onClick }\n) => (\n  <a className={classNames('filterList_item', { 'filterList_item-active' : active})}\n     href={`#${filter}`}\n     onClick={e => {\n       e.preventDefault();\n       !active && onClick(filter);\n     }}>{filter.replace(/SHOW_/, '')}</a>\n);\n\nexport const TodoFilterLinks = (\n  { filterList, currentFilter, onLinkClick }\n) => (\n  <div className=\"filterList\">\n    <span class=\"filterList_label\">see:</span>\n    {\n      filterList.map((filter, index) => (\n        <FilterLink key={index}\n                    filter={filter}\n                    active={filter === currentFilter}\n                    onClick={onLinkClick}/>\n      ))\n    }\n  </div>\n);\n\nexport const TodoFooter = (\n  { todos, onTodoClearClick }\n) => {\n  let completed = todos.filter(todo => todo.completed).length,\n    total       = todos.length,\n    text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';\n\n  return (\n    <p className=\"todoFooter\">\n      <span className=\"todoFooter_count\">{text}</span>\n      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}\n         onClick={(e) => {\n           e.preventDefault();\n           completed && onTodoClearClick();\n         }}>clear completed</a>\n    </p>\n  );\n};\n\n// Container Components\nexport const TodoApp = ({\n  todos,\n  filter,\n  filterList,\n  onTodoFormSubmit,\n  onTodoClick,\n  onTodoButtonClick,\n  onTodoClearClick,\n  onLinkClick\n}) => (\n  <section className=\"todoApp\">\n    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>\n    <TodoFilterLinks filterList={filterList}\n                     currentFilter={filter}\n                     onLinkClick={onLinkClick}/>\n    <TodoList filteredTodos={getFilteredTodos(todos, filter)}\n              onTodoClick={onTodoClick}\n              onTodoButtonClick={onTodoButtonClick}/>\n    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>\n  </section>\n);\n\nconst MapStateToProps = ( state ) => {\n  return {\n    todos         : state.todos,\n    filter        : state.todoFilter,\n    filterList    : Object.keys(todoFilters)\n  };\n};\n\nconst MapDispatchToProps = ( dispatch ) => {\n  return {\n    onTodoFormSubmit  : label => dispatch(addTodo(label)),\n    onTodoClick       : id => dispatch(toggleTodo(id)),\n    onTodoButtonClick : id => dispatch(removeTodo(id)),\n    onTodoClearClick  : () => dispatch(clearTodo()),\n    onLinkClick       : filter => dispatch(setTodoFilter(filter))\n  };\n};\n\nexport default connect(\n  MapStateToProps,\n  MapDispatchToProps\n)(TodoApp);"
+  },
+  {
+    "__docId__": 10,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "Todo",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~Todo",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{Todo}",
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 11,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "TodoList",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~TodoList",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{TodoList}",
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 12,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "TodoForm",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~TodoForm",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{TodoForm}",
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 13,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "FilterLink",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~FilterLink",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{FilterLink}",
+    "description": null,
+    "lineNumber": 71,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 14,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "TodoFilterLinks",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~TodoFilterLinks",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{TodoFilterLinks}",
+    "description": null,
+    "lineNumber": 82,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 15,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "TodoFooter",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~TodoFooter",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{TodoFooter}",
+    "description": null,
+    "lineNumber": 98,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 16,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "TodoApp",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~TodoApp",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": "{TodoApp}",
+    "description": null,
+    "lineNumber": 118,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 17,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "MapStateToProps",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~MapStateToProps",
+    "access": null,
+    "export": false,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 140,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 18,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "MapDispatchToProps",
+    "memberof": "app/modules/todos/TodoApp.component.js",
+    "longname": "app/modules/todos/TodoApp.component.js~MapDispatchToProps",
+    "access": null,
+    "export": false,
+    "importPath": "redux/app/modules/todos/TodoApp.component.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 148,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 19,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "memberof": null,
+    "longname": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\n// Constants\nexport const SET_TODO_FILTER = 'SET_TODO_FILTER';\nexport const todoFilters = {\n  SHOW_ALL        : 'SHOW_ALL',\n  SHOW_COMPLETED  : 'SHOW_COMPLETED',\n  SHOW_PENDING    : 'SHOW_PENDING'\n};\n\n// Actions\nexport const setTodoFilter = ( filter ) => {\n  return { type : SET_TODO_FILTER, filter };\n};\n\nexport const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) => {\n  switch ( filter ) {\n    case todoFilters.SHOW_PENDING:\n      return todos.filter(todo => !todo.completed);\n    case todoFilters.SHOW_COMPLETED:\n      return todos.filter(todo => todo.completed);\n    default:\n      return todos;\n  }\n};\n\n// Reducer\nconst todoFilter = ( state = 'SHOW_ALL', action ) => {\n  switch ( action.type ) {\n    case SET_TODO_FILTER:\n      return action.filter in todoFilters ? action.filter : state;\n    default:\n      return state;\n  }\n};\n\nexport default todoFilter;"
+  },
+  {
+    "__docId__": 20,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "SET_TODO_FILTER",
+    "memberof": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "longname": "app/modules/todos/reducers/todoFilter.reducer.js~SET_TODO_FILTER",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
+    "importStyle": "{SET_TODO_FILTER}",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "todoFilters",
+    "memberof": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "longname": "app/modules/todos/reducers/todoFilter.reducer.js~todoFilters",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
+    "importStyle": "{todoFilters}",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "setTodoFilter",
+    "memberof": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "longname": "app/modules/todos/reducers/todoFilter.reducer.js~setTodoFilter",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
+    "importStyle": "{setTodoFilter}",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "getFilteredTodos",
+    "memberof": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "longname": "app/modules/todos/reducers/todoFilter.reducer.js~getFilteredTodos",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
+    "importStyle": "{getFilteredTodos}",
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 24,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "todoFilter",
+    "memberof": "app/modules/todos/reducers/todoFilter.reducer.js",
+    "longname": "app/modules/todos/reducers/todoFilter.reducer.js~todoFilter",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
+    "importStyle": "todoFilter",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 25,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "app/modules/todos/reducers/todos.reducer.js",
+    "memberof": null,
+    "longname": "app/modules/todos/reducers/todos.reducer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\n// Constants\nexport const ADD_TODO     = 'ADD_TODO';\nexport const REMOVE_TODO  = 'REMOVE_TODO';\nexport const TOGGLE_TODO  = 'TOGGLE_TODO';\nexport const CLEAR_TODO   = 'CLEAR_TODO';\n\n// Actions\nexport const addTodo = ( label ) => {\n  return { type : ADD_TODO, label };\n};\n\nexport const removeTodo = ( id ) => {\n  return { type : REMOVE_TODO, id };\n};\n\nexport const toggleTodo = ( id ) => {\n  return { type : TOGGLE_TODO, id };\n};\n\nexport const clearTodo = () => {\n  return { type : CLEAR_TODO };\n};\n\n// Reducer\nconst todos = ( state = [], action ) => {\n  switch ( action.type ) {\n    case ADD_TODO:\n      return state.concat(\n        {\n          id        : state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,\n          label     : action.label,\n          completed : false\n        }\n      );\n    case REMOVE_TODO:\n      return state.filter(todo => todo.id !== action.id);\n    case TOGGLE_TODO:\n      return state.map(todo => {\n        return action.id === todo.id ? Object.assign({}, todo, { completed : !todo.completed}) : todo;\n      });\n    case CLEAR_TODO:\n      return state.filter(todo => !todo.completed);\n    default:\n      return state;\n  }\n};\n\nexport default todos;"
+  },
+  {
+    "__docId__": 26,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "ADD_TODO",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~ADD_TODO",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{ADD_TODO}",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "REMOVE_TODO",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~REMOVE_TODO",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{REMOVE_TODO}",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "TOGGLE_TODO",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~TOGGLE_TODO",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{TOGGLE_TODO}",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 29,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "CLEAR_TODO",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~CLEAR_TODO",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{CLEAR_TODO}",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 30,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "addTodo",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~addTodo",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{addTodo}",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 31,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "removeTodo",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~removeTodo",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{removeTodo}",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 32,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "toggleTodo",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~toggleTodo",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{toggleTodo}",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 33,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "clearTodo",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~clearTodo",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "{clearTodo}",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 34,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "todos",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~todos",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "todos",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 35,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "app/reducer.js",
+    "memberof": null,
+    "longname": "app/reducer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\n// Dependencies\nimport { combineReducers }  from 'redux';\n\n// Reducers\nimport {\n  routerReducer\n}                           from 'react-router-redux';\nimport todos                from './modules/todos/reducers/todos.reducer';\nimport todoFilter           from './modules/todos/reducers/todoFilter.reducer';\n\nexport const initialState = {\n  routing     : { locationBeforeTransitions : null },\n  todos       : [],\n  todoFilter  : 'SHOW_ALL'\n};\n\nexport const rootReducer = combineReducers({\n  routing : routerReducer,\n  todos,\n  todoFilter\n});"
+  },
+  {
+    "__docId__": 36,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "initialState",
+    "memberof": "app/reducer.js",
+    "longname": "app/reducer.js~initialState",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/reducer.js",
+    "importStyle": "{initialState}",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 37,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "rootReducer",
+    "memberof": "app/reducer.js",
+    "longname": "app/reducer.js~rootReducer",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/reducer.js",
+    "importStyle": "{rootReducer}",
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 49,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  }
+]

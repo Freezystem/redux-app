@@ -21,7 +21,7 @@ Here is the features I intend to have on this project
 - [x] Add Redux Dev Tools
 - [ ] Create production ready build in NPM scripts
 - [ ] Make some data persistent (LocalStorage / SessionStorage)
-- [ ] Write and Generate Documentation
+- [x] Write and Generate Documentation
 
 ###Libs
 

@@ -1,0 +1,59 @@
+{
+  "coverage": "14.81%",
+  "expectCount": 27,
+  "actualCount": 4,
+  "files": {
+    "app/modules/todos/reducers/todos.reducer.js": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        7,
+        5,
+        6,
+        10,
+        22,
+        14,
+        27,
+        18
+      ]
+    },
+    "app/modules/todos/TodoApp.component.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        71,
+        24,
+        118,
+        82,
+        98,
+        50,
+        35
+      ]
+    },
+    "app/modules/main/MainApp.component.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
+    "app/modules/todos/reducers/todoFilter.reducer.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        16,
+        12,
+        28,
+        5
+      ]
+    },
+    "app/reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        19
+      ]
+    }
+  }
+}
