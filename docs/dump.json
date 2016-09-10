@@ -1497,5 +1497,813 @@
     "access": null,
     "description": "",
     "builtinExternal": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/todos/actions.specs.js",
+    "memberof": null,
+    "longname": "test/todos/actions.specs.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\nimport expect     from 'expect';\nimport {\n  ADD_TODO,\n  REMOVE_TODO,\n  TOGGLE_TODO,\n  CLEAR_TODO,\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                 from '../../app/modules/todos/reducers/todos.reducer';\nimport {\n  SET_TODO_FILTER,\n  setTodoFilter,\n  todoFilters\n}                 from '../../app/modules/todos/reducers/todoFilter.reducer';\n\n/** @test */\ndescribe('actions', () => {\n\n  /** @test {addTodo} */\n  describe('addTodo()', () => {\n    it('should create an action to add a todo', () => {\n      const label = 'write tests';\n      const expectedAction = {\n        type : ADD_TODO,\n        label\n      };\n      const addTodoSpy = expect.createSpy().andCall(addTodo);\n\n\n      expect(addTodoSpy(label)).toEqual(expectedAction);\n      expect(addTodoSpy).toHaveBeenCalledWith('write tests');\n    });\n  });\n\n  /** @test {removeTodo} */\n  describe('removeTodo()', () => {\n    it('should create an action to remove a todo', () => {\n      const id = 42;\n      const expectedAction = {\n        type : REMOVE_TODO,\n        id\n      };\n      const removeTodoSpy = expect.createSpy().andCall(removeTodo);\n\n      expect(removeTodoSpy(id)).toEqual(expectedAction);\n      expect(removeTodoSpy).toHaveBeenCalledWith(42);\n    });\n  });\n\n  /** @test {toggleTodo} */\n  describe('toggleTodo()', () => {\n    it('should create an action to toggle a todo', () => {\n      const id = 42;\n      const expectedAction = {\n        type : TOGGLE_TODO,\n        id\n      };\n      const toggleTodoSpy = expect.createSpy().andCall(toggleTodo);\n\n      expect(toggleTodoSpy(id)).toEqual(expectedAction);\n      expect(toggleTodoSpy).toHaveBeenCalledWith(42);\n    });\n  });\n\n  /** @test {clearTodo} */\n  describe('clearTodo()', () => {\n    it('should create an action to clear completed todo', () => {\n      const expectedAction = {\n        type : CLEAR_TODO\n      };\n      const clearTodoSpy = expect.createSpy().andCall(clearTodo);\n\n      expect(clearTodoSpy()).toEqual(expectedAction);\n      expect(clearTodoSpy).toHaveBeenCalled();\n    });\n  });\n\n  /** @test {setTodoFilter} */\n  describe('setTodoFilter()', () => {\n    it('should create an action to set the todo filter', () => {\n      const filter = todoFilters.SHOW_ALL;\n      const expectedAction = {\n        type : SET_TODO_FILTER,\n        filter\n      };\n      const setTodoFilterSpy = expect.createSpy().andCall(setTodoFilter);\n\n      expect(setTodoFilterSpy(filter)).toEqual(expectedAction);\n      expect(setTodoFilterSpy).toHaveBeenCalledWith(todoFilters.SHOW_ALL);\n    });\n  });\n});"
+  },
+  {
+    "__docId__": 96,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe0",
+    "testId": 0,
+    "memberof": "test/todos/actions.specs.js",
+    "testDepth": 0,
+    "longname": "test/todos/actions.specs.js~describe0",
+    "access": null,
+    "description": "actions",
+    "lineNumber": 21,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": ""
+      }
+    ],
+    "testTargets": [
+      "*"
+    ]
+  },
+  {
+    "__docId__": 97,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe1",
+    "testId": 1,
+    "memberof": "test/todos/actions.specs.js~describe0",
+    "testDepth": 1,
+    "longname": "test/todos/actions.specs.js~describe0.describe1",
+    "access": null,
+    "description": "addTodo()",
+    "lineNumber": 24,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{addTodo}"
+      }
+    ],
+    "testTargets": [
+      "addTodo"
+    ]
+  },
+  {
+    "__docId__": 98,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it2",
+    "testId": 2,
+    "memberof": "test/todos/actions.specs.js~describe0.describe1",
+    "testDepth": 2,
+    "longname": "test/todos/actions.specs.js~describe0.describe1.it2",
+    "access": null,
+    "description": "should create an action to add a todo",
+    "lineNumber": 25
+  },
+  {
+    "__docId__": 99,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe3",
+    "testId": 3,
+    "memberof": "test/todos/actions.specs.js~describe0",
+    "testDepth": 1,
+    "longname": "test/todos/actions.specs.js~describe0.describe3",
+    "access": null,
+    "description": "removeTodo()",
+    "lineNumber": 40,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{removeTodo}"
+      }
+    ],
+    "testTargets": [
+      "removeTodo"
+    ]
+  },
+  {
+    "__docId__": 100,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it4",
+    "testId": 4,
+    "memberof": "test/todos/actions.specs.js~describe0.describe3",
+    "testDepth": 2,
+    "longname": "test/todos/actions.specs.js~describe0.describe3.it4",
+    "access": null,
+    "description": "should create an action to remove a todo",
+    "lineNumber": 41
+  },
+  {
+    "__docId__": 101,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe5",
+    "testId": 5,
+    "memberof": "test/todos/actions.specs.js~describe0",
+    "testDepth": 1,
+    "longname": "test/todos/actions.specs.js~describe0.describe5",
+    "access": null,
+    "description": "toggleTodo()",
+    "lineNumber": 55,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{toggleTodo}"
+      }
+    ],
+    "testTargets": [
+      "toggleTodo"
+    ]
+  },
+  {
+    "__docId__": 102,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it6",
+    "testId": 6,
+    "memberof": "test/todos/actions.specs.js~describe0.describe5",
+    "testDepth": 2,
+    "longname": "test/todos/actions.specs.js~describe0.describe5.it6",
+    "access": null,
+    "description": "should create an action to toggle a todo",
+    "lineNumber": 56
+  },
+  {
+    "__docId__": 103,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe7",
+    "testId": 7,
+    "memberof": "test/todos/actions.specs.js~describe0",
+    "testDepth": 1,
+    "longname": "test/todos/actions.specs.js~describe0.describe7",
+    "access": null,
+    "description": "clearTodo()",
+    "lineNumber": 70,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{clearTodo}"
+      }
+    ],
+    "testTargets": [
+      "clearTodo"
+    ]
+  },
+  {
+    "__docId__": 104,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it8",
+    "testId": 8,
+    "memberof": "test/todos/actions.specs.js~describe0.describe7",
+    "testDepth": 2,
+    "longname": "test/todos/actions.specs.js~describe0.describe7.it8",
+    "access": null,
+    "description": "should create an action to clear completed todo",
+    "lineNumber": 71
+  },
+  {
+    "__docId__": 105,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe9",
+    "testId": 9,
+    "memberof": "test/todos/actions.specs.js~describe0",
+    "testDepth": 1,
+    "longname": "test/todos/actions.specs.js~describe0.describe9",
+    "access": null,
+    "description": "setTodoFilter()",
+    "lineNumber": 83,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{setTodoFilter}"
+      }
+    ],
+    "testTargets": [
+      "setTodoFilter"
+    ]
+  },
+  {
+    "__docId__": 106,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it10",
+    "testId": 10,
+    "memberof": "test/todos/actions.specs.js~describe0.describe9",
+    "testDepth": 2,
+    "longname": "test/todos/actions.specs.js~describe0.describe9.it10",
+    "access": null,
+    "description": "should create an action to set the todo filter",
+    "lineNumber": 84
+  },
+  {
+    "__docId__": 107,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/todos/components.specs.js",
+    "memberof": null,
+    "longname": "test/todos/components.specs.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\nimport React        from 'react';\nimport expect       from 'expect';\nimport { mount }    from 'enzyme';\n\nimport {\n  Todo,\n  TodoList,\n  TodoForm,\n  TodoFooter,\n  FilterLink,\n  TodoFilterLinks\n}                   from '../../app/modules/todos/TodoApp.component';\n\nimport {\n  todoFilters\n}                   from '../../app/modules/todos/reducers/todoFilter.reducer';\n\n/** @test */\ndescribe('components', () => {\n\n  /** @test {Todo} */\n  describe('<Todo />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        completed      : true,\n        label          : 'todo',\n        id             : 42,\n        onClick        : expect.createSpy(),\n        onButtonClick  : expect.createSpy()\n      };\n\n      wrapper = mount(<Todo {...attrs} />);\n    });\n\n    it('should render a todo', () => {\n      expect(wrapper.find('.todoList_itemLabel').text()).toBe('todo');\n      expect(wrapper.find('.todoList_itemButton').text()).toExist();\n    });\n\n    it('should call onClick() when label is clicked', () => {\n      wrapper.find('.todoList_itemLabel').simulate('click');\n\n      expect(attrs.onClick.calls.length).toBe(1);\n    });\n\n    it('should call onButtonClick() when button is clicked', () => {\n      wrapper.find('.todoList_itemButton').simulate('click');\n\n      expect(attrs.onButtonClick.calls.length).toBe(1);\n    });\n  });\n\n  /** @test {TodoList} */\n  describe('<TodoList />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        filteredTodos       : [\n          {label: 'todo1', id: 111, completed: false},\n          {label: 'todo2', id: 222, completed: false},\n          {label: 'todo3', id: 333, completed: true},\n        ],\n        onTodoClick         : expect.createSpy(),\n        onTodoButtonClick   : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoList {...attrs} />);\n    });\n\n    it('should render filtered todos', () => {\n      const firstTodo = wrapper.find(Todo).at(0);\n      const secondTodo = wrapper.find(Todo).at(1);\n      const thirdTodo = wrapper.find(Todo).at(2);\n\n      expect(wrapper.find('.todoList').children().length).toBe(3);\n\n      expect(firstTodo.key()).toBe('111');\n      expect(secondTodo.key()).toBe('222');\n      expect(thirdTodo.key()).toBe('333');\n\n      expect(firstTodo.find('.todoList_itemLabel').text()).toBe('todo1');\n      expect(secondTodo.find('.todoList_itemLabel').text()).toBe('todo2');\n      expect(thirdTodo.find('.todoList_itemLabel').text()).toBe('todo3');\n    });\n  });\n\n  /** @test {TodoForm} */\n  describe('<TodoForm />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        onTodoFormSubmit : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoForm {...attrs} />);\n    });\n\n    it('should render a form to add a todo', () => {\n      const form    = wrapper.find('.todoForm');\n      const input   = form.find('.todoForm_label');\n      const button  = form.find('.todoForm_submit');\n\n      expect(form.type()).toBe('form');\n      expect(form.props().onSubmit).toBeA('function');\n\n      expect(input.length).toBe(1);\n      expect(input.type()).toBe('input');\n      expect(input.props().type).toBe('text');\n\n      expect(button.length).toBe(1);\n      expect(button.type()).toBe('button');\n    });\n\n    it('should not submit form with an empty label', () => {\n      const form    = wrapper.find('.todoForm');\n\n      form.simulate('submit');\n\n      expect(attrs.onTodoFormSubmit).toNotHaveBeenCalled();\n    });\n\n    it('should submit form when a label is given', () => {\n      wrapper.find('.todoForm_label').get(0).value = 'write test';\n      wrapper.find('.todoForm').simulate('submit');\n\n      expect(attrs.onTodoFormSubmit).toHaveBeenCalledWith('write test');\n    });\n  });\n\n  /** @test {FilterLink} */\n  describe('<FilterLink />', () => {\n    let attrs = {},\n    wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        active  : false,\n        filter  : todoFilters.SHOW_ALL,\n        onClick : expect.createSpy()\n      };\n\n      wrapper = mount(<FilterLink {...attrs} />);\n    });\n\n    it('should generate a clickable link to filter todos', () => {\n      const link  = wrapper.find('.filterList_item').first();\n\n      expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);\n      expect(link.hasClass('filterList_item-active')).toBeFalsy();\n\n      link.simulate('click');\n\n      expect(attrs.onClick).toHaveBeenCalledWith(todoFilters.SHOW_ALL);\n    });\n\n    it('should not be clickable if filter is already active', () => {\n      wrapper.setProps({ active : true });\n      const link  = wrapper.find('.filterList_item').first();\n\n      expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);\n      expect(link.hasClass('filterList_item-active')).toBeTruthy();\n\n      link.simulate('click');\n\n      expect(attrs.onClick).toNotHaveBeenCalled();\n    });\n\n    it('should display the filter name properly', () => {\n      const link = wrapper.find('.filterList_item').first();\n\n      expect(link.text()).toBe('ALL');\n    });\n  });\n\n  /** @test {TodoFilterLinks} */\n  describe('<TodoFilterLinks />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        filterList    : Object.keys(todoFilters),\n        currentFilter : todoFilters.SHOW_ALL,\n        onLinkClick   : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoFilterLinks {...attrs} />);\n    });\n\n    it('should render all filter links', () => {\n      expect(wrapper.find('.filterList_item').length).toBe(attrs.filterList.length);\n    });\n\n    it('should set proper filter as active', () => {\n      expect(wrapper.find('.filterList_item-active').length).toBe(1);\n      expect(wrapper.find('.filterList_item').not('.filterList_item-active').length).toBe(attrs.filterList.length - 1);\n      expect(wrapper.find('.filterList_item-active').text()).toBe('ALL');\n    });\n\n    it('should pass a fonction as onClick property', () => {\n      wrapper.find('.filterList_item').not('.filterList_item-active').first().simulate('click');\n\n      expect(attrs.onLinkClick).toHaveBeenCalled();\n    });\n  });\n\n  /** @test {TodoFooter} */\n  describe('<TodoFooter />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        todos : [\n          {label: 'todo1', id: 111, completed: false},\n          {label: 'todo2', id: 222, completed: true},\n          {label: 'todo3', id: 333, completed: false},\n        ],\n        onTodoClearClick : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoFooter {...attrs} />);\n    });\n\n    it('should not display clear link if there isn\\'t completed todo', () => {\n      wrapper.setProps({\n        todos : [\n          {label: 'todo1', id: 111, completed: false},\n          {label: 'todo2', id: 222, completed: false},\n          {label: 'todo3', id: 333, completed: false},\n        ]\n      });\n\n      expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeTruthy();\n    });\n\n    it('should display clear link if there is completed todo', () => {\n      expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeFalsy();\n    });\n\n    it('should call onTodoClearClick on clear link click', () => {\n      wrapper.find('.todoFooter_clear').first().simulate('click');\n\n      expect(attrs.onTodoClearClick).toHaveBeenCalled();\n    });\n  });\n});"
+  },
+  {
+    "__docId__": 108,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe11",
+    "testId": 11,
+    "memberof": "test/todos/components.specs.js",
+    "testDepth": 0,
+    "longname": "test/todos/components.specs.js~describe11",
+    "access": null,
+    "description": "components",
+    "lineNumber": 21,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": ""
+      }
+    ],
+    "testTargets": [
+      "*"
+    ]
+  },
+  {
+    "__docId__": 109,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe12",
+    "testId": 12,
+    "memberof": "test/todos/components.specs.js~describe11",
+    "testDepth": 1,
+    "longname": "test/todos/components.specs.js~describe11.describe12",
+    "access": null,
+    "description": "<Todo />",
+    "lineNumber": 24,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{Todo}"
+      }
+    ],
+    "testTargets": [
+      "Todo"
+    ]
+  },
+  {
+    "__docId__": 110,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it13",
+    "testId": 13,
+    "memberof": "test/todos/components.specs.js~describe11.describe12",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe12.it13",
+    "access": null,
+    "description": "should render a todo",
+    "lineNumber": 40
+  },
+  {
+    "__docId__": 111,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it14",
+    "testId": 14,
+    "memberof": "test/todos/components.specs.js~describe11.describe12",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe12.it14",
+    "access": null,
+    "description": "should call onClick() when label is clicked",
+    "lineNumber": 45
+  },
+  {
+    "__docId__": 112,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it15",
+    "testId": 15,
+    "memberof": "test/todos/components.specs.js~describe11.describe12",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe12.it15",
+    "access": null,
+    "description": "should call onButtonClick() when button is clicked",
+    "lineNumber": 51
+  },
+  {
+    "__docId__": 113,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe16",
+    "testId": 16,
+    "memberof": "test/todos/components.specs.js~describe11",
+    "testDepth": 1,
+    "longname": "test/todos/components.specs.js~describe11.describe16",
+    "access": null,
+    "description": "<TodoList />",
+    "lineNumber": 59,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{TodoList}"
+      }
+    ],
+    "testTargets": [
+      "TodoList"
+    ]
+  },
+  {
+    "__docId__": 114,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it17",
+    "testId": 17,
+    "memberof": "test/todos/components.specs.js~describe11.describe16",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe16.it17",
+    "access": null,
+    "description": "should render filtered todos",
+    "lineNumber": 77
+  },
+  {
+    "__docId__": 115,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe18",
+    "testId": 18,
+    "memberof": "test/todos/components.specs.js~describe11",
+    "testDepth": 1,
+    "longname": "test/todos/components.specs.js~describe11.describe18",
+    "access": null,
+    "description": "<TodoForm />",
+    "lineNumber": 95,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{TodoForm}"
+      }
+    ],
+    "testTargets": [
+      "TodoForm"
+    ]
+  },
+  {
+    "__docId__": 116,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it19",
+    "testId": 19,
+    "memberof": "test/todos/components.specs.js~describe11.describe18",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe18.it19",
+    "access": null,
+    "description": "should render a form to add a todo",
+    "lineNumber": 107
+  },
+  {
+    "__docId__": 117,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it20",
+    "testId": 20,
+    "memberof": "test/todos/components.specs.js~describe11.describe18",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe18.it20",
+    "access": null,
+    "description": "should not submit form with an empty label",
+    "lineNumber": 123
+  },
+  {
+    "__docId__": 118,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it21",
+    "testId": 21,
+    "memberof": "test/todos/components.specs.js~describe11.describe18",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe18.it21",
+    "access": null,
+    "description": "should submit form when a label is given",
+    "lineNumber": 131
+  },
+  {
+    "__docId__": 119,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe22",
+    "testId": 22,
+    "memberof": "test/todos/components.specs.js~describe11",
+    "testDepth": 1,
+    "longname": "test/todos/components.specs.js~describe11.describe22",
+    "access": null,
+    "description": "<FilterLink />",
+    "lineNumber": 140,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{FilterLink}"
+      }
+    ],
+    "testTargets": [
+      "FilterLink"
+    ]
+  },
+  {
+    "__docId__": 120,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it23",
+    "testId": 23,
+    "memberof": "test/todos/components.specs.js~describe11.describe22",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe22.it23",
+    "access": null,
+    "description": "should generate a clickable link to filter todos",
+    "lineNumber": 154
+  },
+  {
+    "__docId__": 121,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it24",
+    "testId": 24,
+    "memberof": "test/todos/components.specs.js~describe11.describe22",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe22.it24",
+    "access": null,
+    "description": "should not be clickable if filter is already active",
+    "lineNumber": 165
+  },
+  {
+    "__docId__": 122,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it25",
+    "testId": 25,
+    "memberof": "test/todos/components.specs.js~describe11.describe22",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe22.it25",
+    "access": null,
+    "description": "should display the filter name properly",
+    "lineNumber": 177
+  },
+  {
+    "__docId__": 123,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe26",
+    "testId": 26,
+    "memberof": "test/todos/components.specs.js~describe11",
+    "testDepth": 1,
+    "longname": "test/todos/components.specs.js~describe11.describe26",
+    "access": null,
+    "description": "<TodoFilterLinks />",
+    "lineNumber": 185,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{TodoFilterLinks}"
+      }
+    ],
+    "testTargets": [
+      "TodoFilterLinks"
+    ]
+  },
+  {
+    "__docId__": 124,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it27",
+    "testId": 27,
+    "memberof": "test/todos/components.specs.js~describe11.describe26",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe26.it27",
+    "access": null,
+    "description": "should render all filter links",
+    "lineNumber": 199
+  },
+  {
+    "__docId__": 125,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it28",
+    "testId": 28,
+    "memberof": "test/todos/components.specs.js~describe11.describe26",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe26.it28",
+    "access": null,
+    "description": "should set proper filter as active",
+    "lineNumber": 203
+  },
+  {
+    "__docId__": 126,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it29",
+    "testId": 29,
+    "memberof": "test/todos/components.specs.js~describe11.describe26",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe26.it29",
+    "access": null,
+    "description": "should pass a fonction as onClick property",
+    "lineNumber": 209
+  },
+  {
+    "__docId__": 127,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe30",
+    "testId": 30,
+    "memberof": "test/todos/components.specs.js~describe11",
+    "testDepth": 1,
+    "longname": "test/todos/components.specs.js~describe11.describe30",
+    "access": null,
+    "description": "<TodoFooter />",
+    "lineNumber": 217,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{TodoFooter}"
+      }
+    ],
+    "testTargets": [
+      "TodoFooter"
+    ]
+  },
+  {
+    "__docId__": 128,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it31",
+    "testId": 31,
+    "memberof": "test/todos/components.specs.js~describe11.describe30",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe30.it31",
+    "access": null,
+    "description": "should not display clear link if there isn't completed todo",
+    "lineNumber": 234
+  },
+  {
+    "__docId__": 129,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it32",
+    "testId": 32,
+    "memberof": "test/todos/components.specs.js~describe11.describe30",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe30.it32",
+    "access": null,
+    "description": "should display clear link if there is completed todo",
+    "lineNumber": 246
+  },
+  {
+    "__docId__": 130,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it33",
+    "testId": 33,
+    "memberof": "test/todos/components.specs.js~describe11.describe30",
+    "testDepth": 2,
+    "longname": "test/todos/components.specs.js~describe11.describe30.it33",
+    "access": null,
+    "description": "should call onTodoClearClick on clear link click",
+    "lineNumber": 250
+  },
+  {
+    "__docId__": 131,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/todos/reducers.specs.js",
+    "memberof": null,
+    "longname": "test/todos/reducers.specs.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\n\nimport expect               from 'expect';\nimport deepFreeze           from 'deep-freeze';\n\nimport {\n  initialState,\n  rootReducer\n}                           from '../../app/reducer.js';\n\nimport todos,\n{\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                           from '../../app/modules/todos/reducers/todos.reducer';\n\nimport todoFilter,\n{\n  setTodoFilter,\n  todoFilters\n}                           from '../../app/modules/todos/reducers/todoFilter.reducer';\n\n/** @test */\ndescribe('reducers', () => {\n\n  /** @test {rootReducer} */\n  describe('rootReducer()', () => {\n    it('should return the initial state', () => {\n      expect(rootReducer(undefined, {})).toEqual(initialState);\n    });\n  });\n\n  /** @test {todos} */\n  describe('todos()', () => {\n    it('should handle ADD_TODO', () => {\n      const label       = 'Write Tests';\n      const stateBefore = deepFreeze([]);\n      const stateAfter  = [\n        {\n          id        : 0,\n          label,\n          completed : false\n        }\n      ];\n\n      expect(todos(stateBefore, addTodo(label))).toEqual(stateAfter);\n    });\n\n    it('should handle REMOVE_TODO', () => {\n      const id          = 0;\n      const stateBefore = deepFreeze([\n        {\n          id,\n          label     : 'Write Tests',\n          completed : false\n        }\n      ]);\n      const stateAfter  = [];\n\n      expect(todos(stateBefore, removeTodo(id))).toEqual(stateAfter);\n    });\n\n    it('should handle TOGGLE_TODO', () => {\n      const id          = 0;\n      const stateBefore = deepFreeze([\n        {\n          id,\n          label     : 'Write Tests',\n          completed : false\n        }\n      ]);\n      const stateAfter  = [\n        {\n          id,\n          label     : 'Write Tests',\n          completed : true\n        }\n      ];\n\n      expect(todos(stateBefore, toggleTodo(id))).toEqual(stateAfter);\n    });\n\n    it('should handle CLEAR_TODO', () => {\n      const stateBefore = deepFreeze([\n        {\n          id        : 33,\n          label     : 'Write Tests',\n          completed : true\n        },\n        {\n          id        : 42,\n          label     : 'Do Things',\n          completed : false\n        },\n        {\n          id        : 53,\n          label     : 'Make Stuff',\n          completed : true\n        },\n      ]);\n      const stateAfter  = [\n        {\n          id        : 42,\n          label     : 'Do Things',\n          completed : false\n        }\n      ];\n\n      expect(todos(stateBefore, clearTodo())).toEqual(stateAfter);\n    });\n  });\n\n  /** @test {todoFilter} */\n  describe('todoFilter()', () => {\n    it('should handle SET_TODO_FILTER', () => {\n      const stateBefore = deepFreeze(todoFilters.SHOW_ALL);\n      const stateAfter  = todoFilters.SHOW_COMPLETED;\n\n      expect(todoFilter(stateBefore, setTodoFilter(todoFilters.SHOW_COMPLETED))).toEqual(stateAfter);\n    });\n  });\n});"
+  },
+  {
+    "__docId__": 132,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe34",
+    "testId": 34,
+    "memberof": "test/todos/reducers.specs.js",
+    "testDepth": 0,
+    "longname": "test/todos/reducers.specs.js~describe34",
+    "access": null,
+    "description": "reducers",
+    "lineNumber": 26,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": ""
+      }
+    ],
+    "testTargets": [
+      "*"
+    ]
+  },
+  {
+    "__docId__": 133,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe35",
+    "testId": 35,
+    "memberof": "test/todos/reducers.specs.js~describe34",
+    "testDepth": 1,
+    "longname": "test/todos/reducers.specs.js~describe34.describe35",
+    "access": null,
+    "description": "rootReducer()",
+    "lineNumber": 29,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{rootReducer}"
+      }
+    ],
+    "testTargets": [
+      "rootReducer"
+    ]
+  },
+  {
+    "__docId__": 134,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it36",
+    "testId": 36,
+    "memberof": "test/todos/reducers.specs.js~describe34.describe35",
+    "testDepth": 2,
+    "longname": "test/todos/reducers.specs.js~describe34.describe35.it36",
+    "access": null,
+    "description": "should return the initial state",
+    "lineNumber": 30
+  },
+  {
+    "__docId__": 135,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe37",
+    "testId": 37,
+    "memberof": "test/todos/reducers.specs.js~describe34",
+    "testDepth": 1,
+    "longname": "test/todos/reducers.specs.js~describe34.describe37",
+    "access": null,
+    "description": "todos()",
+    "lineNumber": 36,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{todos}"
+      }
+    ],
+    "testTargets": [
+      "todos"
+    ]
+  },
+  {
+    "__docId__": 136,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it38",
+    "testId": 38,
+    "memberof": "test/todos/reducers.specs.js~describe34.describe37",
+    "testDepth": 2,
+    "longname": "test/todos/reducers.specs.js~describe34.describe37.it38",
+    "access": null,
+    "description": "should handle ADD_TODO",
+    "lineNumber": 37
+  },
+  {
+    "__docId__": 137,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it39",
+    "testId": 39,
+    "memberof": "test/todos/reducers.specs.js~describe34.describe37",
+    "testDepth": 2,
+    "longname": "test/todos/reducers.specs.js~describe34.describe37.it39",
+    "access": null,
+    "description": "should handle REMOVE_TODO",
+    "lineNumber": 51
+  },
+  {
+    "__docId__": 138,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it40",
+    "testId": 40,
+    "memberof": "test/todos/reducers.specs.js~describe34.describe37",
+    "testDepth": 2,
+    "longname": "test/todos/reducers.specs.js~describe34.describe37.it40",
+    "access": null,
+    "description": "should handle TOGGLE_TODO",
+    "lineNumber": 65
+  },
+  {
+    "__docId__": 139,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it41",
+    "testId": 41,
+    "memberof": "test/todos/reducers.specs.js~describe34.describe37",
+    "testDepth": 2,
+    "longname": "test/todos/reducers.specs.js~describe34.describe37.it41",
+    "access": null,
+    "description": "should handle CLEAR_TODO",
+    "lineNumber": 85
+  },
+  {
+    "__docId__": 140,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe42",
+    "testId": 42,
+    "memberof": "test/todos/reducers.specs.js~describe34",
+    "testDepth": 1,
+    "longname": "test/todos/reducers.specs.js~describe34.describe42",
+    "access": null,
+    "description": "todoFilter()",
+    "lineNumber": 116,
+    "unknown": [
+      {
+        "tagName": "@test",
+        "tagValue": "{todoFilter}"
+      }
+    ],
+    "testTargets": [
+      "todoFilter"
+    ]
+  },
+  {
+    "__docId__": 141,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it43",
+    "testId": 43,
+    "memberof": "test/todos/reducers.specs.js~describe34.describe42",
+    "testDepth": 2,
+    "longname": "test/todos/reducers.specs.js~describe34.describe42.it43",
+    "access": null,
+    "description": "should handle SET_TODO_FILTER",
+    "lineNumber": 117
   }
 ]

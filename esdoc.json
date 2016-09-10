@@ -3,7 +3,8 @@
   "destination": "./docs",
   "test": {
     "type": "mocha",
-    "source": "./test"
+    "source": "./test",
+    "includes":["^todo"]
   },
   "plugins": [
     {"name": "esdoc-es7-plugin"}

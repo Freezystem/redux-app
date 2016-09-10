@@ -22,13 +22,17 @@ import todoFilter,
   todoFilters
 }                           from '../../app/modules/todos/reducers/todoFilter.reducer';
 
+/** @test */
 describe('reducers', () => {
+
+  /** @test {rootReducer} */
   describe('rootReducer()', () => {
     it('should return the initial state', () => {
       expect(rootReducer(undefined, {})).toEqual(initialState);
     });
   });
 
+  /** @test {todos} */
   describe('todos()', () => {
     it('should handle ADD_TODO', () => {
       const label       = 'Write Tests';
@@ -108,6 +112,7 @@ describe('reducers', () => {
     });
   });
 
+  /** @test {todoFilter} */
   describe('todoFilter()', () => {
     it('should handle SET_TODO_FILTER', () => {
       const stateBefore = deepFreeze(todoFilters.SHOW_ALL);

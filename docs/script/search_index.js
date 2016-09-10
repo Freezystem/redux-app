@@ -492,6 +492,72 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "* *,*",
+    "test-file/test/todos/actions.specs.js.html#lineNumber21",
+    "actions",
+    "test"
+  ],
+  [
+    "addtodo app/modules/todos/reducers/todos.reducer.js~addtodo,addtodo",
+    "test-file/test/todos/actions.specs.js.html#lineNumber24",
+    "actions addTodo()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/actions.specs.js.html#lineNumber25",
+    "actions addTodo() should create an action to add a todo",
+    "test"
+  ],
+  [
+    "cleartodo app/modules/todos/reducers/todos.reducer.js~cleartodo,cleartodo",
+    "test-file/test/todos/actions.specs.js.html#lineNumber70",
+    "actions clearTodo()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/actions.specs.js.html#lineNumber71",
+    "actions clearTodo() should create an action to clear completed todo",
+    "test"
+  ],
+  [
+    "removetodo app/modules/todos/reducers/todos.reducer.js~removetodo,removetodo",
+    "test-file/test/todos/actions.specs.js.html#lineNumber40",
+    "actions removeTodo()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/actions.specs.js.html#lineNumber41",
+    "actions removeTodo() should create an action to remove a todo",
+    "test"
+  ],
+  [
+    "settodofilter app/modules/todos/reducers/todofilter.reducer.js~settodofilter,settodofilter",
+    "test-file/test/todos/actions.specs.js.html#lineNumber83",
+    "actions setTodoFilter()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/actions.specs.js.html#lineNumber84",
+    "actions setTodoFilter() should create an action to set the todo filter",
+    "test"
+  ],
+  [
+    "toggletodo app/modules/todos/reducers/todos.reducer.js~toggletodo,toggletodo",
+    "test-file/test/todos/actions.specs.js.html#lineNumber55",
+    "actions toggleTodo()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/actions.specs.js.html#lineNumber56",
+    "actions toggleTodo() should create an action to toggle a todo",
+    "test"
+  ],
+  [
     "app/index.js",
     "file/app/index.js.html",
     "app/index.js",
@@ -526,5 +592,221 @@ window.esdocSearchIndex = [
     "file/app/reducer.js.html",
     "app/reducer.js",
     "file"
+  ],
+  [
+    "* *,*",
+    "test-file/test/todos/components.specs.js.html#lineNumber21",
+    "components",
+    "test"
+  ],
+  [
+    "filterlink app/modules/todos/todoapp.component.js~filterlink,filterlink",
+    "test-file/test/todos/components.specs.js.html#lineNumber140",
+    "components <FilterLink />",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber177",
+    "components <FilterLink /> should display the filter name properly",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber154",
+    "components <FilterLink /> should generate a clickable link to filter todos",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber165",
+    "components <FilterLink /> should not be clickable if filter is already active",
+    "test"
+  ],
+  [
+    "todo app/modules/todos/todoapp.component.js~todo,todo",
+    "test-file/test/todos/components.specs.js.html#lineNumber24",
+    "components <Todo />",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber51",
+    "components <Todo /> should call onButtonClick() when button is clicked",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber45",
+    "components <Todo /> should call onClick() when label is clicked",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber40",
+    "components <Todo /> should render a todo",
+    "test"
+  ],
+  [
+    "todofilterlinks app/modules/todos/todoapp.component.js~todofilterlinks,todofilterlinks",
+    "test-file/test/todos/components.specs.js.html#lineNumber185",
+    "components <TodoFilterLinks />",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber209",
+    "components <TodoFilterLinks /> should pass a fonction as onClick property",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber199",
+    "components <TodoFilterLinks /> should render all filter links",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber203",
+    "components <TodoFilterLinks /> should set proper filter as active",
+    "test"
+  ],
+  [
+    "todofooter app/modules/todos/todoapp.component.js~todofooter,todofooter",
+    "test-file/test/todos/components.specs.js.html#lineNumber217",
+    "components <TodoFooter />",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber250",
+    "components <TodoFooter /> should call onTodoClearClick on clear link click",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber246",
+    "components <TodoFooter /> should display clear link if there is completed todo",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber234",
+    "components <TodoFooter /> should not display clear link if there isn't completed todo",
+    "test"
+  ],
+  [
+    "todoform app/modules/todos/todoapp.component.js~todoform,todoform",
+    "test-file/test/todos/components.specs.js.html#lineNumber95",
+    "components <TodoForm />",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber123",
+    "components <TodoForm /> should not submit form with an empty label",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber107",
+    "components <TodoForm /> should render a form to add a todo",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber131",
+    "components <TodoForm /> should submit form when a label is given",
+    "test"
+  ],
+  [
+    "todolist app/modules/todos/todoapp.component.js~todolist,todolist",
+    "test-file/test/todos/components.specs.js.html#lineNumber59",
+    "components <TodoList />",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/components.specs.js.html#lineNumber77",
+    "components <TodoList /> should render filtered todos",
+    "test"
+  ],
+  [
+    "* *,*",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber26",
+    "reducers",
+    "test"
+  ],
+  [
+    "rootreducer app/reducer.js~rootreducer,rootreducer",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber29",
+    "reducers rootReducer()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber30",
+    "reducers rootReducer() should return the initial state",
+    "test"
+  ],
+  [
+    "todofilter app/modules/todos/reducers/todofilter.reducer.js~todofilter,todofilter",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber116",
+    "reducers todoFilter()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber117",
+    "reducers todoFilter() should handle SET_TODO_FILTER",
+    "test"
+  ],
+  [
+    "todos app/modules/todos/reducers/todos.reducer.js~todos,todos",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber36",
+    "reducers todos()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber37",
+    "reducers todos() should handle ADD_TODO",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber85",
+    "reducers todos() should handle CLEAR_TODO",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber51",
+    "reducers todos() should handle REMOVE_TODO",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/todos/reducers.specs.js.html#lineNumber65",
+    "reducers todos() should handle TOGGLE_TODO",
+    "test"
+  ],
+  [
+    "test/todos/actions.specs.js",
+    "test-file/test/todos/actions.specs.js.html",
+    "test/todos/actions.specs.js",
+    "testFile"
+  ],
+  [
+    "test/todos/components.specs.js",
+    "test-file/test/todos/components.specs.js.html",
+    "test/todos/components.specs.js",
+    "testFile"
+  ],
+  [
+    "test/todos/reducers.specs.js",
+    "test-file/test/todos/reducers.specs.js.html",
+    "test/todos/reducers.specs.js",
+    "testFile"
   ]
 ]

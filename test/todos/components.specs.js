@@ -17,7 +17,10 @@ import {
   todoFilters
 }                   from '../../app/modules/todos/reducers/todoFilter.reducer';
 
+/** @test */
 describe('components', () => {
+
+  /** @test {Todo} */
   describe('<Todo />', () => {
     let attrs = {},
       wrapper = null;
@@ -52,6 +55,7 @@ describe('components', () => {
     });
   });
 
+  /** @test {TodoList} */
   describe('<TodoList />', () => {
     let attrs = {},
       wrapper = null;
@@ -87,6 +91,7 @@ describe('components', () => {
     });
   });
 
+  /** @test {TodoForm} */
   describe('<TodoForm />', () => {
     let attrs = {},
       wrapper = null;
@@ -131,6 +136,7 @@ describe('components', () => {
     });
   });
 
+  /** @test {FilterLink} */
   describe('<FilterLink />', () => {
     let attrs = {},
     wrapper = null;
@@ -175,6 +181,7 @@ describe('components', () => {
     });
   });
 
+  /** @test {TodoFilterLinks} */
   describe('<TodoFilterLinks />', () => {
     let attrs = {},
       wrapper = null;
@@ -206,6 +213,7 @@ describe('components', () => {
     });
   });
 
+  /** @test {TodoFooter} */
   describe('<TodoFooter />', () => {
     let attrs = {},
       wrapper = null;

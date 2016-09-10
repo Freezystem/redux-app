@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">API Document</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">test/todos/actions.specs.js | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -63,80 +63,104 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p>##Redux App</p>
-<p><a href="https://semaphoreci.com/freezystem/redux-app"><img src="https://semaphoreci.com/api/v1/freezystem/redux-app/branches/master/shields_badge.svg" alt="Build Status"></a>
-<a href="https://david-dm.org/freezystem/redux-app"><img src="https://david-dm.org/freezystem/redux-app.svg" alt="Dependency Status"></a>
-<a href="https://david-dm.org/freezystem/redux-app#info=devDependencies"><img src="https://david-dm.org/freezystem/redux-app/dev-status.svg" alt="devDependency Status"></a></p>
-<blockquote>
-<p>Just a simple app with routing, tests and stuff to learn Redux.</p>
-</blockquote>
-<p>###Features</p>
-<p>Here is the features I intend to have on this project</p>
-<ul>
-<li>[x] Configure a webpack development build</li>
-<li>[x] Create a simple redux app</li>
-<li>[ ] Add and use complex forms</li>
-<li>[x] Add some styles</li>
-<li>[x] Add routing and history</li>
-<li>[ ] Add async (or observer-like) calls to API</li>
-<li>[x] Add unit tests on actions, reducers and components</li>
-<li>[ ] Add e2e tests on application</li>
-<li>[x] Add automated continuous integration</li>
-<li>[x] Add Redux Dev Tools</li>
-<li>[ ] Create production ready build in NPM scripts</li>
-<li>[ ] Make some data persistent (LocalStorage / SessionStorage)</li>
-<li>[x] Write and Generate Documentation</li>
-</ul>
-<p>###Libs</p>
-<p>Compile </p>
-<ul>
-<li><a href="https://github.com/babel/babel">Babel</a></li>
-</ul>
-<p>Build </p>
-<ul>
-<li><a href="https://github.com/webpack/webpack">Webpack</a></li>
-<li><a href="https://github.com/webpack/webpack-dev-server">Webpack-dev-server</a></li>
-</ul>
-<p>Framework</p>
-<ul>
-<li><a href="https://github.com/facebook/react">React</a></li>
-<li><a href="https://github.com/reactjs/react-redux">React-redux</a></li>
-<li><a href="https://github.com/reactjs/react-router">React-router</a></li>
-<li><a href="https://github.com/reactjs/react-router-redux">React-router-redux</a></li>
-<li><a href="https://github.com/reactjs/redux">Redux</a></li>
-<li><a href="https://github.com/mjackson/history">History</a></li>
-</ul>
-<p>Style</p>
-<ul>
-<li><a href="https://github.com/sass/sass">Sass</a></li>
-</ul>
-<p>Tests</p>
-<ul>
-<li><a href="https://github.com/mochajs/mocha">Mocha</a></li>
-<li><a href="https://github.com/mjackson/expect">Expect</a></li>
-<li><a href="https://github.com/airbnb/enzyme">Enzyme</a></li>
-<li><a href="https://github.com/substack/deep-freeze">DeepFreeze</a></li>
-<li><a href="https://github.com/tmpvar/jsdom">jsDOM</a></li>
-</ul>
-<p>Documentation</p>
-<ul>
-<li><a href="https://esdoc.org">ESDoc</a></li>
-</ul>
-<p>###NPM scripts</p>
-<p>####Setup the app</p>
-<pre><code><code class="source-code prettyprint">git clone https://github.com/Freezystem/redux-app.git
-npm install</code>
-</code></pre><p>####Run development app</p>
-<pre><code><code class="source-code prettyprint">npm run dev</code>
-</code></pre><p>####Build production app</p>
-<pre><code><code class="source-code prettyprint">npm run build</code>
-</code></pre><p>or for a clean install</p>
-<pre><code><code class="source-code prettyprint">npm run build:clean</code>
-</code></pre><p>####Run tests</p>
-<pre><code><code class="source-code prettyprint">npm test</code>
-</code></pre><p>or with watch option</p>
-<pre><code><code class="source-code prettyprint">npm test:watch</code>
-</code></pre></div>
+<div class="content" data-ice="content"><h1 data-ice="title">test/todos/actions.specs.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+import expect     from &apos;expect&apos;;
+import {
+  ADD_TODO,
+  REMOVE_TODO,
+  TOGGLE_TODO,
+  CLEAR_TODO,
+  addTodo,
+  removeTodo,
+  toggleTodo,
+  clearTodo
+}                 from &apos;../../app/modules/todos/reducers/todos.reducer&apos;;
+import {
+  SET_TODO_FILTER,
+  setTodoFilter,
+  todoFilters
+}                 from &apos;../../app/modules/todos/reducers/todoFilter.reducer&apos;;
+
+/** @test */
+describe(&apos;actions&apos;, () =&gt; {
+
+  /** @test {addTodo} */
+  describe(&apos;addTodo()&apos;, () =&gt; {
+    it(&apos;should create an action to add a todo&apos;, () =&gt; {
+      const label = &apos;write tests&apos;;
+      const expectedAction = {
+        type : ADD_TODO,
+        label
+      };
+      const addTodoSpy = expect.createSpy().andCall(addTodo);
+
+
+      expect(addTodoSpy(label)).toEqual(expectedAction);
+      expect(addTodoSpy).toHaveBeenCalledWith(&apos;write tests&apos;);
+    });
+  });
+
+  /** @test {removeTodo} */
+  describe(&apos;removeTodo()&apos;, () =&gt; {
+    it(&apos;should create an action to remove a todo&apos;, () =&gt; {
+      const id = 42;
+      const expectedAction = {
+        type : REMOVE_TODO,
+        id
+      };
+      const removeTodoSpy = expect.createSpy().andCall(removeTodo);
+
+      expect(removeTodoSpy(id)).toEqual(expectedAction);
+      expect(removeTodoSpy).toHaveBeenCalledWith(42);
+    });
+  });
+
+  /** @test {toggleTodo} */
+  describe(&apos;toggleTodo()&apos;, () =&gt; {
+    it(&apos;should create an action to toggle a todo&apos;, () =&gt; {
+      const id = 42;
+      const expectedAction = {
+        type : TOGGLE_TODO,
+        id
+      };
+      const toggleTodoSpy = expect.createSpy().andCall(toggleTodo);
+
+      expect(toggleTodoSpy(id)).toEqual(expectedAction);
+      expect(toggleTodoSpy).toHaveBeenCalledWith(42);
+    });
+  });
+
+  /** @test {clearTodo} */
+  describe(&apos;clearTodo()&apos;, () =&gt; {
+    it(&apos;should create an action to clear completed todo&apos;, () =&gt; {
+      const expectedAction = {
+        type : CLEAR_TODO
+      };
+      const clearTodoSpy = expect.createSpy().andCall(clearTodo);
+
+      expect(clearTodoSpy()).toEqual(expectedAction);
+      expect(clearTodoSpy).toHaveBeenCalled();
+    });
+  });
+
+  /** @test {setTodoFilter} */
+  describe(&apos;setTodoFilter()&apos;, () =&gt; {
+    it(&apos;should create an action to set the todo filter&apos;, () =&gt; {
+      const filter = todoFilters.SHOW_ALL;
+      const expectedAction = {
+        type : SET_TODO_FILTER,
+        filter
+      };
+      const setTodoFilterSpy = expect.createSpy().andCall(setTodoFilter);
+
+      expect(setTodoFilterSpy(filter)).toEqual(expectedAction);
+      expect(setTodoFilterSpy).toHaveBeenCalledWith(todoFilters.SHOW_ALL);
+    });
+  });
+});</code></pre>
+
 </div>
 
 <footer class="footer">

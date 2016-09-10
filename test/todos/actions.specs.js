@@ -17,7 +17,10 @@ import {
   todoFilters
 }                 from '../../app/modules/todos/reducers/todoFilter.reducer';
 
+/** @test */
 describe('actions', () => {
+
+  /** @test {addTodo} */
   describe('addTodo()', () => {
     it('should create an action to add a todo', () => {
       const label = 'write tests';
@@ -33,6 +36,7 @@ describe('actions', () => {
     });
   });
 
+  /** @test {removeTodo} */
   describe('removeTodo()', () => {
     it('should create an action to remove a todo', () => {
       const id = 42;
@@ -47,6 +51,7 @@ describe('actions', () => {
     });
   });
 
+  /** @test {toggleTodo} */
   describe('toggleTodo()', () => {
     it('should create an action to toggle a todo', () => {
       const id = 42;
@@ -61,6 +66,7 @@ describe('actions', () => {
     });
   });
 
+  /** @test {clearTodo} */
   describe('clearTodo()', () => {
     it('should create an action to clear completed todo', () => {
       const expectedAction = {
@@ -73,6 +79,7 @@ describe('actions', () => {
     });
   });
 
+  /** @test {setTodoFilter} */
   describe('setTodoFilter()', () => {
     it('should create an action to set the todo filter', () => {
       const filter = todoFilters.SHOW_ALL;
