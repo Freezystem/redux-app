@@ -48,7 +48,7 @@ export const Todo = (
 
 /**
  * Generate a list of todos
- * @param {Array<Object>} filteredTodos
+ * @param {Array<todoObj>} filteredTodos
  * pre-filtered list of todos depending on the actual selected filter
  * @param {function(id:number)} onTodoClick
  * function to perform when a todo label is clicked, here {@link toggleTodo}
@@ -151,7 +151,7 @@ export const TodoFilterLinks = (
 
 /**
  * Generate a footer for the todo list
- * @param {Array<Object>} todos
+ * @param {Array<todoObj>} todos
  * list of all todos
  * @param {function()} onTodoClearClick
  * function to perform when the clear button is clicked
@@ -181,7 +181,7 @@ export const TodoFooter = (
 
 /**
  * Generate the whole todo application
- * @param {Array<Object>} todos
+ * @param {Array<todoObj>} todos
  * list of all available todos
  * @param {string} filter
  * current active filter
@@ -226,7 +226,7 @@ export const TodoApp = ({
  * Map the application state to the component properties
  * @param {Object} state
  * @return {obejct}
- * @property {Array<Object>} todos
+ * @property {Array<todoObj>} todos
  * @property {string} filter
  * @property {Array<string>} filterList
  * a mapped state to props object

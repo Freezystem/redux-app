@@ -14,7 +14,7 @@ import todoFilter           from './modules/todos/reducers/todoFilter.reducer';
  * Represent the initial state of the redux application
  * @type {Object}
  * @property {Object} routing
- * @property {Array<Object>} todos
+ * @property {Array<todoObj>} todos
  * @property {string} todoFilter
  */
 export const initialState = {

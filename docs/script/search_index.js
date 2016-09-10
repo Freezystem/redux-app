@@ -600,6 +600,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/modules/todos/reducers/todos.reducer.js~todoobj",
+    "typedef/index.html#static-typedef-todoObj",
+    "app/modules/todos/reducers/todos.reducer.js~todoObj",
+    "typedef"
+  ],
+  [
     "app/reducer.js",
     "file/app/reducer.js.html",
     "app/reducer.js",

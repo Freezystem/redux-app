@@ -247,7 +247,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\n// Styles\nimport './TodoApp.scss';\n\n// Dependencies\nimport React          from 'react';\nimport { connect }    from 'react-redux';\nimport classNames     from 'classnames';\n\nimport {\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                     from './reducers/todos.reducer';\nimport {\n  todoFilters,\n  setTodoFilter,\n  getFilteredTodos\n}                     from './reducers/todoFilter.reducer';\n\n// Presentational Components\n\n/**\n * Generate a clickable todo item with a label and an delete button\n * @param {boolean} completed\n * whether the todo is completed or not\n * @param {string} label\n * the todo label\n * @param {function} onClick\n * the function to perform when the todo label is clicked, here {@link toggleTodo}\n * @param {function} onButtonClick\n * the function to perform when the todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <li class=\"todoList_item\"/> markup\n */\nexport const Todo = (\n  { completed, label, onClick, onButtonClick }\n) => (\n  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>\n    <span className=\"todoList_itemLabel\"\n          onClick={onClick}>{label}</span>\n    <button className=\"todoList_itemButton\"\n            onClick={onButtonClick}>+</button>\n  </li>\n);\n\n/**\n * Generate a list of todos\n * @param {Array<Object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n */\nexport const TodoList = (\n  { filteredTodos, onTodoClick, onTodoButtonClick }\n) => (\n  <ul className=\"todoList\">\n    {\n      filteredTodos.map(todo =>\n        <Todo key={todo.id}\n              {...todo}\n              onClick={() => onTodoClick(todo.id)}\n              onButtonClick={() => onTodoButtonClick(todo.id)}/>\n      )\n    }\n  </ul>\n);\n\n/**\n * Generate a form to submit a new todo\n * @param {function(label:string)} onTodoFormSubmit\n * function to perform on form submit\n * @return {ReactDOM}\n * <form class=\"todoForm\"/> markup\n */\nexport const TodoForm = (\n  { onTodoFormSubmit }\n) => {\n  let _label;\n\n  return (\n    <form className=\"todoForm\"\n          onSubmit={(e) => {\n            e.preventDefault();\n            _label.value.trim() && onTodoFormSubmit(_label.value.trim());\n            _label.value = '';\n          }}>\n      <input className=\"todoForm_label\"\n             type=\"text\"\n             placeholder=\"What's need to be done today ?\"\n             ref={input => _label = input}/>\n      <button className=\"todoForm_submit\">add</button>\n    </form>\n  )\n};\n\n/**\n * Generate a link to change filter value\n * @param {boolean} active\n * whether the link is already active or not\n * @param {string} filter\n * constant representing the filter value\n * @param {function(filter:string)} onClick\n * function to perform when link is clicked, here {@link setTodoFilter}\n * @return {ReactDOM}\n * <a class=\"filterList_item\" /> markup\n */\nexport const FilterLink = (\n  { active, filter, onClick }\n) => (\n  <a className={classNames('filterList_item', { 'filterList_item-active' : active})}\n     href={`#${filter}`}\n     onClick={e => {\n       e.preventDefault();\n       !active && onClick(filter);\n     }}>{filter.replace(/SHOW_/, '')}</a>\n);\n\n/**\n * Generate a list of todo filter links\n * @param {Array<string>} filterList\n * list of all available filters\n * @param {string} currentFilter\n * constant representing the currently active filter in the list\n * @param {function()} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <div class=\"filterList\" /> markup\n */\nexport const TodoFilterLinks = (\n  { filterList, currentFilter, onLinkClick }\n) => (\n  <div className=\"filterList\">\n    <span class=\"filterList_label\">see:</span>\n    {\n      filterList.map((filter, index) => (\n        <FilterLink key={index}\n                    filter={filter}\n                    active={filter === currentFilter}\n                    onClick={onLinkClick}/>\n      ))\n    }\n  </div>\n);\n\n/**\n * Generate a footer for the todo list\n * @param {Array<Object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n */\nexport const TodoFooter = (\n  { todos, onTodoClearClick }\n) => {\n  let completed = todos.filter(todo => todo.completed).length,\n    total       = todos.length,\n    text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';\n\n  return (\n    <p className=\"todoFooter\">\n      <span className=\"todoFooter_count\">{text}</span>\n      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}\n         onClick={(e) => {\n           e.preventDefault();\n           completed && onTodoClearClick();\n         }}>clear completed</a>\n    </p>\n  );\n};\n\n// Container Components\n\n/**\n * Generate the whole todo application\n * @param {Array<Object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n */\nexport const TodoApp = ({\n  todos,\n  filter,\n  filterList,\n  onTodoFormSubmit,\n  onTodoClick,\n  onTodoButtonClick,\n  onTodoClearClick,\n  onLinkClick\n}) => (\n  <section className=\"todoApp\">\n    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>\n    <TodoFilterLinks filterList={filterList}\n                     currentFilter={filter}\n                     onLinkClick={onLinkClick}/>\n    <TodoList filteredTodos={getFilteredTodos(todos, filter)}\n              onTodoClick={onTodoClick}\n              onTodoButtonClick={onTodoButtonClick}/>\n    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>\n  </section>\n);\n\n/**\n * Map the application state to the component properties\n * @param {Object} state\n * @return {obejct}\n * @property {Array<Object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n */\nconst MapStateToProps = ( state ) => {\n  return {\n    todos         : state.todos,\n    filter        : state.todoFilter,\n    filterList    : Object.keys(todoFilters)\n  };\n};\n\n/**\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {Object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n */\nconst MapDispatchToProps = ( dispatch ) => {\n  return {\n    onTodoFormSubmit  : label => dispatch(addTodo(label)),\n    onTodoClick       : id => dispatch(toggleTodo(id)),\n    onTodoButtonClick : id => dispatch(removeTodo(id)),\n    onTodoClearClick  : () => dispatch(clearTodo()),\n    onLinkClick       : filter => dispatch(setTodoFilter(filter))\n  };\n};\n\n/**\n * connect react component to redux state\n * @return {ReactDOM}\n * connected <section class=\"todoApp\" /> markup\n */\nexport default connect(\n  MapStateToProps,\n  MapDispatchToProps\n)(TodoApp);"
+    "content": "'use strict';\n\n// Styles\nimport './TodoApp.scss';\n\n// Dependencies\nimport React          from 'react';\nimport { connect }    from 'react-redux';\nimport classNames     from 'classnames';\n\nimport {\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                     from './reducers/todos.reducer';\nimport {\n  todoFilters,\n  setTodoFilter,\n  getFilteredTodos\n}                     from './reducers/todoFilter.reducer';\n\n// Presentational Components\n\n/**\n * Generate a clickable todo item with a label and an delete button\n * @param {boolean} completed\n * whether the todo is completed or not\n * @param {string} label\n * the todo label\n * @param {function} onClick\n * the function to perform when the todo label is clicked, here {@link toggleTodo}\n * @param {function} onButtonClick\n * the function to perform when the todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <li class=\"todoList_item\"/> markup\n */\nexport const Todo = (\n  { completed, label, onClick, onButtonClick }\n) => (\n  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>\n    <span className=\"todoList_itemLabel\"\n          onClick={onClick}>{label}</span>\n    <button className=\"todoList_itemButton\"\n            onClick={onButtonClick}>+</button>\n  </li>\n);\n\n/**\n * Generate a list of todos\n * @param {Array<todoObj>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n */\nexport const TodoList = (\n  { filteredTodos, onTodoClick, onTodoButtonClick }\n) => (\n  <ul className=\"todoList\">\n    {\n      filteredTodos.map(todo =>\n        <Todo key={todo.id}\n              {...todo}\n              onClick={() => onTodoClick(todo.id)}\n              onButtonClick={() => onTodoButtonClick(todo.id)}/>\n      )\n    }\n  </ul>\n);\n\n/**\n * Generate a form to submit a new todo\n * @param {function(label:string)} onTodoFormSubmit\n * function to perform on form submit\n * @return {ReactDOM}\n * <form class=\"todoForm\"/> markup\n */\nexport const TodoForm = (\n  { onTodoFormSubmit }\n) => {\n  let _label;\n\n  return (\n    <form className=\"todoForm\"\n          onSubmit={(e) => {\n            e.preventDefault();\n            _label.value.trim() && onTodoFormSubmit(_label.value.trim());\n            _label.value = '';\n          }}>\n      <input className=\"todoForm_label\"\n             type=\"text\"\n             placeholder=\"What's need to be done today ?\"\n             ref={input => _label = input}/>\n      <button className=\"todoForm_submit\">add</button>\n    </form>\n  )\n};\n\n/**\n * Generate a link to change filter value\n * @param {boolean} active\n * whether the link is already active or not\n * @param {string} filter\n * constant representing the filter value\n * @param {function(filter:string)} onClick\n * function to perform when link is clicked, here {@link setTodoFilter}\n * @return {ReactDOM}\n * <a class=\"filterList_item\" /> markup\n */\nexport const FilterLink = (\n  { active, filter, onClick }\n) => (\n  <a className={classNames('filterList_item', { 'filterList_item-active' : active})}\n     href={`#${filter}`}\n     onClick={e => {\n       e.preventDefault();\n       !active && onClick(filter);\n     }}>{filter.replace(/SHOW_/, '')}</a>\n);\n\n/**\n * Generate a list of todo filter links\n * @param {Array<string>} filterList\n * list of all available filters\n * @param {string} currentFilter\n * constant representing the currently active filter in the list\n * @param {function()} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <div class=\"filterList\" /> markup\n */\nexport const TodoFilterLinks = (\n  { filterList, currentFilter, onLinkClick }\n) => (\n  <div className=\"filterList\">\n    <span class=\"filterList_label\">see:</span>\n    {\n      filterList.map((filter, index) => (\n        <FilterLink key={index}\n                    filter={filter}\n                    active={filter === currentFilter}\n                    onClick={onLinkClick}/>\n      ))\n    }\n  </div>\n);\n\n/**\n * Generate a footer for the todo list\n * @param {Array<todoObj>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n */\nexport const TodoFooter = (\n  { todos, onTodoClearClick }\n) => {\n  let completed = todos.filter(todo => todo.completed).length,\n    total       = todos.length,\n    text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';\n\n  return (\n    <p className=\"todoFooter\">\n      <span className=\"todoFooter_count\">{text}</span>\n      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}\n         onClick={(e) => {\n           e.preventDefault();\n           completed && onTodoClearClick();\n         }}>clear completed</a>\n    </p>\n  );\n};\n\n// Container Components\n\n/**\n * Generate the whole todo application\n * @param {Array<todoObj>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n */\nexport const TodoApp = ({\n  todos,\n  filter,\n  filterList,\n  onTodoFormSubmit,\n  onTodoClick,\n  onTodoButtonClick,\n  onTodoClearClick,\n  onLinkClick\n}) => (\n  <section className=\"todoApp\">\n    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>\n    <TodoFilterLinks filterList={filterList}\n                     currentFilter={filter}\n                     onLinkClick={onLinkClick}/>\n    <TodoList filteredTodos={getFilteredTodos(todos, filter)}\n              onTodoClick={onTodoClick}\n              onTodoButtonClick={onTodoButtonClick}/>\n    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>\n  </section>\n);\n\n/**\n * Map the application state to the component properties\n * @param {Object} state\n * @return {obejct}\n * @property {Array<todoObj>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n */\nconst MapStateToProps = ( state ) => {\n  return {\n    todos         : state.todos,\n    filter        : state.todoFilter,\n    filterList    : Object.keys(todoFilters)\n  };\n};\n\n/**\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {Object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n */\nconst MapDispatchToProps = ( dispatch ) => {\n  return {\n    onTodoFormSubmit  : label => dispatch(addTodo(label)),\n    onTodoClick       : id => dispatch(toggleTodo(id)),\n    onTodoButtonClick : id => dispatch(removeTodo(id)),\n    onTodoClearClick  : () => dispatch(clearTodo()),\n    onLinkClick       : filter => dispatch(setTodoFilter(filter))\n  };\n};\n\n/**\n * connect react component to redux state\n * @return {ReactDOM}\n * connected <section class=\"todoApp\" /> markup\n */\nexport default connect(\n  MapStateToProps,\n  MapDispatchToProps\n)(TodoApp);"
   },
   {
     "__docId__": 12,
@@ -337,7 +337,7 @@
       {
         "nullable": null,
         "types": [
-          "Array<Object>"
+          "Array<todoObj>"
         ],
         "spread": false,
         "optional": false,
@@ -557,7 +557,7 @@
       {
         "nullable": null,
         "types": [
-          "Array<Object>"
+          "Array<todoObj>"
         ],
         "spread": false,
         "optional": false,
@@ -607,7 +607,7 @@
       {
         "nullable": null,
         "types": [
-          "Array<Object>"
+          "Array<todoObj>"
         ],
         "spread": false,
         "optional": false,
@@ -729,7 +729,7 @@
       {
         "nullable": null,
         "types": [
-          "Array<Object>"
+          "Array<todoObj>"
         ],
         "spread": false,
         "optional": false,
@@ -874,7 +874,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\n// Constants\nexport const SET_TODO_FILTER = 'SET_TODO_FILTER';\nexport const todoFilters = {\n  SHOW_ALL        : 'SHOW_ALL',\n  SHOW_COMPLETED  : 'SHOW_COMPLETED',\n  SHOW_PENDING    : 'SHOW_PENDING'\n};\n\n// Actions\nexport const setTodoFilter = ( filter ) => {\n  return { type : SET_TODO_FILTER, filter };\n};\n\nexport const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) => {\n  switch ( filter ) {\n    case todoFilters.SHOW_PENDING:\n      return todos.filter(todo => !todo.completed);\n    case todoFilters.SHOW_COMPLETED:\n      return todos.filter(todo => todo.completed);\n    default:\n      return todos;\n  }\n};\n\n// Reducer\nconst todoFilter = ( state = 'SHOW_ALL', action ) => {\n  switch ( action.type ) {\n    case SET_TODO_FILTER:\n      return action.filter in todoFilters ? action.filter : state;\n    default:\n      return state;\n  }\n};\n\nexport default todoFilter;"
+    "content": "'use strict';\n\n// Constants\n\n/**\n * constant\n * @type {string}\n */\nexport const SET_TODO_FILTER = 'SET_TODO_FILTER';\n\n/**\n * list of todo filters\n * @type {Object}\n */\nexport const todoFilters = {\n  SHOW_ALL        : 'SHOW_ALL',\n  SHOW_COMPLETED  : 'SHOW_COMPLETED',\n  SHOW_PENDING    : 'SHOW_PENDING'\n};\n\n// Actions\n\n/**\n * action to set a filter\n * @param {string} filter\n * label of the filter to set\n * @return {Object}\n * @property {string} type\n * action type\n * @property {string} filter\n * label of the filter to set\n */\nexport const setTodoFilter = ( filter ) => {\n  return { type : SET_TODO_FILTER, filter };\n};\n\n/**\n * filter a list of given todos\n * @param {Array<todoObj>} todos\n * list of todos to filter\n * @param {string} filter\n * filter value\n * @returns {Array<todoObj>}\n * a list of filtered todos\n */\nexport const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) => {\n  switch ( filter ) {\n    case todoFilters.SHOW_PENDING:\n      return todos.filter(todo => !todo.completed);\n    case todoFilters.SHOW_COMPLETED:\n      return todos.filter(todo => todo.completed);\n    default:\n      return todos;\n  }\n};\n\n// Reducer\n\n/**\n * reducer for filter actions\n * @param {string} state\n * current state value\n * @param {string} action\n * action to perform on the state\n * @return {string}\n * new state value after performing the action\n */\nconst todoFilter = ( state = 'SHOW_ALL', action ) => {\n  switch ( action.type ) {\n    case SET_TODO_FILTER:\n      return action.filter in todoFilters ? action.filter : state;\n    default:\n      return state;\n  }\n};\n\nexport default todoFilter;"
   },
   {
     "__docId__": 22,
@@ -888,13 +888,15 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
     "importStyle": "{SET_TODO_FILTER}",
-    "description": null,
-    "lineNumber": 4,
-    "undocument": true,
+    "description": "constant",
+    "lineNumber": 9,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -909,13 +911,15 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
     "importStyle": "{todoFilters}",
-    "description": null,
-    "lineNumber": 5,
-    "undocument": true,
+    "description": "list of todo filters",
+    "lineNumber": 15,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "Object"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -930,9 +934,50 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
     "importStyle": "{setTodoFilter}",
-    "description": null,
-    "lineNumber": 12,
-    "undocument": true,
+    "description": "action to set a filter",
+    "lineNumber": 33,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "filter",
+        "description": "label of the filter to set"
+      }
+    ],
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "action type"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "filter",
+        "description": "label of the filter to set"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": ""
+    },
     "type": {
       "types": [
         "*"
@@ -951,9 +996,44 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
     "importStyle": "{getFilteredTodos}",
-    "description": null,
-    "lineNumber": 16,
-    "undocument": true,
+    "description": "filter a list of given todos",
+    "lineNumber": 46,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Array<todoObj>}\na list of filtered todos"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array<todoObj>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "todos",
+        "description": "list of todos to filter"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "filter",
+        "description": "filter value"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array<todoObj>"
+      ],
+      "spread": false,
+      "description": "a list of filtered todos"
+    },
     "type": {
       "types": [
         "*"
@@ -972,9 +1052,38 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todoFilter.reducer.js",
     "importStyle": "todoFilter",
-    "description": null,
-    "lineNumber": 28,
-    "undocument": true,
+    "description": "reducer for filter actions",
+    "lineNumber": 68,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "state",
+        "description": "current state value"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "action",
+        "description": "action to perform on the state"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "new state value after performing the action"
+    },
     "type": {
       "types": [
         "*"
@@ -992,10 +1101,60 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\n// Constants\nexport const ADD_TODO     = 'ADD_TODO';\nexport const REMOVE_TODO  = 'REMOVE_TODO';\nexport const TOGGLE_TODO  = 'TOGGLE_TODO';\nexport const CLEAR_TODO   = 'CLEAR_TODO';\n\n// Actions\nexport const addTodo = ( label ) => {\n  return { type : ADD_TODO, label };\n};\n\nexport const removeTodo = ( id ) => {\n  return { type : REMOVE_TODO, id };\n};\n\nexport const toggleTodo = ( id ) => {\n  return { type : TOGGLE_TODO, id };\n};\n\nexport const clearTodo = () => {\n  return { type : CLEAR_TODO };\n};\n\n// Reducer\nconst todos = ( state = [], action ) => {\n  switch ( action.type ) {\n    case ADD_TODO:\n      return state.concat(\n        {\n          id        : state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,\n          label     : action.label,\n          completed : false\n        }\n      );\n    case REMOVE_TODO:\n      return state.filter(todo => todo.id !== action.id);\n    case TOGGLE_TODO:\n      return state.map(todo => {\n        return action.id === todo.id ? Object.assign({}, todo, { completed : !todo.completed}) : todo;\n      });\n    case CLEAR_TODO:\n      return state.filter(todo => !todo.completed);\n    default:\n      return state;\n  }\n};\n\nexport default todos;"
+    "content": "'use strict';\n\n/**\n * @typedef {Object} todoObj\n * @property {number} id\n * unique identifier\n * @property {string} label\n * short sentence describing the task to perform\n * @property {boolean} completed\n * wheter the todo is completed or not\n */\n\n// Constants\n\n/**\n * constant\n * @type {string}\n */\nexport const ADD_TODO     = 'ADD_TODO';\n/**\n * constant\n * @type {string}\n */\nexport const REMOVE_TODO  = 'REMOVE_TODO';\n/**\n * constant\n * @type {string}\n */\nexport const TOGGLE_TODO  = 'TOGGLE_TODO';\n/**\n * constant\n * @type {string}\n */\nexport const CLEAR_TODO   = 'CLEAR_TODO';\n\n// Actions\n\n/**\n * action to add a todo\n * @param label\n * @return {Object}\n * @property {string} type\n * action type\n * @property {string} label\n * label of the todo to create\n */\nexport const addTodo = ( label ) => {\n  return { type : ADD_TODO, label };\n};\n\n/**\n * action to remove a todo\n * @param id\n * @return {Object}\n * @property {string} type\n * action type\n * @property {number} id\n * id of the todo to remove\n */\nexport const removeTodo = ( id ) => {\n  return { type : REMOVE_TODO, id };\n};\n\n/**\n * action to toggle a todo\n * @param id\n * @return {Object}\n * @property {string} type\n * action type\n * @property {number} id\n * id of the todo to toggle\n */\nexport const toggleTodo = ( id ) => {\n  return { type : TOGGLE_TODO, id };\n};\n\n/**\n * action to clear completed todos\n * @return {Object}\n * @property {string} type\n * action type\n */\nexport const clearTodo = () => {\n  return { type : CLEAR_TODO };\n};\n\n// Reducer\n\n/**\n * reducer for todo actions\n * @param {Array<todoObj>} state\n * current state value\n * @param {string} action\n * action to perform on the state\n * @return {Array<todoObj>}\n * new state value after performing action\n */\nconst todos = ( state = [], action ) => {\n  switch ( action.type ) {\n    case ADD_TODO:\n      return state.concat(\n        {\n          id        : state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,\n          label     : action.label,\n          completed : false\n        }\n      );\n    case REMOVE_TODO:\n      return state.filter(todo => todo.id !== action.id);\n    case TOGGLE_TODO:\n      return state.map(todo => {\n        return action.id === todo.id ? Object.assign({}, todo, { completed : !todo.completed}) : todo;\n      });\n    case CLEAR_TODO:\n      return state.filter(todo => !todo.completed);\n    default:\n      return state;\n  }\n};\n\nexport default todos;"
   },
   {
     "__docId__": 28,
+    "kind": "typedef",
+    "static": true,
+    "variation": null,
+    "name": "todoObj",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~todoObj",
+    "access": null,
+    "description": "",
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "unique identifier"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "label",
+        "description": "short sentence describing the task to perform"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "completed",
+        "description": "wheter the todo is completed or not"
+      }
+    ],
+    "type": {
+      "types": [
+        "Object"
+      ],
+      "optional": false,
+      "name": "todoObj"
+    }
+  },
+  {
+    "__docId__": 29,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1006,17 +1165,19 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
     "importStyle": "{ADD_TODO}",
-    "description": null,
-    "lineNumber": 4,
-    "undocument": true,
+    "description": "constant",
+    "lineNumber": 19,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 29,
+    "__docId__": 30,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1027,17 +1188,19 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
     "importStyle": "{REMOVE_TODO}",
-    "description": null,
-    "lineNumber": 5,
-    "undocument": true,
+    "description": "constant",
+    "lineNumber": 24,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 30,
+    "__docId__": 31,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1048,17 +1211,19 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
     "importStyle": "{TOGGLE_TODO}",
-    "description": null,
-    "lineNumber": 6,
-    "undocument": true,
+    "description": "constant",
+    "lineNumber": 29,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 31,
+    "__docId__": 32,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1069,17 +1234,19 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
     "importStyle": "{CLEAR_TODO}",
-    "description": null,
-    "lineNumber": 7,
-    "undocument": true,
+    "description": "constant",
+    "lineNumber": 34,
     "type": {
+      "nullable": null,
       "types": [
         "string"
-      ]
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 32,
+    "__docId__": 33,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1090,30 +1257,50 @@
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
     "importStyle": "{addTodo}",
-    "description": null,
-    "lineNumber": 10,
-    "undocument": true,
-    "type": {
+    "description": "action to add a todo",
+    "lineNumber": 47,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "label",
+        "description": ""
+      }
+    ],
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "action type"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "label",
+        "description": "label of the todo to create"
+      }
+    ],
+    "return": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 33,
-    "kind": "variable",
-    "static": true,
-    "variation": null,
-    "name": "removeTodo",
-    "memberof": "app/modules/todos/reducers/todos.reducer.js",
-    "longname": "app/modules/todos/reducers/todos.reducer.js~removeTodo",
-    "access": null,
-    "export": true,
-    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
-    "importStyle": "{removeTodo}",
-    "description": null,
-    "lineNumber": 14,
-    "undocument": true,
+        "Object"
+      ],
+      "spread": false,
+      "description": ""
+    },
     "type": {
       "types": [
         "*"
@@ -1125,16 +1312,57 @@
     "kind": "variable",
     "static": true,
     "variation": null,
-    "name": "toggleTodo",
+    "name": "removeTodo",
     "memberof": "app/modules/todos/reducers/todos.reducer.js",
-    "longname": "app/modules/todos/reducers/todos.reducer.js~toggleTodo",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~removeTodo",
     "access": null,
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
-    "importStyle": "{toggleTodo}",
-    "description": null,
-    "lineNumber": 18,
-    "undocument": true,
+    "importStyle": "{removeTodo}",
+    "description": "action to remove a todo",
+    "lineNumber": 60,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
+      }
+    ],
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "action type"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "id of the todo to remove"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": ""
+    },
     "type": {
       "types": [
         "*"
@@ -1146,16 +1374,57 @@
     "kind": "variable",
     "static": true,
     "variation": null,
-    "name": "clearTodo",
+    "name": "toggleTodo",
     "memberof": "app/modules/todos/reducers/todos.reducer.js",
-    "longname": "app/modules/todos/reducers/todos.reducer.js~clearTodo",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~toggleTodo",
     "access": null,
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
-    "importStyle": "{clearTodo}",
-    "description": null,
-    "lineNumber": 22,
-    "undocument": true,
+    "importStyle": "{toggleTodo}",
+    "description": "action to toggle a todo",
+    "lineNumber": 73,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
+      }
+    ],
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "action type"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "id of the todo to toggle"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": ""
+    },
     "type": {
       "types": [
         "*"
@@ -1167,16 +1436,35 @@
     "kind": "variable",
     "static": true,
     "variation": null,
-    "name": "todos",
+    "name": "clearTodo",
     "memberof": "app/modules/todos/reducers/todos.reducer.js",
-    "longname": "app/modules/todos/reducers/todos.reducer.js~todos",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~clearTodo",
     "access": null,
     "export": true,
     "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
-    "importStyle": "todos",
-    "description": null,
-    "lineNumber": 27,
-    "undocument": true,
+    "importStyle": "{clearTodo}",
+    "description": "action to clear completed todos",
+    "lineNumber": 83,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "type",
+        "description": "action type"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": ""
+    },
     "type": {
       "types": [
         "*"
@@ -1185,6 +1473,56 @@
   },
   {
     "__docId__": 37,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "todos",
+    "memberof": "app/modules/todos/reducers/todos.reducer.js",
+    "longname": "app/modules/todos/reducers/todos.reducer.js~todos",
+    "access": null,
+    "export": true,
+    "importPath": "redux/app/modules/todos/reducers/todos.reducer.js",
+    "importStyle": "todos",
+    "description": "reducer for todo actions",
+    "lineNumber": 98,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array<todoObj>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "state",
+        "description": "current state value"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "action",
+        "description": "action to perform on the state"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array<todoObj>"
+      ],
+      "spread": false,
+      "description": "new state value after performing action"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 38,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -1194,10 +1532,10 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\n// Dependencies\nimport { combineReducers }  from 'redux';\n\n// Reducers\nimport {\n  routerReducer\n}                           from 'react-router-redux';\nimport todos                from './modules/todos/reducers/todos.reducer';\nimport todoFilter           from './modules/todos/reducers/todoFilter.reducer';\n\n/**\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<Object>} todos\n * @property {string} todoFilter\n */\nexport const initialState = {\n  routing     : { locationBeforeTransitions : null },\n  todos       : [],\n  todoFilter  : 'SHOW_ALL'\n};\n\n/**\n * Return the all the reducers combined\n * @type {function}\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n */\nexport const rootReducer = combineReducers({\n  routing : routerReducer,\n  todos,\n  todoFilter\n});"
+    "content": "'use strict';\n\n// Dependencies\nimport { combineReducers }  from 'redux';\n\n// Reducers\nimport {\n  routerReducer\n}                           from 'react-router-redux';\nimport todos                from './modules/todos/reducers/todos.reducer';\nimport todoFilter           from './modules/todos/reducers/todoFilter.reducer';\n\n/**\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n */\nexport const initialState = {\n  routing     : { locationBeforeTransitions : null },\n  todos       : [],\n  todoFilter  : 'SHOW_ALL'\n};\n\n/**\n * Return the all the reducers combined\n * @type {function}\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n */\nexport const rootReducer = combineReducers({\n  routing : routerReducer,\n  todos,\n  todoFilter\n});"
   },
   {
-    "__docId__": 38,
+    "__docId__": 39,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1224,7 +1562,7 @@
       {
         "nullable": null,
         "types": [
-          "Array<Object>"
+          "Array<todoObj>"
         ],
         "spread": false,
         "optional": false,
@@ -1252,7 +1590,7 @@
     }
   },
   {
-    "__docId__": 39,
+    "__docId__": 40,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1315,7 +1653,7 @@
     }
   },
   {
-    "__docId__": 41,
+    "__docId__": 42,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1328,7 +1666,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 42,
+    "__docId__": 43,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1341,7 +1679,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 43,
+    "__docId__": 44,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1354,7 +1692,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 44,
+    "__docId__": 45,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1367,7 +1705,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 45,
+    "__docId__": 46,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1380,7 +1718,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 46,
+    "__docId__": 47,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1393,7 +1731,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 47,
+    "__docId__": 48,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1406,7 +1744,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 48,
+    "__docId__": 49,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1419,7 +1757,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 49,
+    "__docId__": 50,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1432,7 +1770,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 50,
+    "__docId__": 51,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1445,7 +1783,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 51,
+    "__docId__": 52,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1458,7 +1796,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 52,
+    "__docId__": 53,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1471,7 +1809,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 53,
+    "__docId__": 54,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1484,7 +1822,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 54,
+    "__docId__": 55,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1497,7 +1835,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 55,
+    "__docId__": 56,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1510,7 +1848,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 56,
+    "__docId__": 57,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1523,7 +1861,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 57,
+    "__docId__": 58,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1536,7 +1874,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 58,
+    "__docId__": 59,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1549,7 +1887,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 59,
+    "__docId__": 60,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1562,7 +1900,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 60,
+    "__docId__": 61,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1575,7 +1913,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 61,
+    "__docId__": 62,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1588,7 +1926,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 62,
+    "__docId__": 63,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1601,7 +1939,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 63,
+    "__docId__": 64,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1614,7 +1952,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 64,
+    "__docId__": 65,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1627,7 +1965,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 65,
+    "__docId__": 66,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1640,7 +1978,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 66,
+    "__docId__": 67,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1653,7 +1991,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 67,
+    "__docId__": 68,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1666,7 +2004,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 68,
+    "__docId__": 69,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1679,7 +2017,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 69,
+    "__docId__": 70,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1692,7 +2030,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 70,
+    "__docId__": 71,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1705,7 +2043,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 71,
+    "__docId__": 72,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1718,7 +2056,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 72,
+    "__docId__": 73,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1731,7 +2069,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 73,
+    "__docId__": 74,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1744,7 +2082,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 74,
+    "__docId__": 75,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1757,7 +2095,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 75,
+    "__docId__": 76,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1770,7 +2108,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 76,
+    "__docId__": 77,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1783,7 +2121,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 77,
+    "__docId__": 78,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1796,7 +2134,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 78,
+    "__docId__": 79,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1809,7 +2147,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 79,
+    "__docId__": 80,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1822,7 +2160,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 80,
+    "__docId__": 81,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1835,7 +2173,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 81,
+    "__docId__": 82,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1848,7 +2186,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 82,
+    "__docId__": 83,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1861,7 +2199,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 83,
+    "__docId__": 84,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1874,7 +2212,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 84,
+    "__docId__": 85,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1887,7 +2225,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 85,
+    "__docId__": 86,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1900,7 +2238,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 86,
+    "__docId__": 87,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1913,7 +2251,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 87,
+    "__docId__": 88,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1926,7 +2264,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 89,
+    "__docId__": 90,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1939,7 +2277,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 90,
+    "__docId__": 91,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1952,7 +2290,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 91,
+    "__docId__": 92,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1965,7 +2303,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 92,
+    "__docId__": 93,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1978,7 +2316,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 93,
+    "__docId__": 94,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -1991,7 +2329,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 94,
+    "__docId__": 95,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -2004,7 +2342,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 95,
+    "__docId__": 96,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -2017,7 +2355,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 96,
+    "__docId__": 97,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -2030,7 +2368,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 97,
+    "__docId__": 98,
     "kind": "testFile",
     "static": true,
     "variation": null,
@@ -2043,7 +2381,7 @@
     "content": "'use strict';\n\nimport expect     from 'expect';\nimport {\n  ADD_TODO,\n  REMOVE_TODO,\n  TOGGLE_TODO,\n  CLEAR_TODO,\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                 from '../../app/modules/todos/reducers/todos.reducer';\nimport {\n  SET_TODO_FILTER,\n  setTodoFilter,\n  todoFilters\n}                 from '../../app/modules/todos/reducers/todoFilter.reducer';\n\n/** @test */\ndescribe('actions', () => {\n\n  /** @test {addTodo} */\n  describe('addTodo()', () => {\n    it('should create an action to add a todo', () => {\n      const label = 'write tests';\n      const expectedAction = {\n        type : ADD_TODO,\n        label\n      };\n      const addTodoSpy = expect.createSpy().andCall(addTodo);\n\n\n      expect(addTodoSpy(label)).toEqual(expectedAction);\n      expect(addTodoSpy).toHaveBeenCalledWith('write tests');\n    });\n  });\n\n  /** @test {removeTodo} */\n  describe('removeTodo()', () => {\n    it('should create an action to remove a todo', () => {\n      const id = 42;\n      const expectedAction = {\n        type : REMOVE_TODO,\n        id\n      };\n      const removeTodoSpy = expect.createSpy().andCall(removeTodo);\n\n      expect(removeTodoSpy(id)).toEqual(expectedAction);\n      expect(removeTodoSpy).toHaveBeenCalledWith(42);\n    });\n  });\n\n  /** @test {toggleTodo} */\n  describe('toggleTodo()', () => {\n    it('should create an action to toggle a todo', () => {\n      const id = 42;\n      const expectedAction = {\n        type : TOGGLE_TODO,\n        id\n      };\n      const toggleTodoSpy = expect.createSpy().andCall(toggleTodo);\n\n      expect(toggleTodoSpy(id)).toEqual(expectedAction);\n      expect(toggleTodoSpy).toHaveBeenCalledWith(42);\n    });\n  });\n\n  /** @test {clearTodo} */\n  describe('clearTodo()', () => {\n    it('should create an action to clear completed todo', () => {\n      const expectedAction = {\n        type : CLEAR_TODO\n      };\n      const clearTodoSpy = expect.createSpy().andCall(clearTodo);\n\n      expect(clearTodoSpy()).toEqual(expectedAction);\n      expect(clearTodoSpy).toHaveBeenCalled();\n    });\n  });\n\n  /** @test {setTodoFilter} */\n  describe('setTodoFilter()', () => {\n    it('should create an action to set the todo filter', () => {\n      const filter = todoFilters.SHOW_ALL;\n      const expectedAction = {\n        type : SET_TODO_FILTER,\n        filter\n      };\n      const setTodoFilterSpy = expect.createSpy().andCall(setTodoFilter);\n\n      expect(setTodoFilterSpy(filter)).toEqual(expectedAction);\n      expect(setTodoFilterSpy).toHaveBeenCalledWith(todoFilters.SHOW_ALL);\n    });\n  });\n});"
   },
   {
-    "__docId__": 98,
+    "__docId__": 99,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2066,7 +2404,7 @@
     ]
   },
   {
-    "__docId__": 99,
+    "__docId__": 100,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2089,7 +2427,7 @@
     ]
   },
   {
-    "__docId__": 100,
+    "__docId__": 101,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2103,7 +2441,7 @@
     "lineNumber": 25
   },
   {
-    "__docId__": 101,
+    "__docId__": 102,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2126,7 +2464,7 @@
     ]
   },
   {
-    "__docId__": 102,
+    "__docId__": 103,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2140,7 +2478,7 @@
     "lineNumber": 41
   },
   {
-    "__docId__": 103,
+    "__docId__": 104,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2163,7 +2501,7 @@
     ]
   },
   {
-    "__docId__": 104,
+    "__docId__": 105,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2177,7 +2515,7 @@
     "lineNumber": 56
   },
   {
-    "__docId__": 105,
+    "__docId__": 106,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2200,7 +2538,7 @@
     ]
   },
   {
-    "__docId__": 106,
+    "__docId__": 107,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2214,7 +2552,7 @@
     "lineNumber": 71
   },
   {
-    "__docId__": 107,
+    "__docId__": 108,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2237,7 +2575,7 @@
     ]
   },
   {
-    "__docId__": 108,
+    "__docId__": 109,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2251,7 +2589,7 @@
     "lineNumber": 84
   },
   {
-    "__docId__": 109,
+    "__docId__": 110,
     "kind": "testFile",
     "static": true,
     "variation": null,
@@ -2264,7 +2602,7 @@
     "content": "'use strict';\n\nimport React        from 'react';\nimport expect       from 'expect';\nimport { mount }    from 'enzyme';\n\nimport {\n  Todo,\n  TodoList,\n  TodoForm,\n  TodoFooter,\n  FilterLink,\n  TodoFilterLinks\n}                   from '../../app/modules/todos/TodoApp.component';\n\nimport {\n  todoFilters\n}                   from '../../app/modules/todos/reducers/todoFilter.reducer';\n\n/** @test */\ndescribe('components', () => {\n\n  /** @test {Todo} */\n  describe('<Todo />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        completed      : true,\n        label          : 'todo',\n        id             : 42,\n        onClick        : expect.createSpy(),\n        onButtonClick  : expect.createSpy()\n      };\n\n      wrapper = mount(<Todo {...attrs} />);\n    });\n\n    it('should render a todo', () => {\n      expect(wrapper.find('.todoList_itemLabel').text()).toBe('todo');\n      expect(wrapper.find('.todoList_itemButton').text()).toExist();\n    });\n\n    it('should call onClick() when label is clicked', () => {\n      wrapper.find('.todoList_itemLabel').simulate('click');\n\n      expect(attrs.onClick.calls.length).toBe(1);\n    });\n\n    it('should call onButtonClick() when button is clicked', () => {\n      wrapper.find('.todoList_itemButton').simulate('click');\n\n      expect(attrs.onButtonClick.calls.length).toBe(1);\n    });\n  });\n\n  /** @test {TodoList} */\n  describe('<TodoList />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        filteredTodos       : [\n          {label: 'todo1', id: 111, completed: false},\n          {label: 'todo2', id: 222, completed: false},\n          {label: 'todo3', id: 333, completed: true},\n        ],\n        onTodoClick         : expect.createSpy(),\n        onTodoButtonClick   : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoList {...attrs} />);\n    });\n\n    it('should render filtered todos', () => {\n      const firstTodo = wrapper.find(Todo).at(0);\n      const secondTodo = wrapper.find(Todo).at(1);\n      const thirdTodo = wrapper.find(Todo).at(2);\n\n      expect(wrapper.find('.todoList').children().length).toBe(3);\n\n      expect(firstTodo.key()).toBe('111');\n      expect(secondTodo.key()).toBe('222');\n      expect(thirdTodo.key()).toBe('333');\n\n      expect(firstTodo.find('.todoList_itemLabel').text()).toBe('todo1');\n      expect(secondTodo.find('.todoList_itemLabel').text()).toBe('todo2');\n      expect(thirdTodo.find('.todoList_itemLabel').text()).toBe('todo3');\n    });\n  });\n\n  /** @test {TodoForm} */\n  describe('<TodoForm />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        onTodoFormSubmit : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoForm {...attrs} />);\n    });\n\n    it('should render a form to add a todo', () => {\n      const form    = wrapper.find('.todoForm');\n      const input   = form.find('.todoForm_label');\n      const button  = form.find('.todoForm_submit');\n\n      expect(form.type()).toBe('form');\n      expect(form.props().onSubmit).toBeA('function');\n\n      expect(input.length).toBe(1);\n      expect(input.type()).toBe('input');\n      expect(input.props().type).toBe('text');\n\n      expect(button.length).toBe(1);\n      expect(button.type()).toBe('button');\n    });\n\n    it('should not submit form with an empty label', () => {\n      const form    = wrapper.find('.todoForm');\n\n      form.simulate('submit');\n\n      expect(attrs.onTodoFormSubmit).toNotHaveBeenCalled();\n    });\n\n    it('should submit form when a label is given', () => {\n      wrapper.find('.todoForm_label').get(0).value = 'write test';\n      wrapper.find('.todoForm').simulate('submit');\n\n      expect(attrs.onTodoFormSubmit).toHaveBeenCalledWith('write test');\n    });\n  });\n\n  /** @test {FilterLink} */\n  describe('<FilterLink />', () => {\n    let attrs = {},\n    wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        active  : false,\n        filter  : todoFilters.SHOW_ALL,\n        onClick : expect.createSpy()\n      };\n\n      wrapper = mount(<FilterLink {...attrs} />);\n    });\n\n    it('should generate a clickable link to filter todos', () => {\n      const link  = wrapper.find('.filterList_item').first();\n\n      expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);\n      expect(link.hasClass('filterList_item-active')).toBeFalsy();\n\n      link.simulate('click');\n\n      expect(attrs.onClick).toHaveBeenCalledWith(todoFilters.SHOW_ALL);\n    });\n\n    it('should not be clickable if filter is already active', () => {\n      wrapper.setProps({ active : true });\n      const link  = wrapper.find('.filterList_item').first();\n\n      expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);\n      expect(link.hasClass('filterList_item-active')).toBeTruthy();\n\n      link.simulate('click');\n\n      expect(attrs.onClick).toNotHaveBeenCalled();\n    });\n\n    it('should display the filter name properly', () => {\n      const link = wrapper.find('.filterList_item').first();\n\n      expect(link.text()).toBe('ALL');\n    });\n  });\n\n  /** @test {TodoFilterLinks} */\n  describe('<TodoFilterLinks />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        filterList    : Object.keys(todoFilters),\n        currentFilter : todoFilters.SHOW_ALL,\n        onLinkClick   : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoFilterLinks {...attrs} />);\n    });\n\n    it('should render all filter links', () => {\n      expect(wrapper.find('.filterList_item').length).toBe(attrs.filterList.length);\n    });\n\n    it('should set proper filter as active', () => {\n      expect(wrapper.find('.filterList_item-active').length).toBe(1);\n      expect(wrapper.find('.filterList_item').not('.filterList_item-active').length).toBe(attrs.filterList.length - 1);\n      expect(wrapper.find('.filterList_item-active').text()).toBe('ALL');\n    });\n\n    it('should pass a fonction as onClick property', () => {\n      wrapper.find('.filterList_item').not('.filterList_item-active').first().simulate('click');\n\n      expect(attrs.onLinkClick).toHaveBeenCalled();\n    });\n  });\n\n  /** @test {TodoFooter} */\n  describe('<TodoFooter />', () => {\n    let attrs = {},\n      wrapper = null;\n\n    beforeEach(() => {\n      attrs = {\n        todos : [\n          {label: 'todo1', id: 111, completed: false},\n          {label: 'todo2', id: 222, completed: true},\n          {label: 'todo3', id: 333, completed: false},\n        ],\n        onTodoClearClick : expect.createSpy()\n      };\n\n      wrapper = mount(<TodoFooter {...attrs} />);\n    });\n\n    it('should not display clear link if there isn\\'t completed todo', () => {\n      wrapper.setProps({\n        todos : [\n          {label: 'todo1', id: 111, completed: false},\n          {label: 'todo2', id: 222, completed: false},\n          {label: 'todo3', id: 333, completed: false},\n        ]\n      });\n\n      expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeTruthy();\n    });\n\n    it('should display clear link if there is completed todo', () => {\n      expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeFalsy();\n    });\n\n    it('should call onTodoClearClick on clear link click', () => {\n      wrapper.find('.todoFooter_clear').first().simulate('click');\n\n      expect(attrs.onTodoClearClick).toHaveBeenCalled();\n    });\n  });\n});"
   },
   {
-    "__docId__": 110,
+    "__docId__": 111,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2287,7 +2625,7 @@
     ]
   },
   {
-    "__docId__": 111,
+    "__docId__": 112,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2310,7 +2648,7 @@
     ]
   },
   {
-    "__docId__": 112,
+    "__docId__": 113,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2324,7 +2662,7 @@
     "lineNumber": 40
   },
   {
-    "__docId__": 113,
+    "__docId__": 114,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2338,7 +2676,7 @@
     "lineNumber": 45
   },
   {
-    "__docId__": 114,
+    "__docId__": 115,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2352,7 +2690,7 @@
     "lineNumber": 51
   },
   {
-    "__docId__": 115,
+    "__docId__": 116,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2375,7 +2713,7 @@
     ]
   },
   {
-    "__docId__": 116,
+    "__docId__": 117,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2389,7 +2727,7 @@
     "lineNumber": 77
   },
   {
-    "__docId__": 117,
+    "__docId__": 118,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2412,7 +2750,7 @@
     ]
   },
   {
-    "__docId__": 118,
+    "__docId__": 119,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2426,7 +2764,7 @@
     "lineNumber": 107
   },
   {
-    "__docId__": 119,
+    "__docId__": 120,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2440,7 +2778,7 @@
     "lineNumber": 123
   },
   {
-    "__docId__": 120,
+    "__docId__": 121,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2454,7 +2792,7 @@
     "lineNumber": 131
   },
   {
-    "__docId__": 121,
+    "__docId__": 122,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2477,7 +2815,7 @@
     ]
   },
   {
-    "__docId__": 122,
+    "__docId__": 123,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2491,7 +2829,7 @@
     "lineNumber": 154
   },
   {
-    "__docId__": 123,
+    "__docId__": 124,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2505,7 +2843,7 @@
     "lineNumber": 165
   },
   {
-    "__docId__": 124,
+    "__docId__": 125,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2519,7 +2857,7 @@
     "lineNumber": 177
   },
   {
-    "__docId__": 125,
+    "__docId__": 126,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2542,7 +2880,7 @@
     ]
   },
   {
-    "__docId__": 126,
+    "__docId__": 127,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2556,7 +2894,7 @@
     "lineNumber": 199
   },
   {
-    "__docId__": 127,
+    "__docId__": 128,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2570,7 +2908,7 @@
     "lineNumber": 203
   },
   {
-    "__docId__": 128,
+    "__docId__": 129,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2584,7 +2922,7 @@
     "lineNumber": 209
   },
   {
-    "__docId__": 129,
+    "__docId__": 130,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2607,7 +2945,7 @@
     ]
   },
   {
-    "__docId__": 130,
+    "__docId__": 131,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2621,7 +2959,7 @@
     "lineNumber": 234
   },
   {
-    "__docId__": 131,
+    "__docId__": 132,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2635,7 +2973,7 @@
     "lineNumber": 246
   },
   {
-    "__docId__": 132,
+    "__docId__": 133,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2649,7 +2987,7 @@
     "lineNumber": 250
   },
   {
-    "__docId__": 133,
+    "__docId__": 134,
     "kind": "testFile",
     "static": true,
     "variation": null,
@@ -2662,7 +3000,7 @@
     "content": "'use strict';\n\nimport expect               from 'expect';\nimport deepFreeze           from 'deep-freeze';\n\nimport {\n  initialState,\n  rootReducer\n}                           from '../../app/reducer.js';\n\nimport todos,\n{\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                           from '../../app/modules/todos/reducers/todos.reducer';\n\nimport todoFilter,\n{\n  setTodoFilter,\n  todoFilters\n}                           from '../../app/modules/todos/reducers/todoFilter.reducer';\n\n/** @test */\ndescribe('reducers', () => {\n\n  /** @test {rootReducer} */\n  describe('rootReducer()', () => {\n    it('should return the initial state', () => {\n      expect(rootReducer(undefined, {})).toEqual(initialState);\n    });\n  });\n\n  /** @test {todos} */\n  describe('todos()', () => {\n    it('should handle ADD_TODO', () => {\n      const label       = 'Write Tests';\n      const stateBefore = deepFreeze([]);\n      const stateAfter  = [\n        {\n          id        : 0,\n          label,\n          completed : false\n        }\n      ];\n\n      expect(todos(stateBefore, addTodo(label))).toEqual(stateAfter);\n    });\n\n    it('should handle REMOVE_TODO', () => {\n      const id          = 0;\n      const stateBefore = deepFreeze([\n        {\n          id,\n          label     : 'Write Tests',\n          completed : false\n        }\n      ]);\n      const stateAfter  = [];\n\n      expect(todos(stateBefore, removeTodo(id))).toEqual(stateAfter);\n    });\n\n    it('should handle TOGGLE_TODO', () => {\n      const id          = 0;\n      const stateBefore = deepFreeze([\n        {\n          id,\n          label     : 'Write Tests',\n          completed : false\n        }\n      ]);\n      const stateAfter  = [\n        {\n          id,\n          label     : 'Write Tests',\n          completed : true\n        }\n      ];\n\n      expect(todos(stateBefore, toggleTodo(id))).toEqual(stateAfter);\n    });\n\n    it('should handle CLEAR_TODO', () => {\n      const stateBefore = deepFreeze([\n        {\n          id        : 33,\n          label     : 'Write Tests',\n          completed : true\n        },\n        {\n          id        : 42,\n          label     : 'Do Things',\n          completed : false\n        },\n        {\n          id        : 53,\n          label     : 'Make Stuff',\n          completed : true\n        },\n      ]);\n      const stateAfter  = [\n        {\n          id        : 42,\n          label     : 'Do Things',\n          completed : false\n        }\n      ];\n\n      expect(todos(stateBefore, clearTodo())).toEqual(stateAfter);\n    });\n  });\n\n  /** @test {todoFilter} */\n  describe('todoFilter()', () => {\n    it('should handle SET_TODO_FILTER', () => {\n      const stateBefore = deepFreeze(todoFilters.SHOW_ALL);\n      const stateAfter  = todoFilters.SHOW_COMPLETED;\n\n      expect(todoFilter(stateBefore, setTodoFilter(todoFilters.SHOW_COMPLETED))).toEqual(stateAfter);\n    });\n  });\n});"
   },
   {
-    "__docId__": 134,
+    "__docId__": 135,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2685,7 +3023,7 @@
     ]
   },
   {
-    "__docId__": 135,
+    "__docId__": 136,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2708,7 +3046,7 @@
     ]
   },
   {
-    "__docId__": 136,
+    "__docId__": 137,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2722,7 +3060,7 @@
     "lineNumber": 30
   },
   {
-    "__docId__": 137,
+    "__docId__": 138,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2745,7 +3083,7 @@
     ]
   },
   {
-    "__docId__": 138,
+    "__docId__": 139,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2759,7 +3097,7 @@
     "lineNumber": 37
   },
   {
-    "__docId__": 139,
+    "__docId__": 140,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2773,7 +3111,7 @@
     "lineNumber": 51
   },
   {
-    "__docId__": 140,
+    "__docId__": 141,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2787,7 +3125,7 @@
     "lineNumber": 65
   },
   {
-    "__docId__": 141,
+    "__docId__": 142,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -2801,7 +3139,7 @@
     "lineNumber": 85
   },
   {
-    "__docId__": 142,
+    "__docId__": 143,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -2824,7 +3162,7 @@
     ]
   },
   {
-    "__docId__": 143,
+    "__docId__": 144,
     "kind": "testIt",
     "static": true,
     "variation": null,

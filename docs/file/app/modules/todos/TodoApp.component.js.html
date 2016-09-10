@@ -61,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-removeTodo">removeTodo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-todos">todos</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-toggleTodo">toggleTodo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-todoObj">todoObj</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -116,7 +117,7 @@ export const Todo = (
 
 /**
  * Generate a list of todos
- * @param {Array&lt;Object&gt;} filteredTodos
+ * @param {Array&lt;todoObj&gt;} filteredTodos
  * pre-filtered list of todos depending on the actual selected filter
  * @param {function(id:number)} onTodoClick
  * function to perform when a todo label is clicked, here {@link toggleTodo}
@@ -219,7 +220,7 @@ export const TodoFilterLinks = (
 
 /**
  * Generate a footer for the todo list
- * @param {Array&lt;Object&gt;} todos
+ * @param {Array&lt;todoObj&gt;} todos
  * list of all todos
  * @param {function()} onTodoClearClick
  * function to perform when the clear button is clicked
@@ -249,7 +250,7 @@ export const TodoFooter = (
 
 /**
  * Generate the whole todo application
- * @param {Array&lt;Object&gt;} todos
+ * @param {Array&lt;todoObj&gt;} todos
  * list of all available todos
  * @param {string} filter
  * current active filter
@@ -294,7 +295,7 @@ export const TodoApp = ({
  * Map the application state to the component properties
  * @param {Object} state
  * @return {obejct}
- * @property {Array&lt;Object&gt;} todos
+ * @property {Array&lt;todoObj&gt;} todos
  * @property {string} filter
  * @property {Array&lt;string&gt;} filterList
  * a mapped state to props object

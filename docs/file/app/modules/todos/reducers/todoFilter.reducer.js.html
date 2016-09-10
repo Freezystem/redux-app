@@ -61,6 +61,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-removeTodo">removeTodo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-todos">todos</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-toggleTodo">toggleTodo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-todoObj">todoObj</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -69,7 +70,17 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
 // Constants
+
+/**
+ * constant
+ * @type {string}
+ */
 export const SET_TODO_FILTER = &apos;SET_TODO_FILTER&apos;;
+
+/**
+ * list of todo filters
+ * @type {Object}
+ */
 export const todoFilters = {
   SHOW_ALL        : &apos;SHOW_ALL&apos;,
   SHOW_COMPLETED  : &apos;SHOW_COMPLETED&apos;,
@@ -77,10 +88,30 @@ export const todoFilters = {
 };
 
 // Actions
+
+/**
+ * action to set a filter
+ * @param {string} filter
+ * label of the filter to set
+ * @return {Object}
+ * @property {string} type
+ * action type
+ * @property {string} filter
+ * label of the filter to set
+ */
 export const setTodoFilter = ( filter ) =&gt; {
   return { type : SET_TODO_FILTER, filter };
 };
 
+/**
+ * filter a list of given todos
+ * @param {Array&lt;todoObj&gt;} todos
+ * list of todos to filter
+ * @param {string} filter
+ * filter value
+ * @returns {Array&lt;todoObj&gt;}
+ * a list of filtered todos
+ */
 export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) =&gt; {
   switch ( filter ) {
     case todoFilters.SHOW_PENDING:
@@ -93,6 +124,16 @@ export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) =&
 };
 
 // Reducer
+
+/**
+ * reducer for filter actions
+ * @param {string} state
+ * current state value
+ * @param {string} action
+ * action to perform on the state
+ * @return {string}
+ * new state value after performing the action
+ */
 const todoFilter = ( state = &apos;SHOW_ALL&apos;, action ) =&gt; {
   switch ( action.type ) {
     case SET_TODO_FILTER:
