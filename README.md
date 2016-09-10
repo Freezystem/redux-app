@@ -85,3 +85,8 @@ or with watch option
 ```
 npm test:watch
 ```
+
+####Generate Documentation
+```
+npm run doc
+```
