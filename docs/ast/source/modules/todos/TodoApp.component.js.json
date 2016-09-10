@@ -1927,7 +1927,7 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n * Generate a list of todos\n * @param {Array<object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
+            "value": "*\n * Generate a list of todos\n * @param {Array<Object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
             "start": 1284,
             "end": 1733,
             "loc": {
@@ -1994,7 +1994,7 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Generate a list of todos\n * @param {Array<object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
+          "value": "*\n * Generate a list of todos\n * @param {Array<Object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
           "start": 1284,
           "end": 1733,
           "loc": {
@@ -3027,7 +3027,7 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Generate a list of todos\n * @param {Array<object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
+            "value": "*\n * Generate a list of todos\n * @param {Array<Object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
             "start": 1284,
             "end": 1733,
             "loc": {
@@ -3074,7 +3074,7 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Generate a list of todos\n * @param {Array<object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
+          "value": "*\n * Generate a list of todos\n * @param {Array<Object>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n ",
           "start": 1284,
           "end": 1733,
           "loc": {
@@ -6849,7 +6849,7 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n * Generate a footer for the todo list\n * @param {Array<object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
+            "value": "*\n * Generate a footer for the todo list\n * @param {Array<Object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
             "start": 4250,
             "end": 4502,
             "loc": {
@@ -6896,7 +6896,7 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Generate a footer for the todo list\n * @param {Array<object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
+          "value": "*\n * Generate a footer for the todo list\n * @param {Array<Object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
           "start": 4250,
           "end": 4502,
           "loc": {
@@ -8628,7 +8628,7 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Generate a footer for the todo list\n * @param {Array<object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
+            "value": "*\n * Generate a footer for the todo list\n * @param {Array<Object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
             "start": 4250,
             "end": 4502,
             "loc": {
@@ -8670,7 +8670,7 @@
           },
           {
             "type": "Block",
-            "value": "*\n * Generate the whole todo application\n * @param {Array<object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
+            "value": "*\n * Generate the whole todo application\n * @param {Array<Object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
             "start": 5152,
             "end": 5891,
             "loc": {
@@ -8695,7 +8695,7 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Generate a footer for the todo list\n * @param {Array<object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
+          "value": "*\n * Generate a footer for the todo list\n * @param {Array<Object>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n ",
           "start": 4250,
           "end": 4502,
           "loc": {
@@ -8737,7 +8737,7 @@
         },
         {
           "type": "Block",
-          "value": "*\n * Generate the whole todo application\n * @param {Array<object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
+          "value": "*\n * Generate the whole todo application\n * @param {Array<Object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
           "start": 5152,
           "end": 5891,
           "loc": {
@@ -10323,7 +10323,7 @@
           },
           {
             "type": "Block",
-            "value": "*\n * Generate the whole todo application\n * @param {Array<object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
+            "value": "*\n * Generate the whole todo application\n * @param {Array<Object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
             "start": 5152,
             "end": 5891,
             "loc": {
@@ -10345,7 +10345,7 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n * Map the application state to the component properties\n * @param {object} state\n * @return {obejct}\n * @property {Array<object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n ",
+            "value": "*\n * Map the application state to the component properties\n * @param {Object} state\n * @return {obejct}\n * @property {Array<Object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n ",
             "start": 6512,
             "end": 6759,
             "loc": {
@@ -10390,7 +10390,7 @@
         },
         {
           "type": "Block",
-          "value": "*\n * Generate the whole todo application\n * @param {Array<object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
+          "value": "*\n * Generate the whole todo application\n * @param {Array<Object>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n ",
           "start": 5152,
           "end": 5891,
           "loc": {
@@ -10412,7 +10412,7 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Map the application state to the component properties\n * @param {object} state\n * @return {obejct}\n * @property {Array<object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n ",
+          "value": "*\n * Map the application state to the component properties\n * @param {Object} state\n * @return {obejct}\n * @property {Array<Object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n ",
           "start": 6512,
           "end": 6759,
           "loc": {
@@ -10853,7 +10853,7 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Map the application state to the component properties\n * @param {object} state\n * @return {obejct}\n * @property {Array<object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n ",
+          "value": "*\n * Map the application state to the component properties\n * @param {Object} state\n * @return {obejct}\n * @property {Array<Object>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n ",
           "start": 6512,
           "end": 6759,
           "loc": {
@@ -10875,7 +10875,7 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n ",
+          "value": "*\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {Object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n ",
           "start": 6935,
           "end": 7321,
           "loc": {
@@ -11770,7 +11770,7 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n ",
+          "value": "*\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {Object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n ",
           "start": 6935,
           "end": 7321,
           "loc": {
