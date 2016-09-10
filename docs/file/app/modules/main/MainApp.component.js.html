@@ -38,6 +38,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MainApp">MainApp</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Menu">Menu</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NotFound">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ReactDOM">ReactDOM</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Glossary/XML">XML</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">modules/todos</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FilterLink">FilterLink</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Todo">Todo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TodoApp">TodoApp</a></span></span></li>
@@ -74,8 +76,17 @@ import {
 }             from &apos;react-router&apos;;
 
 /**
+ * @external {XML} https://developer.mozilla.org/en-US/docs/Glossary/XML
+ */
+
+/**
+ * @typedef {XML} ReactDOM
+ */
+
+/**
  * Generate site navigation
- * @return {ReactElement} &lt;nav/&gt; Markup
+ * @return {ReactDOM}
+ * &lt;nav class=&quot;appMenu&quot;/&gt; markup
  */
 export const Menu = () =&gt; (
   &lt;nav className=&quot;appMenu&quot;&gt;
@@ -86,7 +97,8 @@ export const Menu = () =&gt; (
 
 /**
  * Temporary home page
- * @return {ReactElement} &lt;div class=&quot;homePage&quot;/&gt; Markup
+ * @return {ReactDOM}
+ * &lt;div class=&quot;homePage&quot;/&gt; markup
  */
 export const HomePage = () =&gt; (
   &lt;div className=&quot;homePage&quot;&gt;
@@ -96,7 +108,8 @@ export const HomePage = () =&gt; (
 
 /**
  * Error 404 fallback page
- * @return {ReactElement} &lt;div class=&quot;notFound&quot;/&gt; Markup
+ * @return {ReactDOM}
+ * &lt;div class=&quot;notFound&quot;/&gt; markup
  */
 export const NotFound = () =&gt; (
   &lt;div className=&quot;notFound&quot;&gt;
@@ -106,8 +119,10 @@ export const NotFound = () =&gt; (
 
 /**
  * Main wrapper
- * @params {ReactElement} children - all components called from router
- * @return {ReactElement} &lt;div class=&quot;notFound&quot;/&gt; Markup
+ * @params {ReactDOM} children
+ * all components called from router
+ * @return {ReactDOM}
+ * &lt;div class=&quot;notFound&quot;/&gt; markup
  */
 const MainApp = ({
   children

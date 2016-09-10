@@ -1,7 +1,7 @@
 {
-  "coverage": "14.81%",
+  "coverage": "40.74%",
   "expectCount": 27,
-  "actualCount": 4,
+  "actualCount": 11,
   "files": {
     "app/modules/todos/reducers/todos.reducer.js": {
       "expectCount": 9,
@@ -20,16 +20,8 @@
     },
     "app/modules/todos/TodoApp.component.js": {
       "expectCount": 7,
-      "actualCount": 0,
-      "undocumentLines": [
-        71,
-        24,
-        118,
-        82,
-        98,
-        50,
-        35
-      ]
+      "actualCount": 7,
+      "undocumentLines": []
     },
     "app/modules/main/MainApp.component.js": {
       "expectCount": 4,

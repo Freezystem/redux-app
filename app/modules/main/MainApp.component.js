@@ -8,8 +8,17 @@ import {
 }             from 'react-router';
 
 /**
+ * @external {XML} https://developer.mozilla.org/en-US/docs/Glossary/XML
+ */
+
+/**
+ * @typedef {XML} ReactDOM
+ */
+
+/**
  * Generate site navigation
- * @return {ReactElement} <nav/> Markup
+ * @return {ReactDOM}
+ * <nav class="appMenu"/> markup
  */
 export const Menu = () => (
   <nav className="appMenu">
@@ -20,7 +29,8 @@ export const Menu = () => (
 
 /**
  * Temporary home page
- * @return {ReactElement} <div class="homePage"/> Markup
+ * @return {ReactDOM}
+ * <div class="homePage"/> markup
  */
 export const HomePage = () => (
   <div className="homePage">
@@ -30,7 +40,8 @@ export const HomePage = () => (
 
 /**
  * Error 404 fallback page
- * @return {ReactElement} <div class="notFound"/> Markup
+ * @return {ReactDOM}
+ * <div class="notFound"/> markup
  */
 export const NotFound = () => (
   <div className="notFound">
@@ -40,8 +51,10 @@ export const NotFound = () => (
 
 /**
  * Main wrapper
- * @params {ReactElement} children - all components called from router
- * @return {ReactElement} <div class="notFound"/> Markup
+ * @params {ReactDOM} children
+ * all components called from router
+ * @return {ReactDOM}
+ * <div class="notFound"/> markup
  */
 const MainApp = ({
   children

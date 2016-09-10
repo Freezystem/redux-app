@@ -38,6 +38,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MainApp">MainApp</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Menu">Menu</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NotFound">NotFound</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ReactDOM">ReactDOM</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Glossary/XML">XML</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">modules/todos</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FilterLink">FilterLink</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Todo">Todo</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TodoApp">TodoApp</a></span></span></li>
@@ -87,6 +89,20 @@ import {
 }                     from &apos;./reducers/todoFilter.reducer&apos;;
 
 // Presentational Components
+
+/**
+ * Generate a clickable todo item with a label and an delete button
+ * @param {boolean} completed
+ * whether the todo is completed or not
+ * @param {string} label
+ * the todo label
+ * @param {function} onClick
+ * the function to perform when the todo label is clicked, here {@link toggleTodo}
+ * @param {function} onButtonClick
+ * the function to perform when the todo button is clicked, here {@link removeTodo}
+ * @return {ReactDOM}
+ * &lt;li class=&quot;todoList_item&quot;/&gt; markup
+ */
 export const Todo = (
   { completed, label, onClick, onButtonClick }
 ) =&gt; (
@@ -98,6 +114,17 @@ export const Todo = (
   &lt;/li&gt;
 );
 
+/**
+ * Generate a list of todos
+ * @param {Array&lt;object&gt;} filteredTodos
+ * pre-filtered list of todos depending on the actual selected filter
+ * @param {function(id:number)} onTodoClick
+ * function to perform when a todo label is clicked, here {@link toggleTodo}
+ * @param {function(id:number)} onTodoButtonClick
+ * function to perform when a todo button is clicked, here {@link removeTodo}
+ * @return {ReactDOM}
+ * &lt;ul class=&quot;todoList&quot;/&gt; markup
+ */
 export const TodoList = (
   { filteredTodos, onTodoClick, onTodoButtonClick }
 ) =&gt; (
@@ -113,6 +140,13 @@ export const TodoList = (
   &lt;/ul&gt;
 );
 
+/**
+ * Generate a form to submit a new todo
+ * @param {function(label:string)} onTodoFormSubmit
+ * function to perform on form submit
+ * @return {ReactDOM}
+ * &lt;form class=&quot;todoForm&quot;/&gt; markup
+ */
 export const TodoForm = (
   { onTodoFormSubmit }
 ) =&gt; {
@@ -134,6 +168,17 @@ export const TodoForm = (
   )
 };
 
+/**
+ * Generate a link to change filter value
+ * @param {boolean} active
+ * whether the link is already active or not
+ * @param {string} filter
+ * constant representing the filter value
+ * @param {function(filter:string)} onClick
+ * function to perform when link is clicked, here {@link setTodoFilter}
+ * @return {ReactDOM}
+ * &lt;a class=&quot;filterList_item&quot; /&gt; markup
+ */
 export const FilterLink = (
   { active, filter, onClick }
 ) =&gt; (
@@ -145,6 +190,17 @@ export const FilterLink = (
      }}&gt;{filter.replace(/SHOW_/, &apos;&apos;)}&lt;/a&gt;
 );
 
+/**
+ * Generate a list of todo filter links
+ * @param {Array&lt;string&gt;} filterList
+ * list of all available filters
+ * @param {string} currentFilter
+ * constant representing the currently active filter in the list
+ * @param {function()} onLinkClick
+ * function to perform when a filter link is clicked
+ * @return {ReactDOM}
+ * &lt;div class=&quot;filterList&quot; /&gt; markup
+ */
 export const TodoFilterLinks = (
   { filterList, currentFilter, onLinkClick }
 ) =&gt; (
@@ -161,6 +217,15 @@ export const TodoFilterLinks = (
   &lt;/div&gt;
 );
 
+/**
+ * Generate a footer for the todo list
+ * @param {Array&lt;object&gt;} todos
+ * list of all todos
+ * @param {function()} onTodoClearClick
+ * function to perform when the clear button is clicked
+ * @return {ReactDOM}
+ * &lt;p class=&quot;todoFooter&quot; /&gt; markup
+ */
 export const TodoFooter = (
   { todos, onTodoClearClick }
 ) =&gt; {
@@ -181,6 +246,28 @@ export const TodoFooter = (
 };
 
 // Container Components
+
+/**
+ * Generate the whole todo application
+ * @param {Array&lt;object&gt;} todos
+ * list of all available todos
+ * @param {string} filter
+ * current active filter
+ * @param {Array&lt;string&gt;} filterList
+ * list of all todo filters
+ * @param {function} onTodoFormSubmit
+ * function to perform when the todo form is submitted
+ * @param {function} onTodoClick
+ * function to perform when the todo label is clicked
+ * @param {function} onTodoButtonClick
+ * function to perform when the todo button is clicked
+ * @param {function} onTodoClearClick
+ * function to perform when the clear button is clicked
+ * @param {function} onLinkClick
+ * function to perform when a filter link is clicked
+ * @return {ReactDOM}
+ * &lt;section class=&quot;todoApp&quot; /&gt; markup
+ */
 export const TodoApp = ({
   todos,
   filter,
@@ -203,6 +290,15 @@ export const TodoApp = ({
   &lt;/section&gt;
 );
 
+/**
+ * Map the application state to the component properties
+ * @param {object} state
+ * @return {obejct}
+ * @property {Array&lt;object&gt;} todos
+ * @property {string} filter
+ * @property {Array&lt;string&gt;} filterList
+ * a mapped state to props object
+ */
 const MapStateToProps = ( state ) =&gt; {
   return {
     todos         : state.todos,
@@ -211,6 +307,17 @@ const MapStateToProps = ( state ) =&gt; {
   };
 };
 
+/**
+ * Map dispatch action to the component properties
+ * @param {function} dispatch
+ * the store dispatch function
+ * @return {object}
+ * @property {function(label:string)} onTodoFormSubmit
+ * @property {function(id:number)} onTodoClick
+ * @property {function(id:number)} onTodoButtonClick
+ * @property {function} onTodoClearClick
+ * @property {function(filter:string)} onLinkClick
+ */
 const MapDispatchToProps = ( dispatch ) =&gt; {
   return {
     onTodoFormSubmit  : label =&gt; dispatch(addTodo(label)),
@@ -221,6 +328,11 @@ const MapDispatchToProps = ( dispatch ) =&gt; {
   };
 };
 
+/**
+ * connect react component to redux state
+ * @return {ReactDOM}
+ * connected &lt;section class=&quot;todoApp&quot; /&gt; markup
+ */
 export default connect(
   MapStateToProps,
   MapDispatchToProps

@@ -570,6 +570,18 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "app/modules/main/mainapp.component.js~reactdom",
+    "typedef/index.html#static-typedef-ReactDOM",
+    "app/modules/main/MainApp.component.js~ReactDOM",
+    "typedef"
+  ],
+  [
+    "app/modules/main/mainapp.component.js~xml",
+    "external/index.html",
+    "app/modules/main/MainApp.component.js~XML",
+    "external"
+  ],
+  [
     "app/modules/todos/todoapp.component.js",
     "file/app/modules/todos/TodoApp.component.js.html",
     "app/modules/todos/TodoApp.component.js",
