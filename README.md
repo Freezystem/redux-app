@@ -9,7 +9,7 @@
 ###Features
 
 Here is the features I intend to have on this project
-- [x] Configure a full webpack build
+- [x] Configure a webpack development build
 - [x] Create a simple redux app
 - [ ] Add and use complex forms
 - [x] Add some styles
@@ -21,6 +21,7 @@ Here is the features I intend to have on this project
 - [x] Add Redux Dev Tools
 - [ ] Create production ready build in NPM scripts
 - [ ] Make some data persistent (LocalStorage / SessionStorage)
+- [ ] Write and Generate Documentation
 
 ###Libs
 
@@ -48,6 +49,10 @@ Tests
 - [Enzyme](https://github.com/airbnb/enzyme)
 - [DeepFreeze](https://github.com/substack/deep-freeze)
 - [jsDOM](https://github.com/tmpvar/jsdom)
+
+Documentation
+
+- [ESDoc](https://esdoc.org)
 
 ###NPM scripts
 
