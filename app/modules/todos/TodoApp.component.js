@@ -24,16 +24,19 @@ import {
 
 /**
  * Generate a clickable todo item with a label and an delete button
- * @param {boolean} completed
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {boolean} props.completed
  * whether the todo is completed or not
- * @param {string} label
+ * @param {string} props.label
  * the todo label
- * @param {function} onClick
+ * @param {function} props.onClick
  * the function to perform when the todo label is clicked, here {@link toggleTodo}
- * @param {function} onButtonClick
+ * @param {function} props.onButtonClick
  * the function to perform when the todo button is clicked, here {@link removeTodo}
  * @return {ReactDOM}
- * <li class="todoList_item"/> markup
+ * generate `<li class="todoList_item"/>` markup
  */
 export const Todo = (
   { completed, label, onClick, onButtonClick }
@@ -48,14 +51,17 @@ export const Todo = (
 
 /**
  * Generate a list of todos
- * @param {Array<todoObj>} filteredTodos
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {Array<todoObj>} props.filteredTodos
  * pre-filtered list of todos depending on the actual selected filter
- * @param {function(id:number)} onTodoClick
+ * @param {function(id:number)} props.onTodoClick
  * function to perform when a todo label is clicked, here {@link toggleTodo}
- * @param {function(id:number)} onTodoButtonClick
+ * @param {function(id:number)} props.onTodoButtonClick
  * function to perform when a todo button is clicked, here {@link removeTodo}
  * @return {ReactDOM}
- * <ul class="todoList"/> markup
+ * generate `<ul class="todoList"/>` markup
  */
 export const TodoList = (
   { filteredTodos, onTodoClick, onTodoButtonClick }
@@ -74,10 +80,13 @@ export const TodoList = (
 
 /**
  * Generate a form to submit a new todo
- * @param {function(label:string)} onTodoFormSubmit
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {function(label:string)} props.onTodoFormSubmit
  * function to perform on form submit
  * @return {ReactDOM}
- * <form class="todoForm"/> markup
+ * generate `<form class="todoForm"/>` markup
  */
 export const TodoForm = (
   { onTodoFormSubmit }
@@ -102,14 +111,17 @@ export const TodoForm = (
 
 /**
  * Generate a link to change filter value
- * @param {boolean} active
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {boolean} props.active
  * whether the link is already active or not
- * @param {string} filter
+ * @param {string} props.filter
  * constant representing the filter value
- * @param {function(filter:string)} onClick
+ * @param {function(filter:string)} props.onClick
  * function to perform when link is clicked, here {@link setTodoFilter}
  * @return {ReactDOM}
- * <a class="filterList_item" /> markup
+ * generate `<a class="filterList_item">` markup
  */
 export const FilterLink = (
   { active, filter, onClick }
@@ -124,14 +136,17 @@ export const FilterLink = (
 
 /**
  * Generate a list of todo filter links
- * @param {Array<string>} filterList
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {Array<string>} props.filterList
  * list of all available filters
- * @param {string} currentFilter
+ * @param {string} props.currentFilter
  * constant representing the currently active filter in the list
- * @param {function()} onLinkClick
+ * @param {function()} props.onLinkClick
  * function to perform when a filter link is clicked
  * @return {ReactDOM}
- * <div class="filterList" /> markup
+ * generate `<div class="filterList" />` markup
  */
 export const TodoFilterLinks = (
   { filterList, currentFilter, onLinkClick }
@@ -151,12 +166,15 @@ export const TodoFilterLinks = (
 
 /**
  * Generate a footer for the todo list
- * @param {Array<todoObj>} todos
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {Array<todoObj>} props.todos
  * list of all todos
- * @param {function()} onTodoClearClick
+ * @param {function()} props.onTodoClearClick
  * function to perform when the clear button is clicked
  * @return {ReactDOM}
- * <p class="todoFooter" /> markup
+ * generate `<p class="todoFooter" />` markup
  */
 export const TodoFooter = (
   { todos, onTodoClearClick }
@@ -181,24 +199,27 @@ export const TodoFooter = (
 
 /**
  * Generate the whole todo application
- * @param {Array<todoObj>} todos
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @param {Array<todoObj>} props.todos
  * list of all available todos
- * @param {string} filter
+ * @param {string} props.filter
  * current active filter
- * @param {Array<string>} filterList
+ * @param {Array<string>} props.filterList
  * list of all todo filters
- * @param {function} onTodoFormSubmit
+ * @param {function} props.onTodoFormSubmit
  * function to perform when the todo form is submitted
- * @param {function} onTodoClick
+ * @param {function} props.onTodoClick
  * function to perform when the todo label is clicked
- * @param {function} onTodoButtonClick
+ * @param {function} props.onTodoButtonClick
  * function to perform when the todo button is clicked
- * @param {function} onTodoClearClick
+ * @param {function} props.onTodoClearClick
  * function to perform when the clear button is clicked
- * @param {function} onLinkClick
+ * @param {function} props.onLinkClick
  * function to perform when a filter link is clicked
  * @return {ReactDOM}
- * <section class="todoApp" /> markup
+ * generate `<section class="todoApp" />` markup
  */
 export const TodoApp = ({
   todos,
@@ -225,7 +246,7 @@ export const TodoApp = ({
 /**
  * Map the application state to the component properties
  * @param {Object} state
- * @return {obejct}
+ * @return {object}
  * @property {Array<todoObj>} todos
  * @property {string} filter
  * @property {Array<string>} filterList
@@ -263,7 +284,7 @@ const MapDispatchToProps = ( dispatch ) => {
 /**
  * connect react component to redux state
  * @return {ReactDOM}
- * connected <section class="todoApp" /> markup
+ * generate connected `<section class="todoApp" />` markup
  */
 export default connect(
   MapStateToProps,

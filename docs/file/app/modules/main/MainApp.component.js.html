@@ -87,7 +87,7 @@ import {
 /**
  * Generate site navigation
  * @return {ReactDOM}
- * &lt;nav class=&quot;appMenu&quot;/&gt; markup
+ * generate `&lt;nav class=&quot;appMenu&quot;/&gt;` markup
  */
 export const Menu = () =&gt; (
   &lt;nav className=&quot;appMenu&quot;&gt;
@@ -99,7 +99,7 @@ export const Menu = () =&gt; (
 /**
  * Temporary home page
  * @return {ReactDOM}
- * &lt;div class=&quot;homePage&quot;/&gt; markup
+ * generate `&lt;div class=&quot;homePage&quot;/&gt;` markup
  */
 export const HomePage = () =&gt; (
   &lt;div className=&quot;homePage&quot;&gt;
@@ -110,7 +110,7 @@ export const HomePage = () =&gt; (
 /**
  * Error 404 fallback page
  * @return {ReactDOM}
- * &lt;div class=&quot;notFound&quot;/&gt; markup
+ * generate `&lt;div class=&quot;notFound&quot;/&gt;` markup
  */
 export const NotFound = () =&gt; (
   &lt;div className=&quot;notFound&quot;&gt;
@@ -120,15 +120,18 @@ export const NotFound = () =&gt; (
 
 /**
  * Main wrapper
- * @params {ReactDOM} children
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @params {ReactDOM} props.children
  * all components called from router
  * @return {ReactDOM}
- * &lt;div class=&quot;notFound&quot;/&gt; markup
+ * generate `&lt;div class=&quot;notFound&quot;/&gt;` markup
  */
 const MainApp = ({
   children
 }) =&gt; (
-  &lt;div class=&quot;mainApp&quot;&gt;
+  &lt;div className=&quot;mainApp&quot;&gt;
     &lt;Menu/&gt;
     {children}
   &lt;/div&gt;

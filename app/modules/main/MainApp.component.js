@@ -18,7 +18,7 @@ import {
 /**
  * Generate site navigation
  * @return {ReactDOM}
- * <nav class="appMenu"/> markup
+ * generate `<nav class="appMenu"/>` markup
  */
 export const Menu = () => (
   <nav className="appMenu">
@@ -30,7 +30,7 @@ export const Menu = () => (
 /**
  * Temporary home page
  * @return {ReactDOM}
- * <div class="homePage"/> markup
+ * generate `<div class="homePage"/>` markup
  */
 export const HomePage = () => (
   <div className="homePage">
@@ -41,7 +41,7 @@ export const HomePage = () => (
 /**
  * Error 404 fallback page
  * @return {ReactDOM}
- * <div class="notFound"/> markup
+ * generate `<div class="notFound"/>` markup
  */
 export const NotFound = () => (
   <div className="notFound">
@@ -51,15 +51,18 @@ export const NotFound = () => (
 
 /**
  * Main wrapper
- * @params {ReactDOM} children
+ * @type {function}
+ * @param {Object} props
+ * react props object
+ * @params {ReactDOM} props.children
  * all components called from router
  * @return {ReactDOM}
- * <div class="notFound"/> markup
+ * generate `<div class="notFound"/>` markup
  */
 const MainApp = ({
   children
 }) => (
-  <div class="mainApp">
+  <div className="mainApp">
     <Menu/>
     {children}
   </div>

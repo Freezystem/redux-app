@@ -86,7 +86,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\nimport './MainApp.scss';\n\nimport React  from 'react';\nimport {\n  Link\n}             from 'react-router';\n\n/**\n * @external {XML} https://developer.mozilla.org/en-US/docs/Glossary/XML\n */\n\n/**\n * @typedef {XML} ReactDOM\n */\n\n/**\n * Generate site navigation\n * @return {ReactDOM}\n * <nav class=\"appMenu\"/> markup\n */\nexport const Menu = () => (\n  <nav className=\"appMenu\">\n    <Link className=\"appMenu_item\" activeClassName={'appMenu_item-active'} to=\"/\">Home</Link>\n    <Link className=\"appMenu_item\" activeClassName={'appMenu_item-active'} to=\"todo\">Todo</Link>\n  </nav>\n);\n\n/**\n * Temporary home page\n * @return {ReactDOM}\n * <div class=\"homePage\"/> markup\n */\nexport const HomePage = () => (\n  <div className=\"homePage\">\n    <h1>Hello Redux!</h1>\n  </div>\n);\n\n/**\n * Error 404 fallback page\n * @return {ReactDOM}\n * <div class=\"notFound\"/> markup\n */\nexport const NotFound = () => (\n  <div className=\"notFound\">\n    <h1>Error 404 : Page Not Found</h1>\n  </div>\n);\n\n/**\n * Main wrapper\n * @params {ReactDOM} children\n * all components called from router\n * @return {ReactDOM}\n * <div class=\"notFound\"/> markup\n */\nconst MainApp = ({\n  children\n}) => (\n  <div class=\"mainApp\">\n    <Menu/>\n    {children}\n  </div>\n);\n\nexport default MainApp;"
+    "content": "'use strict';\n\nimport './MainApp.scss';\n\nimport React  from 'react';\nimport {\n  Link\n}             from 'react-router';\n\n/**\n * @external {XML} https://developer.mozilla.org/en-US/docs/Glossary/XML\n */\n\n/**\n * @typedef {XML} ReactDOM\n */\n\n/**\n * Generate site navigation\n * @return {ReactDOM}\n * generate `<nav class=\"appMenu\"/>` markup\n */\nexport const Menu = () => (\n  <nav className=\"appMenu\">\n    <Link className=\"appMenu_item\" activeClassName={'appMenu_item-active'} to=\"/\">Home</Link>\n    <Link className=\"appMenu_item\" activeClassName={'appMenu_item-active'} to=\"todo\">Todo</Link>\n  </nav>\n);\n\n/**\n * Temporary home page\n * @return {ReactDOM}\n * generate `<div class=\"homePage\"/>` markup\n */\nexport const HomePage = () => (\n  <div className=\"homePage\">\n    <h1>Hello Redux!</h1>\n  </div>\n);\n\n/**\n * Error 404 fallback page\n * @return {ReactDOM}\n * generate `<div class=\"notFound\"/>` markup\n */\nexport const NotFound = () => (\n  <div className=\"notFound\">\n    <h1>Error 404 : Page Not Found</h1>\n  </div>\n);\n\n/**\n * Main wrapper\n * @type {function}\n * @param {Object} props\n * react props object\n * @params {ReactDOM} props.children\n * all components called from router\n * @return {ReactDOM}\n * generate `<div class=\"notFound\"/>` markup\n */\nconst MainApp = ({\n  children\n}) => (\n  <div className=\"mainApp\">\n    <Menu/>\n    {children}\n  </div>\n);\n\nexport default MainApp;"
   },
   {
     "__docId__": 5,
@@ -138,7 +138,7 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<nav class=\"appMenu\"/> markup"
+      "description": "generate `<nav class=\"appMenu\"/>` markup"
     },
     "type": {
       "types": [
@@ -166,7 +166,7 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<div class=\"homePage\"/> markup"
+      "description": "generate `<div class=\"homePage\"/>` markup"
     },
     "type": {
       "types": [
@@ -194,7 +194,7 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<div class=\"notFound\"/> markup"
+      "description": "generate `<div class=\"notFound\"/>` markup"
     },
     "type": {
       "types": [
@@ -215,11 +215,23 @@
     "importPath": "redux/app/modules/main/MainApp.component.js",
     "importStyle": "MainApp",
     "description": "Main wrapper",
-    "lineNumber": 59,
+    "lineNumber": 62,
     "unknown": [
       {
         "tagName": "@params",
-        "tagValue": "{ReactDOM} children\nall components called from router"
+        "tagValue": "{ReactDOM} props.children\nall components called from router"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
       }
     ],
     "return": {
@@ -228,12 +240,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<div class=\"notFound\"/> markup"
+      "description": "generate `<div class=\"notFound\"/>` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -247,7 +262,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\n// Styles\nimport './TodoApp.scss';\n\n// Dependencies\nimport React          from 'react';\nimport { connect }    from 'react-redux';\nimport classNames     from 'classnames';\n\nimport {\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                     from './reducers/todos.reducer';\nimport {\n  todoFilters,\n  setTodoFilter,\n  getFilteredTodos\n}                     from './reducers/todoFilter.reducer';\n\n// Presentational Components\n\n/**\n * Generate a clickable todo item with a label and an delete button\n * @param {boolean} completed\n * whether the todo is completed or not\n * @param {string} label\n * the todo label\n * @param {function} onClick\n * the function to perform when the todo label is clicked, here {@link toggleTodo}\n * @param {function} onButtonClick\n * the function to perform when the todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <li class=\"todoList_item\"/> markup\n */\nexport const Todo = (\n  { completed, label, onClick, onButtonClick }\n) => (\n  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>\n    <span className=\"todoList_itemLabel\"\n          onClick={onClick}>{label}</span>\n    <button className=\"todoList_itemButton\"\n            onClick={onButtonClick}>+</button>\n  </li>\n);\n\n/**\n * Generate a list of todos\n * @param {Array<todoObj>} filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * <ul class=\"todoList\"/> markup\n */\nexport const TodoList = (\n  { filteredTodos, onTodoClick, onTodoButtonClick }\n) => (\n  <ul className=\"todoList\">\n    {\n      filteredTodos.map(todo =>\n        <Todo key={todo.id}\n              {...todo}\n              onClick={() => onTodoClick(todo.id)}\n              onButtonClick={() => onTodoButtonClick(todo.id)}/>\n      )\n    }\n  </ul>\n);\n\n/**\n * Generate a form to submit a new todo\n * @param {function(label:string)} onTodoFormSubmit\n * function to perform on form submit\n * @return {ReactDOM}\n * <form class=\"todoForm\"/> markup\n */\nexport const TodoForm = (\n  { onTodoFormSubmit }\n) => {\n  let _label;\n\n  return (\n    <form className=\"todoForm\"\n          onSubmit={(e) => {\n            e.preventDefault();\n            _label.value.trim() && onTodoFormSubmit(_label.value.trim());\n            _label.value = '';\n          }}>\n      <input className=\"todoForm_label\"\n             type=\"text\"\n             placeholder=\"What's need to be done today ?\"\n             ref={input => _label = input}/>\n      <button className=\"todoForm_submit\">add</button>\n    </form>\n  )\n};\n\n/**\n * Generate a link to change filter value\n * @param {boolean} active\n * whether the link is already active or not\n * @param {string} filter\n * constant representing the filter value\n * @param {function(filter:string)} onClick\n * function to perform when link is clicked, here {@link setTodoFilter}\n * @return {ReactDOM}\n * <a class=\"filterList_item\" /> markup\n */\nexport const FilterLink = (\n  { active, filter, onClick }\n) => (\n  <a className={classNames('filterList_item', { 'filterList_item-active' : active})}\n     href={`#${filter}`}\n     onClick={e => {\n       e.preventDefault();\n       !active && onClick(filter);\n     }}>{filter.replace(/SHOW_/, '')}</a>\n);\n\n/**\n * Generate a list of todo filter links\n * @param {Array<string>} filterList\n * list of all available filters\n * @param {string} currentFilter\n * constant representing the currently active filter in the list\n * @param {function()} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <div class=\"filterList\" /> markup\n */\nexport const TodoFilterLinks = (\n  { filterList, currentFilter, onLinkClick }\n) => (\n  <div className=\"filterList\">\n    <span class=\"filterList_label\">see:</span>\n    {\n      filterList.map((filter, index) => (\n        <FilterLink key={index}\n                    filter={filter}\n                    active={filter === currentFilter}\n                    onClick={onLinkClick}/>\n      ))\n    }\n  </div>\n);\n\n/**\n * Generate a footer for the todo list\n * @param {Array<todoObj>} todos\n * list of all todos\n * @param {function()} onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * <p class=\"todoFooter\" /> markup\n */\nexport const TodoFooter = (\n  { todos, onTodoClearClick }\n) => {\n  let completed = todos.filter(todo => todo.completed).length,\n    total       = todos.length,\n    text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';\n\n  return (\n    <p className=\"todoFooter\">\n      <span className=\"todoFooter_count\">{text}</span>\n      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}\n         onClick={(e) => {\n           e.preventDefault();\n           completed && onTodoClearClick();\n         }}>clear completed</a>\n    </p>\n  );\n};\n\n// Container Components\n\n/**\n * Generate the whole todo application\n * @param {Array<todoObj>} todos\n * list of all available todos\n * @param {string} filter\n * current active filter\n * @param {Array<string>} filterList\n * list of all todo filters\n * @param {function} onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * <section class=\"todoApp\" /> markup\n */\nexport const TodoApp = ({\n  todos,\n  filter,\n  filterList,\n  onTodoFormSubmit,\n  onTodoClick,\n  onTodoButtonClick,\n  onTodoClearClick,\n  onLinkClick\n}) => (\n  <section className=\"todoApp\">\n    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>\n    <TodoFilterLinks filterList={filterList}\n                     currentFilter={filter}\n                     onLinkClick={onLinkClick}/>\n    <TodoList filteredTodos={getFilteredTodos(todos, filter)}\n              onTodoClick={onTodoClick}\n              onTodoButtonClick={onTodoButtonClick}/>\n    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>\n  </section>\n);\n\n/**\n * Map the application state to the component properties\n * @param {Object} state\n * @return {obejct}\n * @property {Array<todoObj>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n */\nconst MapStateToProps = ( state ) => {\n  return {\n    todos         : state.todos,\n    filter        : state.todoFilter,\n    filterList    : Object.keys(todoFilters)\n  };\n};\n\n/**\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {Object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n */\nconst MapDispatchToProps = ( dispatch ) => {\n  return {\n    onTodoFormSubmit  : label => dispatch(addTodo(label)),\n    onTodoClick       : id => dispatch(toggleTodo(id)),\n    onTodoButtonClick : id => dispatch(removeTodo(id)),\n    onTodoClearClick  : () => dispatch(clearTodo()),\n    onLinkClick       : filter => dispatch(setTodoFilter(filter))\n  };\n};\n\n/**\n * connect react component to redux state\n * @return {ReactDOM}\n * connected <section class=\"todoApp\" /> markup\n */\nexport default connect(\n  MapStateToProps,\n  MapDispatchToProps\n)(TodoApp);"
+    "content": "'use strict';\n\n// Styles\nimport './TodoApp.scss';\n\n// Dependencies\nimport React          from 'react';\nimport { connect }    from 'react-redux';\nimport classNames     from 'classnames';\n\nimport {\n  addTodo,\n  removeTodo,\n  toggleTodo,\n  clearTodo\n}                     from './reducers/todos.reducer';\nimport {\n  todoFilters,\n  setTodoFilter,\n  getFilteredTodos\n}                     from './reducers/todoFilter.reducer';\n\n// Presentational Components\n\n/**\n * Generate a clickable todo item with a label and an delete button\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {boolean} props.completed\n * whether the todo is completed or not\n * @param {string} props.label\n * the todo label\n * @param {function} props.onClick\n * the function to perform when the todo label is clicked, here {@link toggleTodo}\n * @param {function} props.onButtonClick\n * the function to perform when the todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * generate `<li class=\"todoList_item\"/>` markup\n */\nexport const Todo = (\n  { completed, label, onClick, onButtonClick }\n) => (\n  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>\n    <span className=\"todoList_itemLabel\"\n          onClick={onClick}>{label}</span>\n    <button className=\"todoList_itemButton\"\n            onClick={onButtonClick}>+</button>\n  </li>\n);\n\n/**\n * Generate a list of todos\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {Array<todoObj>} props.filteredTodos\n * pre-filtered list of todos depending on the actual selected filter\n * @param {function(id:number)} props.onTodoClick\n * function to perform when a todo label is clicked, here {@link toggleTodo}\n * @param {function(id:number)} props.onTodoButtonClick\n * function to perform when a todo button is clicked, here {@link removeTodo}\n * @return {ReactDOM}\n * generate `<ul class=\"todoList\"/>` markup\n */\nexport const TodoList = (\n  { filteredTodos, onTodoClick, onTodoButtonClick }\n) => (\n  <ul className=\"todoList\">\n    {\n      filteredTodos.map(todo =>\n        <Todo key={todo.id}\n              {...todo}\n              onClick={() => onTodoClick(todo.id)}\n              onButtonClick={() => onTodoButtonClick(todo.id)}/>\n      )\n    }\n  </ul>\n);\n\n/**\n * Generate a form to submit a new todo\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {function(label:string)} props.onTodoFormSubmit\n * function to perform on form submit\n * @return {ReactDOM}\n * generate `<form class=\"todoForm\"/>` markup\n */\nexport const TodoForm = (\n  { onTodoFormSubmit }\n) => {\n  let _label;\n\n  return (\n    <form className=\"todoForm\"\n          onSubmit={(e) => {\n            e.preventDefault();\n            _label.value.trim() && onTodoFormSubmit(_label.value.trim());\n            _label.value = '';\n          }}>\n      <input className=\"todoForm_label\"\n             type=\"text\"\n             placeholder=\"What's need to be done today ?\"\n             ref={input => _label = input}/>\n      <button className=\"todoForm_submit\">add</button>\n    </form>\n  )\n};\n\n/**\n * Generate a link to change filter value\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {boolean} props.active\n * whether the link is already active or not\n * @param {string} props.filter\n * constant representing the filter value\n * @param {function(filter:string)} props.onClick\n * function to perform when link is clicked, here {@link setTodoFilter}\n * @return {ReactDOM}\n * generate `<a class=\"filterList_item\">` markup\n */\nexport const FilterLink = (\n  { active, filter, onClick }\n) => (\n  <a className={classNames('filterList_item', { 'filterList_item-active' : active})}\n     href={`#${filter}`}\n     onClick={e => {\n       e.preventDefault();\n       !active && onClick(filter);\n     }}>{filter.replace(/SHOW_/, '')}</a>\n);\n\n/**\n * Generate a list of todo filter links\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {Array<string>} props.filterList\n * list of all available filters\n * @param {string} props.currentFilter\n * constant representing the currently active filter in the list\n * @param {function()} props.onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * generate `<div class=\"filterList\" />` markup\n */\nexport const TodoFilterLinks = (\n  { filterList, currentFilter, onLinkClick }\n) => (\n  <div className=\"filterList\">\n    <span class=\"filterList_label\">see:</span>\n    {\n      filterList.map((filter, index) => (\n        <FilterLink key={index}\n                    filter={filter}\n                    active={filter === currentFilter}\n                    onClick={onLinkClick}/>\n      ))\n    }\n  </div>\n);\n\n/**\n * Generate a footer for the todo list\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {Array<todoObj>} props.todos\n * list of all todos\n * @param {function()} props.onTodoClearClick\n * function to perform when the clear button is clicked\n * @return {ReactDOM}\n * generate `<p class=\"todoFooter\" />` markup\n */\nexport const TodoFooter = (\n  { todos, onTodoClearClick }\n) => {\n  let completed = todos.filter(todo => todo.completed).length,\n    total       = todos.length,\n    text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';\n\n  return (\n    <p className=\"todoFooter\">\n      <span className=\"todoFooter_count\">{text}</span>\n      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}\n         onClick={(e) => {\n           e.preventDefault();\n           completed && onTodoClearClick();\n         }}>clear completed</a>\n    </p>\n  );\n};\n\n// Container Components\n\n/**\n * Generate the whole todo application\n * @type {function}\n * @param {Object} props\n * react props object\n * @param {Array<todoObj>} props.todos\n * list of all available todos\n * @param {string} props.filter\n * current active filter\n * @param {Array<string>} props.filterList\n * list of all todo filters\n * @param {function} props.onTodoFormSubmit\n * function to perform when the todo form is submitted\n * @param {function} props.onTodoClick\n * function to perform when the todo label is clicked\n * @param {function} props.onTodoButtonClick\n * function to perform when the todo button is clicked\n * @param {function} props.onTodoClearClick\n * function to perform when the clear button is clicked\n * @param {function} props.onLinkClick\n * function to perform when a filter link is clicked\n * @return {ReactDOM}\n * generate `<section class=\"todoApp\" />` markup\n */\nexport const TodoApp = ({\n  todos,\n  filter,\n  filterList,\n  onTodoFormSubmit,\n  onTodoClick,\n  onTodoButtonClick,\n  onTodoClearClick,\n  onLinkClick\n}) => (\n  <section className=\"todoApp\">\n    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>\n    <TodoFilterLinks filterList={filterList}\n                     currentFilter={filter}\n                     onLinkClick={onLinkClick}/>\n    <TodoList filteredTodos={getFilteredTodos(todos, filter)}\n              onTodoClick={onTodoClick}\n              onTodoButtonClick={onTodoButtonClick}/>\n    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>\n  </section>\n);\n\n/**\n * Map the application state to the component properties\n * @param {Object} state\n * @return {object}\n * @property {Array<todoObj>} todos\n * @property {string} filter\n * @property {Array<string>} filterList\n * a mapped state to props object\n */\nconst MapStateToProps = ( state ) => {\n  return {\n    todos         : state.todos,\n    filter        : state.todoFilter,\n    filterList    : Object.keys(todoFilters)\n  };\n};\n\n/**\n * Map dispatch action to the component properties\n * @param {function} dispatch\n * the store dispatch function\n * @return {Object}\n * @property {function(label:string)} onTodoFormSubmit\n * @property {function(id:number)} onTodoClick\n * @property {function(id:number)} onTodoButtonClick\n * @property {function} onTodoClearClick\n * @property {function(filter:string)} onLinkClick\n */\nconst MapDispatchToProps = ( dispatch ) => {\n  return {\n    onTodoFormSubmit  : label => dispatch(addTodo(label)),\n    onTodoClick       : id => dispatch(toggleTodo(id)),\n    onTodoButtonClick : id => dispatch(removeTodo(id)),\n    onTodoClearClick  : () => dispatch(clearTodo()),\n    onLinkClick       : filter => dispatch(setTodoFilter(filter))\n  };\n};\n\n/**\n * connect react component to redux state\n * @return {ReactDOM}\n * generate connected `<section class=\"todoApp\" />` markup\n */\nexport default connect(\n  MapStateToProps,\n  MapDispatchToProps\n)(TodoApp);"
   },
   {
     "__docId__": 12,
@@ -262,8 +277,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{Todo}",
     "description": "Generate a clickable todo item with a label and an delete button",
-    "lineNumber": 38,
+    "lineNumber": 41,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -271,7 +296,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "completed",
+        "name": "props.completed",
         "description": "whether the todo is completed or not"
       },
       {
@@ -281,7 +306,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "label",
+        "name": "props.label",
         "description": "the todo label"
       },
       {
@@ -291,7 +316,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onClick",
+        "name": "props.onClick",
         "description": "the function to perform when the todo label is clicked, here {@link toggleTodo}"
       },
       {
@@ -301,7 +326,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onButtonClick",
+        "name": "props.onButtonClick",
         "description": "the function to perform when the todo button is clicked, here {@link removeTodo}"
       }
     ],
@@ -311,12 +336,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<li class=\"todoList_item\"/> markup"
+      "description": "generate `<li class=\"todoList_item\"/>` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -332,8 +360,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{TodoList}",
     "description": "Generate a list of todos",
-    "lineNumber": 60,
+    "lineNumber": 66,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -341,7 +379,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "filteredTodos",
+        "name": "props.filteredTodos",
         "description": "pre-filtered list of todos depending on the actual selected filter"
       },
       {
@@ -351,7 +389,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoClick",
+        "name": "props.onTodoClick",
         "description": "function to perform when a todo label is clicked, here {@link toggleTodo}"
       },
       {
@@ -361,7 +399,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoButtonClick",
+        "name": "props.onTodoButtonClick",
         "description": "function to perform when a todo button is clicked, here {@link removeTodo}"
       }
     ],
@@ -371,12 +409,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<ul class=\"todoList\"/> markup"
+      "description": "generate `<ul class=\"todoList\"/>` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -392,8 +433,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{TodoForm}",
     "description": "Generate a form to submit a new todo",
-    "lineNumber": 82,
+    "lineNumber": 91,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -401,7 +452,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoFormSubmit",
+        "name": "props.onTodoFormSubmit",
         "description": "function to perform on form submit"
       }
     ],
@@ -411,12 +462,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<form class=\"todoForm\"/> markup"
+      "description": "generate `<form class=\"todoForm\"/>` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -432,8 +486,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{FilterLink}",
     "description": "Generate a link to change filter value",
-    "lineNumber": 114,
+    "lineNumber": 126,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -441,7 +505,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "active",
+        "name": "props.active",
         "description": "whether the link is already active or not"
       },
       {
@@ -451,7 +515,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "filter",
+        "name": "props.filter",
         "description": "constant representing the filter value"
       },
       {
@@ -461,7 +525,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onClick",
+        "name": "props.onClick",
         "description": "function to perform when link is clicked, here {@link setTodoFilter}"
       }
     ],
@@ -471,12 +535,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<a class=\"filterList_item\" /> markup"
+      "description": "generate `<a class=\"filterList_item\">` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -492,8 +559,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{TodoFilterLinks}",
     "description": "Generate a list of todo filter links",
-    "lineNumber": 136,
+    "lineNumber": 151,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -501,7 +578,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "filterList",
+        "name": "props.filterList",
         "description": "list of all available filters"
       },
       {
@@ -511,7 +588,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "currentFilter",
+        "name": "props.currentFilter",
         "description": "constant representing the currently active filter in the list"
       },
       {
@@ -521,7 +598,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onLinkClick",
+        "name": "props.onLinkClick",
         "description": "function to perform when a filter link is clicked"
       }
     ],
@@ -531,12 +608,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<div class=\"filterList\" /> markup"
+      "description": "generate `<div class=\"filterList\" />` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -552,8 +632,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{TodoFooter}",
     "description": "Generate a footer for the todo list",
-    "lineNumber": 161,
+    "lineNumber": 179,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -561,7 +651,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "todos",
+        "name": "props.todos",
         "description": "list of all todos"
       },
       {
@@ -571,7 +661,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoClearClick",
+        "name": "props.onTodoClearClick",
         "description": "function to perform when the clear button is clicked"
       }
     ],
@@ -581,12 +671,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<p class=\"todoFooter\" /> markup"
+      "description": "generate `<p class=\"todoFooter\" />` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -602,8 +695,18 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": "{TodoApp}",
     "description": "Generate the whole todo application",
-    "lineNumber": 203,
+    "lineNumber": 224,
     "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "props",
+        "description": "react props object"
+      },
       {
         "nullable": null,
         "types": [
@@ -611,7 +714,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "todos",
+        "name": "props.todos",
         "description": "list of all available todos"
       },
       {
@@ -621,7 +724,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "filter",
+        "name": "props.filter",
         "description": "current active filter"
       },
       {
@@ -631,7 +734,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "filterList",
+        "name": "props.filterList",
         "description": "list of all todo filters"
       },
       {
@@ -641,7 +744,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoFormSubmit",
+        "name": "props.onTodoFormSubmit",
         "description": "function to perform when the todo form is submitted"
       },
       {
@@ -651,7 +754,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoClick",
+        "name": "props.onTodoClick",
         "description": "function to perform when the todo label is clicked"
       },
       {
@@ -661,7 +764,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoButtonClick",
+        "name": "props.onTodoButtonClick",
         "description": "function to perform when the todo button is clicked"
       },
       {
@@ -671,7 +774,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onTodoClearClick",
+        "name": "props.onTodoClearClick",
         "description": "function to perform when the clear button is clicked"
       },
       {
@@ -681,7 +784,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "onLinkClick",
+        "name": "props.onLinkClick",
         "description": "function to perform when a filter link is clicked"
       }
     ],
@@ -691,12 +794,15 @@
         "ReactDOM"
       ],
       "spread": false,
-      "description": "<section class=\"todoApp\" /> markup"
+      "description": "generate `<section class=\"todoApp\" />` markup"
     },
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "function"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
@@ -712,7 +818,7 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": null,
     "description": "Map the application state to the component properties",
-    "lineNumber": 234,
+    "lineNumber": 255,
     "params": [
       {
         "nullable": null,
@@ -760,7 +866,7 @@
     "return": {
       "nullable": null,
       "types": [
-        "obejct"
+        "object"
       ],
       "spread": false,
       "description": ""
@@ -784,7 +890,7 @@
     "importPath": "redux/app/modules/todos/TodoApp.component.js",
     "importStyle": null,
     "description": "Map dispatch action to the component properties",
-    "lineNumber": 253,
+    "lineNumber": 274,
     "params": [
       {
         "nullable": null,
@@ -1532,7 +1638,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\n// Dependencies\nimport { combineReducers }  from 'redux';\n\n// Reducers\nimport {\n  routerReducer\n}                           from 'react-router-redux';\nimport todos                from './modules/todos/reducers/todos.reducer';\nimport todoFilter           from './modules/todos/reducers/todoFilter.reducer';\n\n/**\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n */\nexport const initialState = {\n  routing     : { locationBeforeTransitions : null },\n  todos       : [],\n  todoFilter  : 'SHOW_ALL'\n};\n\n/**\n * Return the all the reducers combined\n * @type {function}\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n */\nexport const rootReducer = combineReducers({\n  routing : routerReducer,\n  todos,\n  todoFilter\n});"
+    "content": "'use strict';\n\n// Dependencies\nimport { combineReducers }  from 'redux';\n\n// Reducers\nimport {\n  routerReducer\n}                           from 'react-router-redux';\nimport todos                from './modules/todos/reducers/todos.reducer';\nimport todoFilter           from './modules/todos/reducers/todoFilter.reducer';\n\n/**\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n */\nexport const initialState = {\n  routing     : { locationBeforeTransitions : null },\n  todos       : [],\n  todoFilter  : 'SHOW_ALL'\n};\n\n/**\n * Return the all the reducers combined\n * @type {function}\n * react props object\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n */\nexport const rootReducer = combineReducers({\n  routing : routerReducer,\n  todos,\n  todoFilter\n});"
   },
   {
     "__docId__": 39,
@@ -1602,7 +1708,7 @@
     "importPath": "redux/app/reducer.js",
     "importStyle": "{rootReducer}",
     "description": "Return the all the reducers combined",
-    "lineNumber": 36,
+    "lineNumber": 37,
     "properties": [
       {
         "nullable": null,
