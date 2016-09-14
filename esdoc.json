@@ -5,8 +5,5 @@
     "type": "mocha",
     "source": "./test",
     "includes":["\\.specs\\."]
-  },
-  "plugins": [
-    {"name": "esdoc-es7-plugin"}
-  ]
+  }
 }

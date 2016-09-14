@@ -1,23 +1,31 @@
 {
   "type": "Program",
-  "start": 0,
-  "end": 989,
-  "loc": {
-    "start": {
-      "line": 1,
-      "column": 0
-    },
-    "end": {
-      "line": 41,
-      "column": 3
-    }
-  },
-  "sourceType": "module",
   "body": [
     {
       "type": "ExpressionStatement",
-      "start": 0,
-      "end": 13,
+      "expression": {
+        "type": "Literal",
+        "value": "use strict",
+        "raw": "'use strict'",
+        "range": [
+          0,
+          12
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 12
+          }
+        }
+      },
+      "range": [
+        0,
+        13
+      ],
       "loc": {
         "start": {
           "line": 1,
@@ -28,30 +36,14 @@
           "column": 13
         }
       },
-      "expression": {
-        "type": "Literal",
-        "start": 0,
-        "end": 12,
-        "loc": {
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 1,
-            "column": 12
-          }
-        },
-        "value": "use strict",
-        "rawValue": "use strict",
-        "raw": "'use strict'"
-      },
       "trailingComments": [
         {
-          "type": "CommentLine",
+          "type": "Line",
           "value": " Dependencies",
-          "start": 15,
-          "end": 30,
+          "range": [
+            15,
+            30
+          ],
           "loc": {
             "start": {
               "line": 3,
@@ -61,18 +53,90 @@
               "line": 3,
               "column": 15
             }
-          },
-          "range": [
-            15,
-            30
-          ]
+          }
         }
       ]
     },
     {
       "type": "ImportDeclaration",
-      "start": 31,
-      "end": 72,
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "combineReducers",
+            "range": [
+              40,
+              55
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 9
+              },
+              "end": {
+                "line": 4,
+                "column": 24
+              }
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "combineReducers",
+            "range": [
+              40,
+              55
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 9
+              },
+              "end": {
+                "line": 4,
+                "column": 24
+              }
+            }
+          },
+          "range": [
+            40,
+            55
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 9
+            },
+            "end": {
+              "line": 4,
+              "column": 24
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "redux",
+        "raw": "'redux'",
+        "range": [
+          64,
+          71
+        ],
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 33
+          },
+          "end": {
+            "line": 4,
+            "column": 40
+          }
+        }
+      },
+      "range": [
+        31,
+        72
+      ],
       "loc": {
         "start": {
           "line": 4,
@@ -83,104 +147,14 @@
           "column": 41
         }
       },
-      "specifiers": [
-        {
-          "type": "ImportSpecifier",
-          "start": 40,
-          "end": 55,
-          "loc": {
-            "start": {
-              "line": 4,
-              "column": 9
-            },
-            "end": {
-              "line": 4,
-              "column": 24
-            }
-          },
-          "imported": {
-            "type": "Identifier",
-            "start": 40,
-            "end": 55,
-            "loc": {
-              "start": {
-                "line": 4,
-                "column": 9
-              },
-              "end": {
-                "line": 4,
-                "column": 24
-              }
-            },
-            "name": "combineReducers",
-            "leadingComments": null
-          },
-          "local": {
-            "type": "Identifier",
-            "start": 40,
-            "end": 55,
-            "loc": {
-              "start": {
-                "line": 4,
-                "column": 9
-              },
-              "end": {
-                "line": 4,
-                "column": 24
-              }
-            },
-            "name": "combineReducers",
-            "leadingComments": [
-              {
-                "type": "CommentLine",
-                "value": " Dependencies",
-                "start": 15,
-                "end": 30,
-                "loc": {
-                  "start": {
-                    "line": 3,
-                    "column": 0
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 15
-                  }
-                },
-                "range": [
-                  15,
-                  30
-                ]
-              }
-            ]
-          },
-          "leadingComments": null
-        }
-      ],
-      "importKind": "value",
-      "source": {
-        "type": "Literal",
-        "start": 64,
-        "end": 71,
-        "loc": {
-          "start": {
-            "line": 4,
-            "column": 33
-          },
-          "end": {
-            "line": 4,
-            "column": 40
-          }
-        },
-        "value": "redux",
-        "rawValue": "redux",
-        "raw": "'redux'"
-      },
       "leadingComments": [
         {
-          "type": "CommentLine",
+          "type": "Line",
           "value": " Dependencies",
-          "start": 15,
-          "end": 30,
+          "range": [
+            15,
+            30
+          ],
           "loc": {
             "start": {
               "line": 3,
@@ -190,19 +164,17 @@
               "line": 3,
               "column": 15
             }
-          },
-          "range": [
-            15,
-            30
-          ]
+          }
         }
       ],
       "trailingComments": [
         {
-          "type": "CommentLine",
+          "type": "Line",
           "value": " Reducers",
-          "start": 74,
-          "end": 85,
+          "range": [
+            74,
+            85
+          ],
           "loc": {
             "start": {
               "line": 6,
@@ -212,18 +184,90 @@
               "line": 6,
               "column": 11
             }
-          },
-          "range": [
-            74,
-            85
-          ]
+          }
         }
       ]
     },
     {
       "type": "ImportDeclaration",
-      "start": 86,
-      "end": 165,
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "routerReducer",
+            "range": [
+              97,
+              110
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 2
+              },
+              "end": {
+                "line": 8,
+                "column": 15
+              }
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "routerReducer",
+            "range": [
+              97,
+              110
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 2
+              },
+              "end": {
+                "line": 8,
+                "column": 15
+              }
+            }
+          },
+          "range": [
+            97,
+            110
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 2
+            },
+            "end": {
+              "line": 8,
+              "column": 15
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "react-router-redux",
+        "raw": "'react-router-redux'",
+        "range": [
+          144,
+          164
+        ],
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 33
+          },
+          "end": {
+            "line": 9,
+            "column": 53
+          }
+        }
+      },
+      "range": [
+        86,
+        165
+      ],
       "loc": {
         "start": {
           "line": 7,
@@ -234,104 +278,14 @@
           "column": 54
         }
       },
-      "specifiers": [
-        {
-          "type": "ImportSpecifier",
-          "start": 97,
-          "end": 110,
-          "loc": {
-            "start": {
-              "line": 8,
-              "column": 2
-            },
-            "end": {
-              "line": 8,
-              "column": 15
-            }
-          },
-          "imported": {
-            "type": "Identifier",
-            "start": 97,
-            "end": 110,
-            "loc": {
-              "start": {
-                "line": 8,
-                "column": 2
-              },
-              "end": {
-                "line": 8,
-                "column": 15
-              }
-            },
-            "name": "routerReducer",
-            "leadingComments": null
-          },
-          "local": {
-            "type": "Identifier",
-            "start": 97,
-            "end": 110,
-            "loc": {
-              "start": {
-                "line": 8,
-                "column": 2
-              },
-              "end": {
-                "line": 8,
-                "column": 15
-              }
-            },
-            "name": "routerReducer",
-            "leadingComments": [
-              {
-                "type": "CommentLine",
-                "value": " Reducers",
-                "start": 74,
-                "end": 85,
-                "loc": {
-                  "start": {
-                    "line": 6,
-                    "column": 0
-                  },
-                  "end": {
-                    "line": 6,
-                    "column": 11
-                  }
-                },
-                "range": [
-                  74,
-                  85
-                ]
-              }
-            ]
-          },
-          "leadingComments": null
-        }
-      ],
-      "importKind": "value",
-      "source": {
-        "type": "Literal",
-        "start": 144,
-        "end": 164,
-        "loc": {
-          "start": {
-            "line": 9,
-            "column": 33
-          },
-          "end": {
-            "line": 9,
-            "column": 53
-          }
-        },
-        "value": "react-router-redux",
-        "rawValue": "react-router-redux",
-        "raw": "'react-router-redux'"
-      },
       "leadingComments": [
         {
-          "type": "CommentLine",
+          "type": "Line",
           "value": " Reducers",
-          "start": 74,
-          "end": 85,
+          "range": [
+            74,
+            85
+          ],
           "loc": {
             "start": {
               "line": 6,
@@ -341,47 +295,22 @@
               "line": 6,
               "column": 11
             }
-          },
-          "range": [
-            74,
-            85
-          ]
+          }
         }
       ]
     },
     {
       "type": "ImportDeclaration",
-      "start": 166,
-      "end": 240,
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 0
-        },
-        "end": {
-          "line": 10,
-          "column": 74
-        }
-      },
       "specifiers": [
         {
           "type": "ImportDefaultSpecifier",
-          "start": 173,
-          "end": 178,
-          "loc": {
-            "start": {
-              "line": 10,
-              "column": 7
-            },
-            "end": {
-              "line": 10,
-              "column": 12
-            }
-          },
           "local": {
             "type": "Identifier",
-            "start": 173,
-            "end": 178,
+            "name": "todos",
+            "range": [
+              173,
+              178
+            ],
             "loc": {
               "start": {
                 "line": 10,
@@ -391,16 +320,32 @@
                 "line": 10,
                 "column": 12
               }
+            }
+          },
+          "range": [
+            173,
+            178
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 7
             },
-            "name": "todos"
+            "end": {
+              "line": 10,
+              "column": 12
+            }
           }
         }
       ],
-      "importKind": "value",
       "source": {
         "type": "Literal",
-        "start": 199,
-        "end": 239,
+        "value": "./modules/todos/reducers/todos.reducer",
+        "raw": "'./modules/todos/reducers/todos.reducer'",
+        "range": [
+          199,
+          239
+        ],
         "loc": {
           "start": {
             "line": 10,
@@ -410,16 +355,85 @@
             "line": 10,
             "column": 73
           }
+        }
+      },
+      "range": [
+        166,
+        240
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 0
         },
-        "value": "./modules/todos/reducers/todos.reducer",
-        "rawValue": "./modules/todos/reducers/todos.reducer",
-        "raw": "'./modules/todos/reducers/todos.reducer'"
+        "end": {
+          "line": 10,
+          "column": 74
+        }
       }
     },
     {
       "type": "ImportDeclaration",
-      "start": 241,
-      "end": 320,
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "todoFilter",
+            "range": [
+              248,
+              258
+            ],
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 7
+              },
+              "end": {
+                "line": 11,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            248,
+            258
+          ],
+          "loc": {
+            "start": {
+              "line": 11,
+              "column": 7
+            },
+            "end": {
+              "line": 11,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./modules/todos/reducers/todoFilter.reducer",
+        "raw": "'./modules/todos/reducers/todoFilter.reducer'",
+        "range": [
+          274,
+          319
+        ],
+        "loc": {
+          "start": {
+            "line": 11,
+            "column": 33
+          },
+          "end": {
+            "line": 11,
+            "column": 78
+          }
+        }
+      },
+      "range": [
+        241,
+        320
+      ],
       "loc": {
         "start": {
           "line": 11,
@@ -430,64 +444,14 @@
           "column": 79
         }
       },
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "start": 248,
-          "end": 258,
-          "loc": {
-            "start": {
-              "line": 11,
-              "column": 7
-            },
-            "end": {
-              "line": 11,
-              "column": 17
-            }
-          },
-          "local": {
-            "type": "Identifier",
-            "start": 248,
-            "end": 258,
-            "loc": {
-              "start": {
-                "line": 11,
-                "column": 7
-              },
-              "end": {
-                "line": 11,
-                "column": 17
-              }
-            },
-            "name": "todoFilter"
-          }
-        }
-      ],
-      "importKind": "value",
-      "source": {
-        "type": "Literal",
-        "start": 274,
-        "end": 319,
-        "loc": {
-          "start": {
-            "line": 11,
-            "column": 33
-          },
-          "end": {
-            "line": 11,
-            "column": 78
-          }
-        },
-        "value": "./modules/todos/reducers/todoFilter.reducer",
-        "rawValue": "./modules/todos/reducers/todoFilter.reducer",
-        "raw": "'./modules/todos/reducers/todoFilter.reducer'"
-      },
       "trailingComments": [
         {
           "type": "Block",
           "value": "*\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n ",
-          "start": 322,
-          "end": 502,
+          "range": [
+            322,
+            502
+          ],
           "loc": {
             "start": {
               "line": 13,
@@ -497,32 +461,306 @@
               "line": 19,
               "column": 3
             }
-          },
-          "range": [
-            322,
-            502
-          ]
+          }
         }
       ]
     },
     {
       "type": "ExportNamedDeclaration",
-      "start": 503,
-      "end": 636,
-      "loc": {
-        "start": {
-          "line": 20,
-          "column": 0
-        },
-        "end": {
-          "line": 24,
-          "column": 2
-        }
-      },
       "declaration": {
         "type": "VariableDeclaration",
-        "start": 510,
-        "end": 636,
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "initialState",
+              "range": [
+                516,
+                528
+              ],
+              "loc": {
+                "start": {
+                  "line": 20,
+                  "column": 13
+                },
+                "end": {
+                  "line": 20,
+                  "column": 25
+                }
+              }
+            },
+            "init": {
+              "type": "ObjectExpression",
+              "properties": [
+                {
+                  "type": "Property",
+                  "key": {
+                    "type": "Identifier",
+                    "name": "routing",
+                    "range": [
+                      535,
+                      542
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 21,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 21,
+                        "column": 9
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "ObjectExpression",
+                    "properties": [
+                      {
+                        "type": "Property",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "locationBeforeTransitions",
+                          "range": [
+                            551,
+                            576
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 21,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 21,
+                              "column": 43
+                            }
+                          }
+                        },
+                        "value": {
+                          "type": "Literal",
+                          "value": null,
+                          "raw": "null",
+                          "range": [
+                            579,
+                            583
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 21,
+                              "column": 46
+                            },
+                            "end": {
+                              "line": 21,
+                              "column": 50
+                            }
+                          }
+                        },
+                        "kind": "init",
+                        "method": false,
+                        "shorthand": false,
+                        "computed": false,
+                        "range": [
+                          551,
+                          583
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 21,
+                            "column": 18
+                          },
+                          "end": {
+                            "line": 21,
+                            "column": 50
+                          }
+                        }
+                      }
+                    ],
+                    "range": [
+                      549,
+                      585
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 21,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 21,
+                        "column": 52
+                      }
+                    }
+                  },
+                  "kind": "init",
+                  "method": false,
+                  "shorthand": false,
+                  "computed": false,
+                  "range": [
+                    535,
+                    585
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 21,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 52
+                    }
+                  }
+                },
+                {
+                  "type": "Property",
+                  "key": {
+                    "type": "Identifier",
+                    "name": "todos",
+                    "range": [
+                      589,
+                      594
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 22,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 22,
+                        "column": 7
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "ArrayExpression",
+                    "elements": [],
+                    "range": [
+                      603,
+                      605
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 22,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 22,
+                        "column": 18
+                      }
+                    }
+                  },
+                  "kind": "init",
+                  "method": false,
+                  "shorthand": false,
+                  "computed": false,
+                  "range": [
+                    589,
+                    605
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 22,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 18
+                    }
+                  }
+                },
+                {
+                  "type": "Property",
+                  "key": {
+                    "type": "Identifier",
+                    "name": "todoFilter",
+                    "range": [
+                      609,
+                      619
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 23,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 12
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "Literal",
+                    "value": "SHOW_ALL",
+                    "raw": "'SHOW_ALL'",
+                    "range": [
+                      623,
+                      633
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 23,
+                        "column": 16
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 26
+                      }
+                    }
+                  },
+                  "kind": "init",
+                  "method": false,
+                  "shorthand": false,
+                  "computed": false,
+                  "range": [
+                    609,
+                    633
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 23,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 26
+                    }
+                  }
+                }
+              ],
+              "range": [
+                531,
+                635
+              ],
+              "loc": {
+                "start": {
+                  "line": 20,
+                  "column": 28
+                },
+                "end": {
+                  "line": 24,
+                  "column": 1
+                }
+              }
+            },
+            "range": [
+              516,
+              635
+            ],
+            "loc": {
+              "start": {
+                "line": 20,
+                "column": 13
+              },
+              "end": {
+                "line": 24,
+                "column": 1
+              }
+            }
+          }
+        ],
+        "kind": "const",
+        "range": [
+          510,
+          636
+        ],
         "loc": {
           "start": {
             "line": 20,
@@ -533,274 +771,14 @@
             "column": 2
           }
         },
-        "declarations": [
-          {
-            "type": "VariableDeclarator",
-            "start": 516,
-            "end": 635,
-            "loc": {
-              "start": {
-                "line": 20,
-                "column": 13
-              },
-              "end": {
-                "line": 24,
-                "column": 1
-              }
-            },
-            "id": {
-              "type": "Identifier",
-              "start": 516,
-              "end": 528,
-              "loc": {
-                "start": {
-                  "line": 20,
-                  "column": 13
-                },
-                "end": {
-                  "line": 20,
-                  "column": 25
-                }
-              },
-              "name": "initialState",
-              "leadingComments": null
-            },
-            "init": {
-              "type": "ObjectExpression",
-              "start": 531,
-              "end": 635,
-              "loc": {
-                "start": {
-                  "line": 20,
-                  "column": 28
-                },
-                "end": {
-                  "line": 24,
-                  "column": 1
-                }
-              },
-              "properties": [
-                {
-                  "type": "Property",
-                  "start": 535,
-                  "end": 585,
-                  "loc": {
-                    "start": {
-                      "line": 21,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 21,
-                      "column": 52
-                    }
-                  },
-                  "method": false,
-                  "shorthand": false,
-                  "computed": false,
-                  "key": {
-                    "type": "Identifier",
-                    "start": 535,
-                    "end": 542,
-                    "loc": {
-                      "start": {
-                        "line": 21,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 21,
-                        "column": 9
-                      }
-                    },
-                    "name": "routing"
-                  },
-                  "value": {
-                    "type": "ObjectExpression",
-                    "start": 549,
-                    "end": 585,
-                    "loc": {
-                      "start": {
-                        "line": 21,
-                        "column": 16
-                      },
-                      "end": {
-                        "line": 21,
-                        "column": 52
-                      }
-                    },
-                    "properties": [
-                      {
-                        "type": "Property",
-                        "start": 551,
-                        "end": 583,
-                        "loc": {
-                          "start": {
-                            "line": 21,
-                            "column": 18
-                          },
-                          "end": {
-                            "line": 21,
-                            "column": 50
-                          }
-                        },
-                        "method": false,
-                        "shorthand": false,
-                        "computed": false,
-                        "key": {
-                          "type": "Identifier",
-                          "start": 551,
-                          "end": 576,
-                          "loc": {
-                            "start": {
-                              "line": 21,
-                              "column": 18
-                            },
-                            "end": {
-                              "line": 21,
-                              "column": 43
-                            }
-                          },
-                          "name": "locationBeforeTransitions"
-                        },
-                        "value": {
-                          "type": "Literal",
-                          "start": 579,
-                          "end": 583,
-                          "loc": {
-                            "start": {
-                              "line": 21,
-                              "column": 46
-                            },
-                            "end": {
-                              "line": 21,
-                              "column": 50
-                            }
-                          },
-                          "value": null,
-                          "rawValue": null,
-                          "raw": "null"
-                        },
-                        "kind": "init"
-                      }
-                    ]
-                  },
-                  "kind": "init"
-                },
-                {
-                  "type": "Property",
-                  "start": 589,
-                  "end": 605,
-                  "loc": {
-                    "start": {
-                      "line": 22,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 22,
-                      "column": 18
-                    }
-                  },
-                  "method": false,
-                  "shorthand": false,
-                  "computed": false,
-                  "key": {
-                    "type": "Identifier",
-                    "start": 589,
-                    "end": 594,
-                    "loc": {
-                      "start": {
-                        "line": 22,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 22,
-                        "column": 7
-                      }
-                    },
-                    "name": "todos"
-                  },
-                  "value": {
-                    "type": "ArrayExpression",
-                    "start": 603,
-                    "end": 605,
-                    "loc": {
-                      "start": {
-                        "line": 22,
-                        "column": 16
-                      },
-                      "end": {
-                        "line": 22,
-                        "column": 18
-                      }
-                    },
-                    "elements": []
-                  },
-                  "kind": "init"
-                },
-                {
-                  "type": "Property",
-                  "start": 609,
-                  "end": 633,
-                  "loc": {
-                    "start": {
-                      "line": 23,
-                      "column": 2
-                    },
-                    "end": {
-                      "line": 23,
-                      "column": 26
-                    }
-                  },
-                  "method": false,
-                  "shorthand": false,
-                  "computed": false,
-                  "key": {
-                    "type": "Identifier",
-                    "start": 609,
-                    "end": 619,
-                    "loc": {
-                      "start": {
-                        "line": 23,
-                        "column": 2
-                      },
-                      "end": {
-                        "line": 23,
-                        "column": 12
-                      }
-                    },
-                    "name": "todoFilter"
-                  },
-                  "value": {
-                    "type": "Literal",
-                    "start": 623,
-                    "end": 633,
-                    "loc": {
-                      "start": {
-                        "line": 23,
-                        "column": 16
-                      },
-                      "end": {
-                        "line": 23,
-                        "column": 26
-                      }
-                    },
-                    "value": "SHOW_ALL",
-                    "rawValue": "SHOW_ALL",
-                    "raw": "'SHOW_ALL'"
-                  },
-                  "kind": "init"
-                }
-              ]
-            },
-            "leadingComments": null
-          }
-        ],
-        "kind": "const",
         "leadingComments": [
           {
             "type": "Block",
             "value": "*\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n ",
-            "start": 322,
-            "end": 502,
+            "range": [
+              322,
+              502
+            ],
             "loc": {
               "start": {
                 "line": 13,
@@ -810,19 +788,17 @@
                 "line": 19,
                 "column": 3
               }
-            },
-            "range": [
-              322,
-              502
-            ]
+            }
           }
         ],
         "trailingComments": [
           {
             "type": "Block",
             "value": "*\n * Return the all the reducers combined\n * @type {function}\n * react props object\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n ",
-            "start": 638,
-            "end": 891,
+            "range": [
+              638,
+              891
+            ],
             "loc": {
               "start": {
                 "line": 26,
@@ -832,22 +808,34 @@
                 "line": 36,
                 "column": 3
               }
-            },
-            "range": [
-              638,
-              891
-            ]
+            }
           }
         ]
       },
       "specifiers": [],
       "source": null,
+      "range": [
+        503,
+        636
+      ],
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 0
+        },
+        "end": {
+          "line": 24,
+          "column": 2
+        }
+      },
       "leadingComments": [
         {
           "type": "Block",
           "value": "*\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n ",
-          "start": 322,
-          "end": 502,
+          "range": [
+            322,
+            502
+          ],
           "loc": {
             "start": {
               "line": 13,
@@ -857,19 +845,17 @@
               "line": 19,
               "column": 3
             }
-          },
-          "range": [
-            322,
-            502
-          ]
+          }
         }
       ],
       "trailingComments": [
         {
           "type": "Block",
           "value": "*\n * Return the all the reducers combined\n * @type {function}\n * react props object\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n ",
-          "start": 638,
-          "end": 891,
+          "range": [
+            638,
+            891
+          ],
           "loc": {
             "start": {
               "line": 26,
@@ -879,32 +865,283 @@
               "line": 36,
               "column": 3
             }
-          },
-          "range": [
-            638,
-            891
-          ]
+          }
         }
       ]
     },
     {
       "type": "ExportNamedDeclaration",
-      "start": 892,
-      "end": 989,
-      "loc": {
-        "start": {
-          "line": 37,
-          "column": 0
-        },
-        "end": {
-          "line": 41,
-          "column": 3
-        }
-      },
       "declaration": {
         "type": "VariableDeclaration",
-        "start": 899,
-        "end": 989,
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "rootReducer",
+              "range": [
+                905,
+                916
+              ],
+              "loc": {
+                "start": {
+                  "line": 37,
+                  "column": 13
+                },
+                "end": {
+                  "line": 37,
+                  "column": 24
+                }
+              }
+            },
+            "init": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "combineReducers",
+                "range": [
+                  919,
+                  934
+                ],
+                "loc": {
+                  "start": {
+                    "line": 37,
+                    "column": 27
+                  },
+                  "end": {
+                    "line": 37,
+                    "column": 42
+                  }
+                }
+              },
+              "arguments": [
+                {
+                  "type": "ObjectExpression",
+                  "properties": [
+                    {
+                      "type": "Property",
+                      "key": {
+                        "type": "Identifier",
+                        "name": "routing",
+                        "range": [
+                          939,
+                          946
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 38,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 38,
+                            "column": 9
+                          }
+                        }
+                      },
+                      "value": {
+                        "type": "Identifier",
+                        "name": "routerReducer",
+                        "range": [
+                          949,
+                          962
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 38,
+                            "column": 12
+                          },
+                          "end": {
+                            "line": 38,
+                            "column": 25
+                          }
+                        }
+                      },
+                      "kind": "init",
+                      "method": false,
+                      "shorthand": false,
+                      "computed": false,
+                      "range": [
+                        939,
+                        962
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 38,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 38,
+                          "column": 25
+                        }
+                      }
+                    },
+                    {
+                      "type": "Property",
+                      "key": {
+                        "type": "Identifier",
+                        "name": "todos",
+                        "range": [
+                          966,
+                          971
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 39,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 39,
+                            "column": 7
+                          }
+                        }
+                      },
+                      "value": {
+                        "type": "Identifier",
+                        "name": "todos",
+                        "range": [
+                          966,
+                          971
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 39,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 39,
+                            "column": 7
+                          }
+                        }
+                      },
+                      "kind": "init",
+                      "method": false,
+                      "shorthand": true,
+                      "computed": false,
+                      "range": [
+                        966,
+                        971
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 39,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 39,
+                          "column": 7
+                        }
+                      }
+                    },
+                    {
+                      "type": "Property",
+                      "key": {
+                        "type": "Identifier",
+                        "name": "todoFilter",
+                        "range": [
+                          975,
+                          985
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 40,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 40,
+                            "column": 12
+                          }
+                        }
+                      },
+                      "value": {
+                        "type": "Identifier",
+                        "name": "todoFilter",
+                        "range": [
+                          975,
+                          985
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 40,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 40,
+                            "column": 12
+                          }
+                        }
+                      },
+                      "kind": "init",
+                      "method": false,
+                      "shorthand": true,
+                      "computed": false,
+                      "range": [
+                        975,
+                        985
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 40,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 40,
+                          "column": 12
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    935,
+                    987
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 37,
+                      "column": 43
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 1
+                    }
+                  }
+                }
+              ],
+              "range": [
+                919,
+                988
+              ],
+              "loc": {
+                "start": {
+                  "line": 37,
+                  "column": 27
+                },
+                "end": {
+                  "line": 41,
+                  "column": 2
+                }
+              }
+            },
+            "range": [
+              905,
+              988
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 13
+              },
+              "end": {
+                "line": 41,
+                "column": 2
+              }
+            }
+          }
+        ],
+        "kind": "const",
+        "range": [
+          899,
+          989
+        ],
         "loc": {
           "start": {
             "line": 37,
@@ -915,251 +1152,14 @@
             "column": 3
           }
         },
-        "declarations": [
-          {
-            "type": "VariableDeclarator",
-            "start": 905,
-            "end": 988,
-            "loc": {
-              "start": {
-                "line": 37,
-                "column": 13
-              },
-              "end": {
-                "line": 41,
-                "column": 2
-              }
-            },
-            "id": {
-              "type": "Identifier",
-              "start": 905,
-              "end": 916,
-              "loc": {
-                "start": {
-                  "line": 37,
-                  "column": 13
-                },
-                "end": {
-                  "line": 37,
-                  "column": 24
-                }
-              },
-              "name": "rootReducer",
-              "leadingComments": null
-            },
-            "init": {
-              "type": "CallExpression",
-              "start": 919,
-              "end": 988,
-              "loc": {
-                "start": {
-                  "line": 37,
-                  "column": 27
-                },
-                "end": {
-                  "line": 41,
-                  "column": 2
-                }
-              },
-              "callee": {
-                "type": "Identifier",
-                "start": 919,
-                "end": 934,
-                "loc": {
-                  "start": {
-                    "line": 37,
-                    "column": 27
-                  },
-                  "end": {
-                    "line": 37,
-                    "column": 42
-                  }
-                },
-                "name": "combineReducers"
-              },
-              "arguments": [
-                {
-                  "type": "ObjectExpression",
-                  "start": 935,
-                  "end": 987,
-                  "loc": {
-                    "start": {
-                      "line": 37,
-                      "column": 43
-                    },
-                    "end": {
-                      "line": 41,
-                      "column": 1
-                    }
-                  },
-                  "properties": [
-                    {
-                      "type": "Property",
-                      "start": 939,
-                      "end": 962,
-                      "loc": {
-                        "start": {
-                          "line": 38,
-                          "column": 2
-                        },
-                        "end": {
-                          "line": 38,
-                          "column": 25
-                        }
-                      },
-                      "method": false,
-                      "shorthand": false,
-                      "computed": false,
-                      "key": {
-                        "type": "Identifier",
-                        "start": 939,
-                        "end": 946,
-                        "loc": {
-                          "start": {
-                            "line": 38,
-                            "column": 2
-                          },
-                          "end": {
-                            "line": 38,
-                            "column": 9
-                          }
-                        },
-                        "name": "routing"
-                      },
-                      "value": {
-                        "type": "Identifier",
-                        "start": 949,
-                        "end": 962,
-                        "loc": {
-                          "start": {
-                            "line": 38,
-                            "column": 12
-                          },
-                          "end": {
-                            "line": 38,
-                            "column": 25
-                          }
-                        },
-                        "name": "routerReducer"
-                      },
-                      "kind": "init"
-                    },
-                    {
-                      "type": "Property",
-                      "start": 966,
-                      "end": 971,
-                      "loc": {
-                        "start": {
-                          "line": 39,
-                          "column": 2
-                        },
-                        "end": {
-                          "line": 39,
-                          "column": 7
-                        }
-                      },
-                      "method": false,
-                      "shorthand": true,
-                      "computed": false,
-                      "key": {
-                        "type": "Identifier",
-                        "start": 966,
-                        "end": 971,
-                        "loc": {
-                          "start": {
-                            "line": 39,
-                            "column": 2
-                          },
-                          "end": {
-                            "line": 39,
-                            "column": 7
-                          }
-                        },
-                        "name": "todos"
-                      },
-                      "kind": "init",
-                      "value": {
-                        "type": "Identifier",
-                        "start": 966,
-                        "end": 971,
-                        "loc": {
-                          "start": {
-                            "line": 39,
-                            "column": 2
-                          },
-                          "end": {
-                            "line": 39,
-                            "column": 7
-                          }
-                        },
-                        "name": "todos"
-                      }
-                    },
-                    {
-                      "type": "Property",
-                      "start": 975,
-                      "end": 985,
-                      "loc": {
-                        "start": {
-                          "line": 40,
-                          "column": 2
-                        },
-                        "end": {
-                          "line": 40,
-                          "column": 12
-                        }
-                      },
-                      "method": false,
-                      "shorthand": true,
-                      "computed": false,
-                      "key": {
-                        "type": "Identifier",
-                        "start": 975,
-                        "end": 985,
-                        "loc": {
-                          "start": {
-                            "line": 40,
-                            "column": 2
-                          },
-                          "end": {
-                            "line": 40,
-                            "column": 12
-                          }
-                        },
-                        "name": "todoFilter"
-                      },
-                      "kind": "init",
-                      "value": {
-                        "type": "Identifier",
-                        "start": 975,
-                        "end": 985,
-                        "loc": {
-                          "start": {
-                            "line": 40,
-                            "column": 2
-                          },
-                          "end": {
-                            "line": 40,
-                            "column": 12
-                          }
-                        },
-                        "name": "todoFilter"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            "leadingComments": null
-          }
-        ],
-        "kind": "const",
         "leadingComments": [
           {
             "type": "Block",
             "value": "*\n * Return the all the reducers combined\n * @type {function}\n * react props object\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n ",
-            "start": 638,
-            "end": 891,
+            "range": [
+              638,
+              891
+            ],
             "loc": {
               "start": {
                 "line": 26,
@@ -1169,23 +1169,35 @@
                 "line": 36,
                 "column": 3
               }
-            },
-            "range": [
-              638,
-              891
-            ]
+            }
           }
         ],
         "trailingComments": []
       },
       "specifiers": [],
       "source": null,
+      "range": [
+        892,
+        989
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 41,
+          "column": 3
+        }
+      },
       "leadingComments": [
         {
           "type": "Block",
           "value": "*\n * Return the all the reducers combined\n * @type {function}\n * react props object\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n ",
-          "start": 638,
-          "end": 891,
+          "range": [
+            638,
+            891
+          ],
           "loc": {
             "start": {
               "line": 26,
@@ -1195,13 +1207,98 @@
               "line": 36,
               "column": 3
             }
-          },
-          "range": [
-            638,
-            891
-          ]
+          }
         }
       ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    989
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 41,
+      "column": 3
+    }
+  },
+  "comments": [
+    {
+      "type": "Line",
+      "value": " Dependencies",
+      "range": [
+        15,
+        30
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " Reducers",
+      "range": [
+        74,
+        85
+      ],
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * Represent the initial state of the redux application\n * @type {Object}\n * @property {Object} routing\n * @property {Array<todoObj>} todos\n * @property {string} todoFilter\n ",
+      "range": [
+        322,
+        502
+      ],
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * Return the all the reducers combined\n * @type {function}\n * react props object\n * @return {Object}\n * @property {function} routing\n * @property {function} todos\n * see {@link todos}\n * @property {function} todoFilter\n * see {@link todoFilter}\n ",
+      "range": [
+        638,
+        891
+      ],
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 3
+        }
+      }
     }
   ]
 }

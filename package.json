@@ -31,7 +31,6 @@
     "deep-freeze": "0.0.1",
     "enzyme": "^2.4.1",
     "esdoc": "^0.4.8",
-    "esdoc-es7-plugin": "0.0.3",
     "expect": "^1.20.2",
     "html-webpack-plugin": "^2.22.0",
     "ignore-styles": "^5.0.1",
