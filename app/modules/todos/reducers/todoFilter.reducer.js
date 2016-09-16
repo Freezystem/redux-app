@@ -22,6 +22,7 @@ export const todoFilters = {
 
 /**
  * action to set a filter
+ * @type {function}
  * @param {string} filter
  * label of the filter to set
  * @return {Object}
@@ -36,6 +37,7 @@ export const setTodoFilter = ( filter ) => {
 
 /**
  * filter a list of given todos
+ * @type {function}
  * @param {Array<todoObj>} todos
  * list of todos to filter
  * @param {string} filter
@@ -58,6 +60,7 @@ export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) =>
 
 /**
  * reducer for filter actions
+ * @type {function}
  * @param {string} state
  * current state value
  * @param {string} action
@@ -65,7 +68,7 @@ export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) =>
  * @return {string}
  * new state value after performing the action
  */
-const todoFilter = ( state = 'SHOW_ALL', action ) => {
+const todoFilter = ( state = todoFilters.SHOW_ALL, action ) => {
   switch ( action.type ) {
     case SET_TODO_FILTER:
       return action.filter in todoFilters ? action.filter : state;

@@ -37,6 +37,7 @@ export const CLEAR_TODO   = 'CLEAR_TODO';
 
 /**
  * action to add a todo
+ * @type {function}
  * @param label
  * @return {Object}
  * @property {string} type
@@ -50,6 +51,7 @@ export const addTodo = ( label ) => {
 
 /**
  * action to remove a todo
+ * @type {function}
  * @param id
  * @return {Object}
  * @property {string} type
@@ -63,6 +65,7 @@ export const removeTodo = ( id ) => {
 
 /**
  * action to toggle a todo
+ * @type {function}
  * @param id
  * @return {Object}
  * @property {string} type
@@ -76,6 +79,7 @@ export const toggleTodo = ( id ) => {
 
 /**
  * action to clear completed todos
+ * @type {function}
  * @return {Object}
  * @property {string} type
  * action type
@@ -88,10 +92,17 @@ export const clearTodo = () => {
 
 /**
  * reducer for todo actions
+ * @type {function}
  * @param {Array<todoObj>} state
  * current state value
- * @param {string} action
+ * @param {Object} action
  * action to perform on the state
+ * @param {string} action.type
+ * action type constant
+ * @param {string} action.label
+ * todo label
+ * @param {number} action.id
+ * todo id
  * @return {Array<todoObj>}
  * new state value after performing action
  */
