@@ -16,7 +16,7 @@ import {
 }                     from 'react-router';
 import {
   syncHistoryWithStore
-}                     from 'react-router-redux'
+}                     from 'react-router-redux';
 
 // Components
 import {

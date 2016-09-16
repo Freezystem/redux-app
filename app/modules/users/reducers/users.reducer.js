@@ -1,5 +1,10 @@
 'use strict';
 
+// Libs
+
+import 'rxjs';
+import 'whatwg-fetch';
+
 // Constants
 
 /**
@@ -59,6 +64,19 @@ export const fetchUsersSuccess = ( data ) => {
 export const fetchUsersError = ( error ) => {
   return { type : FETCH_USERS_ERROR, error };
 };
+
+// Epic
+
+export const fetchUserEpic = ( action$ ) => {
+  return action$.ofType(FETCH_USERS)
+    .mergeMap(action =>
+      fetch(`https://api.github.com/users?per_page=${action.perPage}&since=${action.since}`)
+        .map(users => fetchUsersSuccess(users.json()))
+        .onErrorReturn(error => fetchUsersError(error))
+    );
+};
+
+// Reducer
 
 const users = (
   state = {
