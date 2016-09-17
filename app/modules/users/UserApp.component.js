@@ -15,19 +15,36 @@ import {
 
 // Presentational Components
 
+export const User = ({
+  login,
+  url,
+  avatar_url
+}) => (
+  <li className="ghUserList_item">
+    <a className="ghUserList_itemLink"
+       href={url}
+       target="_blank">
+      <img src={avatar_url}
+           alt={`${login} avatar`} />
+      <span>{login}</span>
+    </a>
+  </li>
+);
+
 // Container Components
+
 export const UserApp = ({
   users,
   onLoadClick
 }) => (
   <section className="userApp">
     <p>User list:</p>
-    <button onClick={onLoadClick}>Load</button>
-    <ul>
+    <ul className="ghUserList">
       {
-        users.map(user => (<li key={user.id}>{user.login}</li>))
+        users.map(user => <User key={user.id} {...user} />)
       }
     </ul>
+    <button onClick={onLoadClick}>Refresh</button>
   </section>
 );
 
