@@ -2,13 +2,20 @@
 
 // Dependencies
 import { combineReducers }  from 'redux';
+import { combineEpics }  from 'redux-observable';
 
-// Reducers
+// Reducers & Epics
 import {
   routerReducer
 }                           from 'react-router-redux';
-import todos                from './modules/todos/reducers/todos.reducer';
-import todoFilter           from './modules/todos/reducers/todoFilter.reducer';
+import todos                from './todos/reducers/todos.reducer';
+import todoFilter, {
+  todoFilters
+}                           from './todos/reducers/todoFilter.reducer';
+import users, {
+  requestState,
+  fetchUsersEpic
+}                           from './users/reducers/users.reducer';
 
 /**
  * Represent the initial state of the redux application
@@ -20,7 +27,12 @@ import todoFilter           from './modules/todos/reducers/todoFilter.reducer';
 export const initialState = {
   routing     : { locationBeforeTransitions : null },
   todos       : [],
-  todoFilter  : 'SHOW_ALL'
+  todoFilter  : todoFilters.SHOW_ALL,
+  users       : {
+    requestState : requestState.FULFILLED,
+    data         : [],
+    error        : null
+  }
 };
 
 /**
@@ -37,5 +49,8 @@ export const initialState = {
 export const rootReducer = combineReducers({
   routing : routerReducer,
   todos,
-  todoFilter
+  todoFilter,
+  users
 });
+
+export const rootEpic = combineEpics(fetchUsersEpic);

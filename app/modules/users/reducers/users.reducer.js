@@ -2,8 +2,10 @@
 
 // Libs
 
-import 'rxjs';
-import 'whatwg-fetch';
+import Rx from 'rxjs';
+
+const Observable = Rx.Observable;
+const { ajax } = Observable;
 
 // Constants
 
@@ -67,12 +69,12 @@ export const fetchUsersError = ( error ) => {
 
 // Epic
 
-export const fetchUserEpic = ( action$ ) => {
+export const fetchUsersEpic = ( action$ ) => {
   return action$.ofType(FETCH_USERS)
     .mergeMap(action =>
-      fetch(`https://api.github.com/users?per_page=${action.perPage}&since=${action.since}`)
-        .map(users => fetchUsersSuccess(users.json()))
-        .onErrorReturn(error => fetchUsersError(error))
+      ajax(`https://api.github.com/users?per_page=${action.perPage}&since=${action.since}`)
+        .map(users => fetchUsersSuccess(users.response))
+        .catch(error => Observable.of(fetchUsersError(error)))
     );
 };
 

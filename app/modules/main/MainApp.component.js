@@ -23,7 +23,8 @@ import {
 export const Menu = () => (
   <nav className="appMenu">
     <Link className="appMenu_item" activeClassName={'appMenu_item-active'} to="/">Home</Link>
-    <Link className="appMenu_item" activeClassName={'appMenu_item-active'} to="todo">Todo</Link>
+    <Link className="appMenu_item" activeClassName={'appMenu_item-active'} to="todos">Todos</Link>
+    <Link className="appMenu_item" activeClassName={'appMenu_item-active'} to="users">Users</Link>
   </nav>
 );
 

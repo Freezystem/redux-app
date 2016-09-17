@@ -6,7 +6,7 @@ import deepFreeze           from 'deep-freeze';
 import {
   initialState,
   rootReducer
-}                           from '../../app/reducer.js';
+}                           from '../../app/modules/root';
 
 import todos,
 {

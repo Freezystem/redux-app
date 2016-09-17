@@ -17,6 +17,9 @@ import {
 import {
   syncHistoryWithStore
 }                     from 'react-router-redux';
+import {
+  createEpicMiddleware
+}                     from 'redux-observable';
 
 // Components
 import {
@@ -24,6 +27,7 @@ import {
   Route
 }                     from 'react-router';
 import TodoApp        from './modules/todos/TodoApp.component';
+import UserApp        from './modules/users/UserApp.component';
 import MainApp,
 {
   HomePage,
@@ -33,19 +37,30 @@ import MainApp,
 // Reducer
 import {
   rootReducer,
-  initialState
-}                     from './reducer';
+  initialState,
+  rootEpic
+}                     from './modules/root';
 
-const devTool  = window.devToolsExtension && window.devToolsExtension();
-const store    = createStore(rootReducer, initialState, devTool);
-const history  = syncHistoryWithStore(browserHistory, store);
+
+const devTool         = window.devToolsExtension && window.devToolsExtension();
+const epicMiddleware  = createEpicMiddleware(rootEpic);
+const composed        = compose(
+  applyMiddleware(epicMiddleware),
+  devTool
+);
+const store           = createStore(rootReducer, initialState, composed);
+const history         = syncHistoryWithStore(browserHistory, store);
+
+window.devToolsExtension && window.devToolsExtension.updateStore(store);
+
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route component={MainApp}>
         <Route path="/" component={HomePage}/>
-        <Route path="todo" component={TodoApp}/>
+        <Route path="todos" component={TodoApp}/>
+        <Route path="users" component={UserApp}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>
