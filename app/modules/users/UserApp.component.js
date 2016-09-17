@@ -20,8 +20,8 @@ export const User = ({
   url,
   avatar_url
 }) => (
-  <li className="ghUserList_item">
-    <a className="ghUserList_itemLink"
+  <li className="userList_item">
+    <a className="userList_itemLink"
        href={url}
        target="_blank">
       <img src={avatar_url}
@@ -31,20 +31,35 @@ export const User = ({
   </li>
 );
 
+export const UserList = ({
+  users
+}) => (
+  <ul className="userList">
+    {
+      users.map(user => <User key={user.id} {...user} />)
+    }
+  </ul>
+);
+
+export const UserHeader = ({
+  onClick
+}) => (
+  <div className="userHeader">
+    <p className="userHeader_title">user list</p>
+    <button className="userHeader_refresh"
+            onClick={onClick}>refresh</button>
+  </div>
+);
+
 // Container Components
 
 export const UserApp = ({
   users,
-  onLoadClick
+  onRefreshButtonClick
 }) => (
   <section className="userApp">
-    <p>User list:</p>
-    <ul className="ghUserList">
-      {
-        users.map(user => <User key={user.id} {...user} />)
-      }
-    </ul>
-    <button onClick={onLoadClick}>Refresh</button>
+    <UserHeader onClick={onRefreshButtonClick} />
+    <UserList users={users}/>
   </section>
 );
 
@@ -56,7 +71,7 @@ const MapStateToProps = ( state ) => {
 
 const MapDispatchToProps = ( dispatch ) => {
   return {
-    onLoadClick  : () => dispatch(fetchUsers())
+    onRefreshButtonClick : () => dispatch(fetchUsers())
   };
 };
 
