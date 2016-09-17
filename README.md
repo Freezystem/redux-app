@@ -14,7 +14,8 @@ Here is the features I intend to have on this project
 - [ ] Add and use complex forms
 - [x] Add some styles
 - [x] Add routing and history
-- [ ] Add async (or observer-like) calls to API
+- [x] Add async calls to API
+- [x] Use Reactive Functionnal Programming paradigm
 - [x] Add unit tests on actions, reducers and components
 - [ ] Add e2e tests on application
 - [x] Add automated continuous integration
