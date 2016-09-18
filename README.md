@@ -18,6 +18,7 @@ Here is the features I intend to have on this project
 - [x] Use Reactive Functionnal Programming paradigm
 - [x] Add unit tests on actions, reducers and components
 - [ ] Add e2e tests on application
+- [ ] Mock/Stub calls to API
 - [x] Add automated continuous integration
 - [x] Add Redux Dev Tools
 - [ ] Create production ready build in NPM scripts
