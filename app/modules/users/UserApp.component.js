@@ -36,9 +36,18 @@ export const UserList = ({
 }) => (
   <ul className="userList">
     {
-      users.map(user => <User key={user.id} {...user} />)
+      users.map(user => <User key={user.id} {...user}/>)
     }
   </ul>
+);
+
+export const UserError = ({
+  error
+}) => (
+  <p className="userError">
+    <span className="userError_title">unable to get user list</span>
+    <span className="userError_message">{error.message}</span>
+  </p>
 );
 
 export const UserHeader = ({
@@ -55,17 +64,21 @@ export const UserHeader = ({
 
 export const UserApp = ({
   users,
+  error,
   onRefreshButtonClick
 }) => (
   <section className="userApp">
-    <UserHeader onClick={onRefreshButtonClick} />
-    <UserList users={users}/>
+    <UserHeader onClick={onRefreshButtonClick}/>
+    {
+      error ? <UserError error={error}/> : <UserList users={users}/>
+    }
   </section>
 );
 
 const MapStateToProps = ( state ) => {
   return {
-    users : state.users.data
+    users : state.users.data,
+    error : state.users.error
   };
 };
 

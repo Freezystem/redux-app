@@ -69,4 +69,21 @@
       }
     }
   }
+  .userError {
+    display   : inline-flex;
+    flex-flow : column nowrap;
+    width     : 100%;
+    color     : #454545;
+    &_title {
+      width         : 100%;
+      text-align    : center;
+      margin-bottom : 10px;
+    }
+    &_message {
+      background-color  : #efefef;
+      width             : 100%;
+      text-align        : center;
+      padding           : 10px;
+    }
+  }
 }
