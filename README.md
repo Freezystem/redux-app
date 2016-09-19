@@ -24,6 +24,7 @@ Here is the features I intend to have on this project
 - [ ] Create production ready build in NPM scripts
 - [ ] Make some data persistent (LocalStorage / SessionStorage)
 - [x] Write and Generate Documentation
+- [x] Add Linter
 
 ###Libs
 
@@ -33,6 +34,7 @@ Compile
 Build 
 - [Webpack](https://github.com/webpack/webpack)
 - [Webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+- [EsLint](http://eslint.org/)
 
 Framework
 - [React](https://github.com/facebook/react)

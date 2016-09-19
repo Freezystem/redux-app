@@ -7,8 +7,6 @@ let webpack   = require('webpack'),
 let debug     = process.env.NODE_ENV !== 'production',
   devConfig   = [
     new html({ template : __dirname + '/app/index.html', filename : 'index.html', inject : 'body' }),
-    new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min-[hash:6].js')
   ],
   prodConfig  = [
@@ -34,18 +32,13 @@ module.exports = {
   module    : {
     loaders : [
       {
-        test    : /\.html$/,
+        test    : /\.html?$/,
         loader  : 'html'
       },
       {
         test    : /\.jsx?$/,
         exclude : /(node_modules|bower_components)/,
-        loader  : 'babel',
-        query   : {
-          presets : ['react', 'es2015', 'stage-0'],
-          plugins : ['react-html-attrs', 'transform-decorators-legacy'],
-          cacheDirectory: true
-        }
+        loaders  : ['babel?presets[]=react&presets[]=es2015&presets[]=stage-0&plugins[]=react-html-attrs&plugins[]=transform-decorators-legacy&cacheDirectory=true','eslint-loader']
       },
       {
         test    : /\.s?css$/,

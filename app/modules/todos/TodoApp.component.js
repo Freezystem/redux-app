@@ -92,7 +92,7 @@ export const TodoList = (
 export const TodoForm = (
   { onTodoFormSubmit }
 ) => {
-  let _label;
+  let _label = '';
 
   return (
     <form className="todoForm"
@@ -107,7 +107,7 @@ export const TodoForm = (
              ref={input => _label = input}/>
       <button className="todoForm_submit">add</button>
     </form>
-  )
+  );
 };
 
 /**
