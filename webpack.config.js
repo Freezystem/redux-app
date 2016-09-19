@@ -1,8 +1,22 @@
-var debug   = process.env.NODE_ENV !== 'production',
-  webpack   = require('webpack'),
-  path      = require('path'),
-  HWP       = require('html-webpack-plugin'),
-  HWPConfig = new HWP({ template : __dirname + '/app/index.html', filename : 'index.html', inject : 'body' });
+let webpack   = require('webpack'),
+  path        = require('path'),
+  clean       = require('clean-webpack-plugin'),
+  html        = require('html-webpack-plugin'),
+  pkg         = require('./package.json');
+
+let debug     = process.env.NODE_ENV !== 'production',
+  devConfig   = [
+    new html({ template : __dirname + '/app/index.html', filename : 'index.html', inject : 'body' }),
+    new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min-[hash:6].js')
+  ],
+  prodConfig  = [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ mangle : false, sourcemap : false }),
+    new clean(['dist'], { root : __dirname, verbose : true, dry : false})
+  ].concat(devConfig);
 
 module.exports = {
   context   : path.join(__dirname, 'app'),
@@ -10,9 +24,19 @@ module.exports = {
   devServer : {
     historyApiFallback: true
   },
-  entry     : './index.js',
+  entry     : {
+    app     : './index.js',
+    vendor  : Object.keys(pkg.dependencies)
+  },
+  eslint  : {
+    configFile: './.eslintrc'
+  },
   module    : {
     loaders : [
+      {
+        test    : /\.html$/,
+        loader  : 'html'
+      },
       {
         test    : /\.jsx?$/,
         exclude : /(node_modules|bower_components)/,
@@ -24,21 +48,18 @@ module.exports = {
         }
       },
       {
-        test    : /\.scss$/,
+        test    : /\.s?css$/,
         loader  : 'style!css!sass'
+      },
+      {
+        test    : /\.(jpe?g|png|gif|svg|ico|eot|ttf|woff2?)/,
+        loader  : 'file?name=[path][name].[ext]'
       }
     ]
   },
   output    : {
-    path      : path.resolve(__dirname, 'dist'),
-    filename  : 'client.min.js'
+    path      : './dist',
+    filename  : 'app.min-[hash:6].js'
   },
-  plugins   : debug ? [
-    HWPConfig
-  ] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle : false, sourcemap : false }),
-    HWPConfig
-  ]
+  plugins   : debug ? devConfig : prodConfig
 };

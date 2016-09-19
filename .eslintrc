@@ -1,0 +1,20 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "globals": {
+    "moment" : false,
+    "_"      : false
+  },
+  "rules": {
+    "eqeqeq": 1,
+    "no-console": 1,
+    "quotes": [1,"single"],
+    "semi": 2
+  }
+}
