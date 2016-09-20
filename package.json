@@ -57,7 +57,7 @@
     "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host redux.app.io --open",
     "build": "export NODE_ENV=production&& npm i && webpack -p",
     "build:clean": "export NODE_ENV=production&& npm run clean-install && webpack -p",
-    "test": "mocha --compilers js:babel-register --es_staging --use_strict -r ignore-styles -r jsdom-global/register",
+    "test": "mocha --compilers js:babel-register --recursive --es_staging --use_strict -r ignore-styles -r jsdom-global/register",
     "test:watch": "npm test -- --watch",
     "doc": "esdoc -c esdoc.json"
   },
