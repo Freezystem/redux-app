@@ -3,11 +3,6 @@
 import expect               from 'expect';
 import deepFreeze           from 'deep-freeze';
 
-import {
-  initialState,
-  rootReducer
-}                           from '../../app/modules/root';
-
 import todos,
 {
   addTodo,
@@ -24,13 +19,6 @@ import todoFilter,
 
 /** @test */
 describe('reducers', () => {
-
-  /** @test {rootReducer} */
-  describe('rootReducer()', () => {
-    it('should return the initial state', () => {
-      expect(rootReducer(undefined, {})).toEqual(initialState);
-    });
-  });
 
   /** @test {todos} */
   describe('todos()', () => {
