@@ -1,6 +1,8 @@
 'use strict';
 
-import expect     from 'expect';
+import expect, {
+  createSpy
+}                 from 'expect';
 import {
   ADD_TODO,
   REMOVE_TODO,
@@ -28,7 +30,7 @@ describe('actions', () => {
         type : ADD_TODO,
         label
       };
-      const addTodoSpy = expect.createSpy().andCall(addTodo);
+      const addTodoSpy = createSpy().andCall(addTodo);
 
 
       expect(addTodoSpy(label)).toEqual(expectedAction);
@@ -44,7 +46,7 @@ describe('actions', () => {
         type : REMOVE_TODO,
         id
       };
-      const removeTodoSpy = expect.createSpy().andCall(removeTodo);
+      const removeTodoSpy = createSpy().andCall(removeTodo);
 
       expect(removeTodoSpy(id)).toEqual(expectedAction);
       expect(removeTodoSpy).toHaveBeenCalledWith(42);
@@ -59,7 +61,7 @@ describe('actions', () => {
         type : TOGGLE_TODO,
         id
       };
-      const toggleTodoSpy = expect.createSpy().andCall(toggleTodo);
+      const toggleTodoSpy = createSpy().andCall(toggleTodo);
 
       expect(toggleTodoSpy(id)).toEqual(expectedAction);
       expect(toggleTodoSpy).toHaveBeenCalledWith(42);
@@ -72,7 +74,7 @@ describe('actions', () => {
       const expectedAction = {
         type : CLEAR_TODO
       };
-      const clearTodoSpy = expect.createSpy().andCall(clearTodo);
+      const clearTodoSpy = createSpy().andCall(clearTodo);
 
       expect(clearTodoSpy()).toEqual(expectedAction);
       expect(clearTodoSpy).toHaveBeenCalled();
@@ -87,7 +89,7 @@ describe('actions', () => {
         type : SET_TODO_FILTER,
         filter
       };
-      const setTodoFilterSpy = expect.createSpy().andCall(setTodoFilter);
+      const setTodoFilterSpy = createSpy().andCall(setTodoFilter);
 
       expect(setTodoFilterSpy(filter)).toEqual(expectedAction);
       expect(setTodoFilterSpy).toHaveBeenCalledWith(todoFilters.SHOW_ALL);

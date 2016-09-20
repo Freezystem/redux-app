@@ -1,7 +1,7 @@
 'use strict';
 
-import expect               from 'expect';
-import deepFreeze           from 'deep-freeze';
+import expect         from 'expect';
+import deepFreeze     from 'deep-freeze';
 
 import users,
 {
@@ -9,7 +9,7 @@ import users,
   fetchUsersError,
   fetchUsersSuccess,
   requestState
-}                           from '../../app/modules/users/reducers/users.reducer';
+}                     from '../../app/modules/users/reducers/users.reducer';
 
 /** @test */
 describe('reducers', () => {

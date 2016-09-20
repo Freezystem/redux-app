@@ -1,6 +1,8 @@
 'use strict';
 
-import expect     from 'expect';
+import expect, {
+  createSpy
+}                     from 'expect';
 import {
   FETCH_USERS,
   FETCH_USERS_SUCCESS,
@@ -8,7 +10,7 @@ import {
   fetchUsers,
   fetchUsersSuccess,
   fetchUsersError
-}                 from '../../app/modules/users/reducers/users.reducer';
+}                     from '../../app/modules/users/reducers/users.reducer';
 
 /** @test */
 describe('actions', () => {
@@ -23,7 +25,7 @@ describe('actions', () => {
         perPage,
         since
       };
-      const fetchUsersSpy = expect.createSpy().andCall(fetchUsers);
+      const fetchUsersSpy = createSpy().andCall(fetchUsers);
 
       expect(fetchUsersSpy(since, perPage)).toEqual(expectedAction);
       expect(fetchUsersSpy).toHaveBeenCalledWith(42, 3);
@@ -42,7 +44,7 @@ describe('actions', () => {
         type : FETCH_USERS_SUCCESS,
         data
       };
-      const fetchUsersSuccessSpy = expect.createSpy().andCall(fetchUsersSuccess);
+      const fetchUsersSuccessSpy = createSpy().andCall(fetchUsersSuccess);
 
       expect(fetchUsersSuccessSpy(data)).toEqual(expectedAction);
       expect(fetchUsersSuccessSpy).toHaveBeenCalledWith(data);
@@ -57,7 +59,7 @@ describe('actions', () => {
         type : FETCH_USERS_ERROR,
         error
       };
-      const fetchUsersErrorSpy = expect.createSpy().andCall(fetchUsersError);
+      const fetchUsersErrorSpy = createSpy().andCall(fetchUsersError);
 
       expect(fetchUsersErrorSpy(error)).toEqual(expectedAction);
       expect(fetchUsersErrorSpy).toHaveBeenCalledWith(error);

@@ -1,7 +1,9 @@
 'use strict';
 
 import React        from 'react';
-import expect       from 'expect';
+import expect, {
+  createSpy
+}                   from 'expect';
 import { mount }    from 'enzyme';
 
 import {
@@ -30,8 +32,8 @@ describe('components', () => {
         completed      : true,
         label          : 'todo',
         id             : 42,
-        onClick        : expect.createSpy(),
-        onButtonClick  : expect.createSpy()
+        onClick        : createSpy(),
+        onButtonClick  : createSpy()
       };
 
       wrapper = mount(<Todo {...attrs} />);
@@ -67,8 +69,8 @@ describe('components', () => {
           {label: 'todo2', id: 222, completed: false},
           {label: 'todo3', id: 333, completed: true},
         ],
-        onTodoClick         : expect.createSpy(),
-        onTodoButtonClick   : expect.createSpy()
+        onTodoClick         : createSpy(),
+        onTodoButtonClick   : createSpy()
       };
 
       wrapper = mount(<TodoList {...attrs} />);
@@ -84,10 +86,6 @@ describe('components', () => {
       expect(firstTodo.key()).toBe('111');
       expect(secondTodo.key()).toBe('222');
       expect(thirdTodo.key()).toBe('333');
-
-      expect(firstTodo.find('.todoList_itemLabel').text()).toBe('todo1');
-      expect(secondTodo.find('.todoList_itemLabel').text()).toBe('todo2');
-      expect(thirdTodo.find('.todoList_itemLabel').text()).toBe('todo3');
     });
   });
 
@@ -98,7 +96,7 @@ describe('components', () => {
 
     beforeEach(() => {
       attrs = {
-        onTodoFormSubmit : expect.createSpy()
+        onTodoFormSubmit : createSpy()
       };
 
       wrapper = mount(<TodoForm {...attrs} />);
@@ -145,7 +143,7 @@ describe('components', () => {
       attrs = {
         active  : false,
         filter  : todoFilters.SHOW_ALL,
-        onClick : expect.createSpy()
+        onClick : createSpy()
       };
 
       wrapper = mount(<FilterLink {...attrs} />);
@@ -190,7 +188,7 @@ describe('components', () => {
       attrs = {
         filterList    : Object.keys(todoFilters),
         currentFilter : todoFilters.SHOW_ALL,
-        onLinkClick   : expect.createSpy()
+        onLinkClick   : createSpy()
       };
 
       wrapper = mount(<TodoFilterLinks {...attrs} />);
@@ -225,7 +223,7 @@ describe('components', () => {
           {label: 'todo2', id: 222, completed: true},
           {label: 'todo3', id: 333, completed: false},
         ],
-        onTodoClearClick : expect.createSpy()
+        onTodoClearClick : createSpy()
       };
 
       wrapper = mount(<TodoFooter {...attrs} />);
