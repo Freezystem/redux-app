@@ -23,6 +23,7 @@ import users, {
  * @property {Object} routing
  * @property {Array<todoObj>} todos
  * @property {string} todoFilter
+ * @property {Object} users
  */
 export const initialState = {
   routing     : { locationBeforeTransitions : null },
@@ -36,15 +37,15 @@ export const initialState = {
 };
 
 /**
- * Return the all the reducers combined
- * @type {function}
- * react props object
+ * Return all the reducers combined
  * @return {Object}
  * @property {function} routing
  * @property {function} todos
  * see {@link todos}
  * @property {function} todoFilter
  * see {@link todoFilter}
+ * @property {function} users
+ * see {@link users}
  */
 export const rootReducer = combineReducers({
   routing : routerReducer,
@@ -53,4 +54,8 @@ export const rootReducer = combineReducers({
   users
 });
 
+/**
+ * array containing all epics
+ * @type {Array}
+ */
 export const rootEpic = combineEpics(fetchUsersEpic);

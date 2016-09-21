@@ -37,63 +37,58 @@ export const CLEAR_TODO   = 'CLEAR_TODO';
 
 /**
  * action to add a todo
- * @type {function}
- * @param label
+ * @param {!string} label
  * @return {Object}
  * @property {string} type
  * action type
  * @property {string} label
  * label of the todo to create
  */
-export const addTodo = ( label ) => {
+export function addTodo ( label ) {
   return { type : ADD_TODO, label };
-};
+}
 
 /**
  * action to remove a todo
- * @type {function}
- * @param id
+ * @param {!number} id
  * @return {Object}
  * @property {string} type
  * action type
  * @property {number} id
  * id of the todo to remove
  */
-export const removeTodo = ( id ) => {
+export function removeTodo ( id ) {
   return { type : REMOVE_TODO, id };
-};
+}
 
 /**
  * action to toggle a todo
- * @type {function}
- * @param id
+ * @param {!number} id
  * @return {Object}
  * @property {string} type
  * action type
  * @property {number} id
  * id of the todo to toggle
  */
-export const toggleTodo = ( id ) => {
+export function toggleTodo ( id ) {
   return { type : TOGGLE_TODO, id };
-};
+}
 
 /**
  * action to clear completed todos
- * @type {function}
  * @return {Object}
  * @property {string} type
  * action type
  */
-export const clearTodo = () => {
+export function clearTodo () {
   return { type : CLEAR_TODO };
-};
+}
 
 // Reducer
 
 /**
  * reducer for todo actions
- * @type {function}
- * @param {Array<todoObj>} state
+ * @param {Array<todoObj>} [state=[]]
  * current state value
  * @param {Object} action
  * action to perform on the state
@@ -106,7 +101,7 @@ export const clearTodo = () => {
  * @return {Array<todoObj>}
  * new state value after performing action
  */
-const todos = ( state = [], action ) => {
+export default function todos ( state = [], action ) {
   switch ( action.type ) {
     case ADD_TODO:
       return state.concat(
@@ -127,6 +122,4 @@ const todos = ( state = [], action ) => {
     default:
       return state;
   }
-};
-
-export default todos;
+}

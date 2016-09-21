@@ -11,6 +11,12 @@ export const SET_TODO_FILTER = 'SET_TODO_FILTER';
 /**
  * list of todo filters
  * @type {Object}
+ * @property {string} SHOW_ALL
+ * show all todos
+ * @property {string} SHOW_COMPLETED
+ * show completed todos
+ * @property {string} SHOW_PENDING
+ * show pending todos
  */
 export const todoFilters = {
   SHOW_ALL        : 'SHOW_ALL',
@@ -22,7 +28,6 @@ export const todoFilters = {
 
 /**
  * action to set a filter
- * @type {function}
  * @param {string} filter
  * label of the filter to set
  * @return {Object}
@@ -31,21 +36,23 @@ export const todoFilters = {
  * @property {string} filter
  * label of the filter to set
  */
-export const setTodoFilter = ( filter ) => {
+export function setTodoFilter ( filter ) {
   return { type : SET_TODO_FILTER, filter };
-};
+}
 
 /**
  * filter a list of given todos
- * @type {function}
  * @param {Array<todoObj>} todos
  * list of todos to filter
  * @param {string} filter
  * filter value
- * @returns {Array<todoObj>}
+ * @return {Array<todoObj>}
  * a list of filtered todos
  */
-export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) => {
+export function getFilteredTodos (
+  todos = [],
+  filter = todoFilters.SHOW_ALL
+) {
   switch ( filter ) {
     case todoFilters.SHOW_PENDING:
       return todos.filter(todo => !todo.completed);
@@ -54,27 +61,29 @@ export const getFilteredTodos = ( todos = [], filter = todoFilters.SHOW_ALL ) =>
     default:
       return todos;
   }
-};
+}
 
 // Reducer
 
 /**
  * reducer for filter actions
- * @type {function}
  * @param {string} state
  * current state value
  * @param {string} action
  * action to perform on the state
+ * @param {string} action.type
+ * describe the action type
  * @return {string}
  * new state value after performing the action
  */
-const todoFilter = ( state = todoFilters.SHOW_ALL, action ) => {
+export default function todoFilter (
+  state = todoFilters.SHOW_ALL,
+  action
+) {
   switch ( action.type ) {
     case SET_TODO_FILTER:
       return action.filter in todoFilters ? action.filter : state;
     default:
       return state;
   }
-};
-
-export default todoFilter;
+}

@@ -1,5 +1,17 @@
 'use strict';
 
+/**
+ * @typedef {Object} userObj
+ * @property {number} id
+ * unique identifier
+ * @property {string} login
+ * user login
+ * @property {string} url
+ * user profile URL
+ * @property {string} avatar_url
+ * user profile picture URL
+ */
+
 // Libs
 
 import Rx from 'rxjs';
@@ -28,6 +40,12 @@ export const FETCH_USERS_ERROR    = 'FETCH_USERS_ERROR';
 /**
  * list of request states
  * @type {Object}
+ * @property {string} PENDING
+ * user query is pending response
+ * @property {string} FULFILLED
+ * user query is fulfilled
+ * @property {string} REJECTED
+ * user query is rejected
  */
 export const requestState = {
   PENDING     : 'PENDING',
@@ -39,11 +57,10 @@ export const requestState = {
 
 /**
  * action to fetch user
- * @type {function}
- * @param since
- * id from where to get users
- * @param perPage
- * number of user to get
+ * @param {?number} [since=RANDOM]
+ * id from where to get users, default is a random number
+ * @param {?number} [perPage=10]
+ * number of user to get, default is 10
  * @return {Object}
  * @property {string} type
  * action type
@@ -52,42 +69,94 @@ export const requestState = {
  * @property {number} perPage
  * number of user to get
  */
-export const fetchUsers = (
+export function fetchUsers (
   since   = Math.floor(Math.random()*500),
   perPage = 10
-) => {
+) {
   return { type : FETCH_USERS, since, perPage };
-};
+}
 
-export const fetchUsersSuccess = ( data ) => {
+/**
+ * action to provide users data to the state
+ * @param {Array<userObj>} data
+ * user list from API
+ * @return {Object}
+ * @property {type}
+ * action type
+ * @property {Array<userObj>} data
+ * user list from API
+ */
+export function fetchUsersSuccess ( data ) {
   return { type : FETCH_USERS_SUCCESS, data };
-};
+}
 
-export const fetchUsersError = ( error ) => {
+/**
+ * action to provide users error logs to state
+ * @param error
+ * error from failed API request
+ * @return {Object}
+ * @property {type}
+ * action type
+ * @property {Object} error
+ * error from failed API request
+ */
+export function fetchUsersError ( error ) {
   return { type : FETCH_USERS_ERROR, error };
-};
+}
 
 // Epic
 
-export const fetchUsersEpic = ( action$ ) => {
+/**
+ * Epic observer that query user API
+ * @param {Object} action$
+ * action object that trigger the user API request
+ * @param {string} action$.type
+ * action type
+ * @return {(Array<userObj>|Object)}
+ */
+export function fetchUsersEpic ( action$ ) {
   return action$.ofType(FETCH_USERS)
     .mergeMap(action =>
       ajax(`https://api.github.com/users?per_page=${action.perPage}&since=${action.since}`)
-        .map(users => fetchUsersSuccess(users.response))
+        .map(xhr => fetchUsersSuccess(xhr.response))
         .catch(error => Observable.of(fetchUsersError(error)))
     );
-};
+}
 
 // Reducer
 
-const users = (
+/**
+ * reducer for users actions
+ * @param {Object} state
+ * current state value
+ * @param {string} state.requestState
+ * user request state
+ * @param {Array<userObj>} state.data
+ * data gotten from user request
+ * @param {?Object} state.error
+ * error object from failed user request
+ * @param {string} state.error.message
+ * error object if an error occurred
+ * @param {Object} action
+ * action to perform on the state
+ * @param {string} action.type
+ * describe the action type
+ * @return {Object}
+ * @property {string} state.requestState
+ * user request state
+ * @property {Array<userObj>} state.data
+ * data gotten from user request
+ * @property {?Object} state.error
+ * error object from failed user request
+ */
+export default function users (
   state = {
     requestState : requestState.FULFILLED,
     data         : [],
     error        : null
   },
   action
-) => {
+) {
   switch ( action.type ) {
     case FETCH_USERS:
       return Object.assign({}, state, {
@@ -110,6 +179,4 @@ const users = (
     default:
       return state;
   }
-};
-
-export default users;
+}

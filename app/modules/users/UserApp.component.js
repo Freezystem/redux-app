@@ -14,65 +14,127 @@ import {
 
 // Presentational Components
 
-export const User = ({
+/**
+ * Generate user item with a picture and a link to the profile
+ * @param {!userObj} props
+ * user object
+ * @return {ReactDOM}
+ * generate `<li class="userList_item"/>` markup
+ */
+export function User ({
   login,
   url,
   avatar_url
-}) => (
-  <li className="userList_item">
-    <a className="userList_itemLink"
-       href={url}
-       target="_blank">
-      <img src={avatar_url}
-           alt={`${login} avatar`} />
-      <span>{login}</span>
-    </a>
-  </li>
-);
+}) {
+  return (
+    <li className="userList_item">
+      <a className="userList_itemLink"
+         href={url}
+         target="_blank">
+        <img src={avatar_url}
+             alt={`${login} avatar`} />
+        <span>{login}</span>
+      </a>
+    </li>
+  );
+}
 
-export const UserList = ({
+/**
+ * Generate a list of users
+ * @param {!Object} props
+ * react props object
+ * @param {!Array<userObj>} props.users
+ * list of user object
+ * @return {ReactDOM}
+ * generate `<ul class="userList"/>` markup
+ */
+export function UserList ({
   users
-}) => (
-  <ul className="userList">
-    {
-      users.map(user => <User key={user.id} {...user}/>)
-    }
-  </ul>
-);
+}) {
+  return (
+    <ul className="userList">
+      {
+        users.map(user => <User key={user.id} {...user}/>)
+      }
+    </ul>
+  );
+}
 
-export const UserError = ({
+/**
+ * Generate a visual error when request fails
+ * @param {!Object} props
+ * react props object
+ * @param {!Object} props.error
+ * error object to display
+ * @param {!string} props.error.message
+ * error message
+ * @return {ReactDOM}
+ * generate `<p class="userError"/>` markup
+ */
+export function UserError ({
   error
-}) => (
-  <p className="userError">
-    <span className="userError_title">unable to get user list</span>
-    <span className="userError_message">{error.message}</span>
-  </p>
-);
+}) {
+  return (
+    <p className="userError">
+      <span className="userError_title">unable to get user list</span>
+      <span className="userError_message">{error.message}</span>
+    </p>
+  );
+}
 
-export const UserHeader = ({
+/**
+ * Generate a header to display list title and button to launch user query
+ * @param {!Object} props
+ * react props object
+ * @param {!Object} props.onClick
+ * function to run when refresh button is clicked
+ * @return {ReactDOM}
+ * generate `<div class="userHeader"/>` markup
+ */
+export function UserHeader ({
   onClick
-}) => (
-  <div className="userHeader">
-    <p className="userHeader_title">user list</p>
-    <button className="userHeader_refresh"
-            onClick={onClick}>refresh</button>
-  </div>
-);
+}) {
+  return (
+    <div className="userHeader">
+      <p className="userHeader_title">user list</p>
+      <button className="userHeader_refresh"
+              onClick={onClick}>refresh
+      </button>
+    </div>
+  );
+}
 
 // Container Components
 
-export const UserApp = ({
+/**
+ * Generate a header to display list title and button to launch user query
+ * @param {!Object} props
+ * react props object
+ * @param {!Array<userObj>} props.users
+ * list of user object
+ * @param {!Object} props.error
+ * error object to display
+ * @param {!string} props.error.message
+ * error message
+ * @param {!Object} props.onRefreshButtonClick
+ * function to run when refresh button is clicked
+ * @return {ReactDOM}
+ * generate `<section class="userApp"/>` markup
+ */
+export function UserApp ({
   users,
   error,
   onRefreshButtonClick
-}) => (
-  <section className="userApp">
-    <UserHeader onClick={onRefreshButtonClick}/>
-    {
-      error ? <UserError error={error}/> : <UserList users={users}/>
-    }
-  </section>
-);
+}) {
+  return (
+    <section className="userApp">
+      <UserHeader onClick={onRefreshButtonClick}/>
+      {
+        error ? <UserError error={error}/> : <UserList users={users}/>
+      }
+    </section>
+  );
+}
 
 const MapStateToProps = ( state ) => {
   return {
@@ -87,6 +149,11 @@ const MapDispatchToProps = ( dispatch ) => {
   };
 };
 
+/**
+ * connect react component to redux state
+ * @return {ReactDOM}
+ * generate connected `<section class="userApp"/>` markup
+ */
 export default connect(
   MapStateToProps,
   MapDispatchToProps
