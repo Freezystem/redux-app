@@ -115,7 +115,7 @@ export default function todos ( state = [], action ) {
       return state.filter(todo => todo.id !== action.id);
     case TOGGLE_TODO:
       return state.map(todo => {
-        return action.id === todo.id ? Object.assign({}, todo, { completed : !todo.completed}) : todo;
+        return action.id === todo.id ? Object.assign({}, todo, {completed : !todo.completed}) : todo;
       });
     case CLEAR_TODO:
       return state.filter(todo => !todo.completed);

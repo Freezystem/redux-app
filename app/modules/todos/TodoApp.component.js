@@ -75,11 +75,12 @@ export function TodoList ({
   return (
     <ul className="todoList">
       {
-        filteredTodos.map(todo =>
-          <Todo key={todo.id}
-                {...todo}
-                onClick={() => onTodoClick(todo.id)}
-                onButtonClick={() => onTodoButtonClick(todo.id)}/>
+        filteredTodos.map(
+          todo =>
+            <Todo key={todo.id}
+                  {...todo}
+                  onClick={() => onTodoClick(todo.id)}
+                  onButtonClick={() => onTodoButtonClick(todo.id)}/>
         )
       }
     </ul>
@@ -102,11 +103,13 @@ export function TodoForm ({
 
   return (
     <form className="todoForm"
-          onSubmit={(e) => {
-            e.preventDefault();
-            _label.value.trim() && onTodoFormSubmit(_label.value.trim());
-            _label.value = '';
-          }}>
+          onSubmit={
+            event => {
+              event.preventDefault();
+              _label.value.trim() && onTodoFormSubmit(_label.value.trim());
+              _label.value = '';
+            }
+          }>
       <input className="todoForm_label"
              type="text"
              placeholder="What's need to be done today ?"
@@ -135,12 +138,14 @@ export function FilterLink ({
   onClick
 }) {
   return (
-    <a className={classNames('filterList_item', { 'filterList_item-active' : active})}
+    <a className={classNames('filterList_item', {'filterList_item-active' : active})}
        href={`#${filter}`}
-       onClick={e => {
-         e.preventDefault();
-         !active && onClick(filter);
-       }}>{filter.replace(/SHOW_/, '')}</a>
+       onClick={
+         event => {
+          e.preventDefault();
+          !active && onClick(filter);
+         }
+       }>{filter.replace(/SHOW_/, '')}</a>
   );
 }
 
@@ -166,12 +171,13 @@ export function TodoFilterLinks ({
     <div className="filterList">
       <span class="filterList_label">see:</span>
       {
-        filterList.map((filter, index) => (
-          <FilterLink key={index}
-                      filter={filter}
-                      active={filter === currentFilter}
-                      onClick={onLinkClick}/>
-        ))
+        filterList.map(
+          (filter, index) =>
+            <FilterLink key={index}
+                        filter={filter}
+                        active={filter === currentFilter}
+                        onClick={onLinkClick}/>
+        )
       }
     </div>
   );
@@ -199,7 +205,7 @@ export function TodoFooter ({
   return (
     <p className="todoFooter">
       <span className="todoFooter_count">{text}</span>
-      <a className={classNames('todoFooter_clear', { 'todoFooter_clear-hide' : !completed })}
+      <a className={classNames('todoFooter_clear', {'todoFooter_clear-hide' : !completed})}
          onClick={(e) => {
            e.preventDefault();
            completed && onTodoClearClick();
