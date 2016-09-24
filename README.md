@@ -67,6 +67,11 @@ npm install
 ```
 
 ####Run development app
+First add this line to `/etc/hosts` on Unix systems or `C:\Windows\System32\drivers\etc` on Windows.
+```
+127.0.0.1           redux.app.io
+```
+Then just run
 ```
 npm run dev
 ```
