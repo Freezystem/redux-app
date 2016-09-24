@@ -142,7 +142,7 @@ export function FilterLink ({
        href={`#${filter}`}
        onClick={
          event => {
-          e.preventDefault();
+          event.preventDefault();
           !active && onClick(filter);
          }
        }>{filter.replace(/SHOW_/, '')}</a>
@@ -206,8 +206,8 @@ export function TodoFooter ({
     <p className="todoFooter">
       <span className="todoFooter_count">{text}</span>
       <a className={classNames('todoFooter_clear', {'todoFooter_clear-hide' : !completed})}
-         onClick={(e) => {
-           e.preventDefault();
+         onClick={(event) => {
+           event.preventDefault();
            completed && onTodoClearClick();
          }}>clear completed</a>
     </p>
