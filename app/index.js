@@ -42,7 +42,7 @@ import {
 }                     from './modules/root';
 
 
-const devTool         = window.devToolsExtension && window.devToolsExtension();
+const devTool         = typeof window.devToolsExtension === 'function' && window.devToolsExtension();
 const epicMiddleware  = createEpicMiddleware(rootEpic);
 const composed        = compose(
   applyMiddleware(epicMiddleware),
