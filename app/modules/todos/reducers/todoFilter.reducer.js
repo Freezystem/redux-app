@@ -76,7 +76,7 @@ export function getFilteredTodos (
  * @return {string}
  * new state value after performing the action
  */
-export default function todoFilter (
+export default function todoFiltersReducer (
   state = todoFilters.SHOW_ALL,
   action
 ) {

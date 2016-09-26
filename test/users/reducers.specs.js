@@ -14,8 +14,8 @@ import users,
 /** @test */
 describe('reducers', () => {
 
-  /** @test {users} */
-  describe('users()', () => {
+  /** @test {usersReducer} */
+  describe('usersReducer()', () => {
     it('should handle FETCH_USERS', () => {
       const stateBefore = deepFreeze({
         requestState  : requestState.FULFILLED,

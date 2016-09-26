@@ -149,7 +149,7 @@ export function fetchUsersEpic ( action$ ) {
  * @property {?Object} state.error
  * error object from failed user request
  */
-export default function users (
+export default function usersReducer (
   state = {
     requestState : requestState.FULFILLED,
     data         : [],

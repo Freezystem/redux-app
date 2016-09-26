@@ -101,7 +101,7 @@ export function clearTodo () {
  * @return {Array<todoObj>}
  * new state value after performing action
  */
-export default function todos ( state = [], action ) {
+export default function todosReducer ( state = [], action ) {
   switch ( action.type ) {
     case ADD_TODO:
       return state.concat(

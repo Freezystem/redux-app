@@ -20,8 +20,8 @@ import todoFilter,
 /** @test */
 describe('reducers', () => {
 
-  /** @test {todos} */
-  describe('todos()', () => {
+  /** @test {todosReducer} */
+  describe('todosReducer()', () => {
     it('should handle ADD_TODO', () => {
       const label       = 'Write Tests';
       const stateBefore = deepFreeze([]);
@@ -100,8 +100,8 @@ describe('reducers', () => {
     });
   });
 
-  /** @test {todoFilter} */
-  describe('todoFilter()', () => {
+  /** @test {todoFiltersReducer} */
+  describe('todoFiltersReducer()', () => {
     it('should handle SET_TODO_FILTER', () => {
       const stateBefore = deepFreeze(todoFilters.SHOW_ALL);
       const stateAfter  = todoFilters.SHOW_COMPLETED;
