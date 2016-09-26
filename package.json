@@ -34,7 +34,7 @@
     "deep-freeze": "0.0.1",
     "enzyme": "^2.4.1",
     "esdoc": "^0.4.8",
-    "eslint": "^3.5.0",
+    "eslint": "^3.6.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-react": "^6.3.0",
     "expect": "^1.20.2",
