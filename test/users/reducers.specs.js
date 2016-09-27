@@ -3,7 +3,7 @@
 import expect         from 'expect';
 import deepFreeze     from 'deep-freeze';
 
-import users,
+import usersReducer,
 {
   fetchUsers,
   fetchUsersError,
@@ -16,6 +16,16 @@ describe('reducers', () => {
 
   /** @test {usersReducer} */
   describe('usersReducer()', () => {
+    it('should handle unknown or missing actions', () => {
+      const stateBefore = deepFreeze({
+        requestState  : requestState.FULFILLED,
+        data          : [],
+        error         : null
+      });
+
+      expect(usersReducer(stateBefore, {})).toEqual(stateBefore);
+    });
+
     it('should handle FETCH_USERS', () => {
       const stateBefore = deepFreeze({
         requestState  : requestState.FULFILLED,
@@ -28,7 +38,7 @@ describe('reducers', () => {
         error         : null
       };
 
-      expect(users(stateBefore, fetchUsers())).toEqual(stateAfter);
+      expect(usersReducer(stateBefore, fetchUsers())).toEqual(stateAfter);
     });
 
     it('should handle FETCH_USERS_SUCCESS', () => {
@@ -48,7 +58,7 @@ describe('reducers', () => {
         error         : null
       };
 
-      expect(users(stateBefore, fetchUsersSuccess(data))).toEqual(stateAfter);
+      expect(usersReducer(stateBefore, fetchUsersSuccess(data))).toEqual(stateAfter);
     });
 
     it('should handle FETCH_USERS_ERROR', () => {
@@ -66,7 +76,7 @@ describe('reducers', () => {
         error
       };
 
-      expect(users(stateBefore, fetchUsersError(error))).toEqual(stateAfter);
+      expect(usersReducer(stateBefore, fetchUsersError(error))).toEqual(stateAfter);
     });
   });
 });

@@ -3,7 +3,7 @@
 import expect               from 'expect';
 import deepFreeze           from 'deep-freeze';
 
-import todos,
+import todosReducer,
 {
   addTodo,
   removeTodo,
@@ -11,7 +11,7 @@ import todos,
   clearTodo
 }                           from '../../app/modules/todos/reducers/todos.reducer';
 
-import todoFilter,
+import todoFiltersReducer,
 {
   setTodoFilter,
   todoFilters
@@ -22,6 +22,12 @@ describe('reducers', () => {
 
   /** @test {todosReducer} */
   describe('todosReducer()', () => {
+    it('should handle unknown or missing actions', () => {
+      const stateBefore = deepFreeze([]);
+
+      expect(todosReducer(stateBefore, {})).toEqual(stateBefore);
+    });
+
     it('should handle ADD_TODO', () => {
       const label       = 'Write Tests';
       const stateBefore = deepFreeze([]);
@@ -33,7 +39,7 @@ describe('reducers', () => {
         }
       ];
 
-      expect(todos(stateBefore, addTodo(label))).toEqual(stateAfter);
+      expect(todosReducer(stateBefore, addTodo(label))).toEqual(stateAfter);
     });
 
     it('should handle REMOVE_TODO', () => {
@@ -47,7 +53,7 @@ describe('reducers', () => {
       ]);
       const stateAfter  = [];
 
-      expect(todos(stateBefore, removeTodo(id))).toEqual(stateAfter);
+      expect(todosReducer(stateBefore, removeTodo(id))).toEqual(stateAfter);
     });
 
     it('should handle TOGGLE_TODO', () => {
@@ -67,7 +73,7 @@ describe('reducers', () => {
         }
       ];
 
-      expect(todos(stateBefore, toggleTodo(id))).toEqual(stateAfter);
+      expect(todosReducer(stateBefore, toggleTodo(id))).toEqual(stateAfter);
     });
 
     it('should handle CLEAR_TODO', () => {
@@ -96,17 +102,23 @@ describe('reducers', () => {
         }
       ];
 
-      expect(todos(stateBefore, clearTodo())).toEqual(stateAfter);
+      expect(todosReducer(stateBefore, clearTodo())).toEqual(stateAfter);
     });
   });
 
   /** @test {todoFiltersReducer} */
   describe('todoFiltersReducer()', () => {
+    it('should handle unknown or missing actions', () => {
+      const stateBefore = deepFreeze(todoFilters.SHOW_ALL);
+
+      expect(todoFiltersReducer(stateBefore, {})).toEqual(stateBefore);
+    });
+
     it('should handle SET_TODO_FILTER', () => {
       const stateBefore = deepFreeze(todoFilters.SHOW_ALL);
       const stateAfter  = todoFilters.SHOW_COMPLETED;
 
-      expect(todoFilter(stateBefore, setTodoFilter(todoFilters.SHOW_COMPLETED))).toEqual(stateAfter);
+      expect(todoFiltersReducer(stateBefore, setTodoFilter(todoFilters.SHOW_COMPLETED))).toEqual(stateAfter);
     });
   });
 });
