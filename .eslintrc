@@ -13,8 +13,9 @@
     "mocha": true
   },
   "globals": {
-    "moment" : false,
-    "_"      : false
+    "moment": false,
+    "_": false,
+    "process": false
   },
   "plugins": [
     "react"

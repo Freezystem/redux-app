@@ -42,16 +42,15 @@ import {
 }                     from './modules/root';
 
 
-const devTool         = typeof window.devToolsExtension === 'function' ? window.devToolsExtension() : f => f;
+const composer        = process.env.NODE_ENV !== 'production'
+                        && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+                        || compose;
 const epicMiddleware  = createEpicMiddleware(rootEpic);
-const composed        = compose(
-  applyMiddleware(epicMiddleware),
-  devTool
-);
-const store           = createStore(rootReducer, initialState, composed);
+const enhancers       = composer(applyMiddleware(epicMiddleware));
+const store           = createStore(rootReducer, initialState, enhancers);
 const history         = syncHistoryWithStore(browserHistory, store);
 
-window.devToolsExtension && window.devToolsExtension.updateStore(store);
+// window.devToolsExtension && window.devToolsExtension.updateStore(store);
 
 
 ReactDOM.render(
