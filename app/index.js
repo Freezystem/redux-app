@@ -46,12 +46,9 @@ const composer        = process.env.NODE_ENV !== 'production'
                         && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
                         || compose;
 const epicMiddleware  = createEpicMiddleware(rootEpic);
-const enhancers       = composer(applyMiddleware(epicMiddleware));
-const store           = createStore(rootReducer, initialState, enhancers);
+const middlewares     = composer(applyMiddleware(epicMiddleware));
+const store           = createStore(rootReducer, initialState, middlewares);
 const history         = syncHistoryWithStore(browserHistory, store);
-
-// window.devToolsExtension && window.devToolsExtension.updateStore(store);
-
 
 ReactDOM.render(
   <Provider store={store}>
