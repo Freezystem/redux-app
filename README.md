@@ -8,44 +8,47 @@
 
 ###Features
 
-Here is the features I intend to have on this project
+Here is the features I intend to have in this project
 - [x] Configure a webpack development build
 - [x] Create a simple redux app
-- [ ] Add and use complex forms
 - [x] Add some styles
 - [x] Add routing and history
 - [x] Add async calls to API
 - [x] Use Reactive Functionnal Programming paradigm
 - [x] Add unit tests on actions, reducers and components
-- [ ] Add e2e tests on application
-- [ ] Mock/Stub calls to API
 - [x] Add automated continuous integration
 - [x] Add Redux Dev Tools
-- [ ] Create production ready build in NPM scripts
-- [ ] Make some data persistent (LocalStorage / SessionStorage)
-- [x] Write and Generate Documentation
 - [x] Add Linter
+- [x] Write and Generate Documentation
+- [x] Add (fake) authentication
+- [ ] Add and use complex forms
+- [ ] Add e2e tests on application
+- [ ] Mock/Stub calls to API
+- [ ] Create production ready build in Yarn scripts
+- [ ] Make some data persistent (LocalStorage / SessionStorage)
 
-###Libs
-
-Compile 
-- [Babel](https://github.com/babel/babel)
+###What's in
 
 Build 
+- [Yarn](https://github.com/yarnpkg/yarn)
+- [Babel](https://github.com/babel/babel)
 - [Webpack](https://github.com/webpack/webpack)
 - [Webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-- [EsLint](http://eslint.org/)
 
-Framework
+Libraries
 - [React](https://github.com/facebook/react)
 - [React-redux](https://github.com/reactjs/react-redux)
 - [React-router](https://github.com/reactjs/react-router)
 - [React-router-redux](https://github.com/reactjs/react-router-redux)
 - [Redux](https://github.com/reactjs/redux)
+- [Redux-auth-wrapper](https://github.com/mjrussell/redux-auth-wrapper)
+- [RxJS](https://github.com/ReactiveX/RxJS)
+- [Redux-observable](https://github.com/redux-observable/redux-observable)
 - [History](https://github.com/mjackson/history)
 
 Style
 - [Sass](https://github.com/sass/sass)
+- [Classnames](https://github.com/JedWatson/classnames)
 
 Tests
 - [Mocha](https://github.com/mochajs/mocha)
@@ -54,16 +57,17 @@ Tests
 - [DeepFreeze](https://github.com/substack/deep-freeze)
 - [jsDOM](https://github.com/tmpvar/jsdom)
 
-Documentation
+Documentation and quality
 
 - [ESDoc](https://esdoc.org)
+- [EsLint](http://eslint.org)
 
-###NPM scripts
+###Yarn scripts
 
 ####Setup the app
 ```
 git clone https://github.com/Freezystem/redux-app.git
-npm install
+cd redux-app && yarn
 ```
 
 ####Run development app
@@ -73,29 +77,29 @@ First add this line to `/etc/hosts` on Unix systems or `C:\Windows\System32\driv
 ```
 Then just run
 ```
-npm run dev
+yarn run dev
 ```
 
 ####Build production app
 ```
-npm run build
+yarn run build
 ```
 
 or for a clean install
 ```
-npm run build:clean
+yarn run build:clean
 ```
 
 ####Run tests
 ```
-npm test
+yarn test
 ```
 or with watch option
 ```
-npm test:watch
+yarn run test:watch
 ```
 
 ####Generate Documentation
 ```
-npm run doc
+yarn run doc
 ```
