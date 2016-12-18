@@ -16,8 +16,8 @@
 
 import Rx from 'rxjs';
 
-const Observable = Rx.Observable;
-const { ajax } = Observable;
+const Observable  = Rx.Observable;
+const { ajax }    = Observable;
 
 // Constants
 

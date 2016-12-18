@@ -12,6 +12,9 @@ import todos                from './todos/reducers/todos.reducer';
 import todoFilter, {
   todoFilters
 }                           from './todos/reducers/todoFilter.reducer';
+import auth, {
+  logInEpic
+}                           from './auth/reducers/auth.reducer';
 import users, {
   requestState,
   fetchUsersEpic
@@ -26,6 +29,12 @@ import users, {
  * @property {Object} users
  */
 export const initialState = {
+  auth        : {
+    isFetching      : false,
+    isAuthenticated : false,
+    error           : null,
+    user            : {}
+  },
   routing     : { locationBeforeTransitions : null },
   todos       : [],
   todoFilter  : todoFilters.SHOW_ALL,
@@ -48,6 +57,7 @@ export const initialState = {
  * see {@link users}
  */
 export const rootReducer = combineReducers({
+  auth,
   routing : routerReducer,
   todos,
   todoFilter,
@@ -58,4 +68,7 @@ export const rootReducer = combineReducers({
  * array containing all epics
  * @type {Array}
  */
-export const rootEpic = combineEpics(fetchUsersEpic);
+export const rootEpic = combineEpics(
+  fetchUsersEpic,
+  logInEpic
+);

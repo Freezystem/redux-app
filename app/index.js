@@ -15,11 +15,16 @@ import {
   browserHistory
 }                     from 'react-router';
 import {
-  syncHistoryWithStore
+  syncHistoryWithStore,
+  routerActions,
+  routerMiddleware
 }                     from 'react-router-redux';
 import {
   createEpicMiddleware
 }                     from 'redux-observable';
+import {
+  UserAuthWrapper
+}                     from 'redux-auth-wrapper';
 
 // Components
 import {
@@ -28,6 +33,7 @@ import {
 }                     from 'react-router';
 import TodoApp        from './modules/todos/TodoApp.component';
 import UserApp        from './modules/users/UserApp.component';
+import AuthApp        from './modules/auth/AuthApp.component';
 import MainApp,
 {
   HomePage,
@@ -41,14 +47,32 @@ import {
   rootEpic
 }                     from './modules/root';
 
+// Redirects to /login by default
+const isAuthenticated = UserAuthWrapper({
+  authSelector            : state => state.auth.user,
+  authenticatingSelector  : state => state.auth.isFetching,
+  redirectAction          : routerActions.replace,
+  predicate               : user => 'token' in user && user.token !== '',
+  wrapperDisplayName      : 'isAuthenticated'
+});
 
-const composer        = process.env.NODE_ENV !== 'production'
+const isNotAuthenticated = UserAuthWrapper({
+  authSelector            : state => state.auth.user,
+  redirectAction          : routerActions.replace,
+  predicate               : user => !user.token,
+  failureRedirectPath     : (state, ownProps) => ownProps.location.query.redirect || '/home',
+  allowRedirectBack       : false,
+  wrapperDisplayName      : 'isNotAuthenticated'
+});
+
+const routingMiddleware = routerMiddleware(browserHistory);
+const composer          = process.env.NODE_ENV !== 'production'
                         && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
                         || compose;
-const epicMiddleware  = createEpicMiddleware(rootEpic);
-const middlewares     = composer(applyMiddleware(epicMiddleware));
-const store           = createStore(rootReducer, initialState, middlewares);
-const history         = syncHistoryWithStore(browserHistory, store);
+const epicMiddleware    = createEpicMiddleware(rootEpic);
+const middlewares       = composer(applyMiddleware(routingMiddleware, epicMiddleware));
+const store             = createStore(rootReducer, initialState, middlewares);
+const history           = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -56,7 +80,8 @@ ReactDOM.render(
       <Route component={MainApp}>
         <Route path="/" component={HomePage}/>
         <Route path="todos" component={TodoApp}/>
-        <Route path="users" component={UserApp}/>
+        <Route path="users" component={isAuthenticated(UserApp)}/>
+        <Route path="login" component={isNotAuthenticated(AuthApp)}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>
