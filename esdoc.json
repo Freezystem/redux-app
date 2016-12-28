@@ -1,9 +1,0 @@
-{
-  "source": "./app",
-  "destination": "./docs",
-  "test": {
-    "type": "mocha",
-    "source": "./test",
-    "includes":["\\.specs\\."]
-  }
-}
