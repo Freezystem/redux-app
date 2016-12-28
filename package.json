@@ -2,32 +2,12 @@
   "name": "redux",
   "version": "0.0.1",
   "description": "Just a simple redux app",
+  "author": "freezystem@gmail.com",
+  "license": "UNLICENSED",
   "main": "app/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Freezystem/redux-app.git"
-  },
-  "esdoc": {
-    "source": "./app",
-    "destination": "./docs",
-    "test": {
-      "type": "mocha",
-      "source": "./test",
-      "includes": [
-        "\\.specs\\."
-      ]
-    }
-  },
-  "babel": {
-    "presets": [
-      "react",
-      "es2015",
-      "stage-0"
-    ],
-    "plugins": [
-      "react-html-attrs",
-      "transform-decorators-legacy"
-    ]
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -83,6 +63,123 @@
     "test:watch": "npm test -- --watch",
     "doc": "esdoc"
   },
-  "author": "freezystem@gmail.com",
-  "license": "UNLICENSED"
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
+    ],
+    "plugins": [
+      "react-html-attrs",
+      "transform-decorators-legacy"
+    ]
+  },
+  "esdoc": {
+    "source": "./app",
+    "destination": "./docs",
+    "test": {
+      "type": "mocha",
+      "source": "./test",
+      "includes": [
+        "\\.specs\\."
+      ]
+    }
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "impliedStrict": true
+      }
+    },
+    "env": {
+      "browser": true,
+      "es6": true,
+      "mocha": true
+    },
+    "globals": {
+      "moment": false,
+      "_": false,
+      "process": false
+    },
+    "plugins": [
+      "react"
+    ],
+    "extends": "eslint:recommended",
+    "rules": {
+      "no-console": "warn",
+      "no-extra-parens": "off",
+      "no-prototype-builtins": "warn",
+      "no-template-curly-in-string": "error",
+      "no-unsafe-negation": "error",
+      "no-unused-vars": "off",
+      "array-callback-return": "error",
+      "block-scoped-var": "error",
+      "class-methods-use-this": "error",
+      "consistent-return": "error",
+      "curly": "error",
+      "default-case": "error",
+      "dot-location": ["error", "property"],
+      "dot-notation": "warn",
+      "eqeqeq": "warn",
+      "guard-for-in": "warn",
+      "no-alert": "warn",
+      "no-caller": "error",
+      "no-div-regex": "error",
+      "no-empty-function": "error",
+      "no-eq-null": "error",
+      "no-eval": "error",
+      "no-extra-bind": "error",
+      "no-extra-label": "error",
+      "no-floating-decimal": "error",
+      "no-global-assign": "error",
+      "no-implied-eval": "error",
+      "no-invalid-this": "error",
+      "no-lone-blocks": "error",
+      "no-loop-func": "error",
+      "no-multi-spaces": "off",
+      "no-multi-str": "error",
+      "no-new-func": "error",
+      "no-new-wrappers": "error",
+      "no-new": "error",
+      "no-script-url": "error",
+      "no-self-compare": "error",
+      "no-sequences": "error",
+      "no-throw-literal": "error",
+      "no-unmodified-loop-condition": "warn",
+      "no-useless-call": "error",
+      "no-useless-concat": "error",
+      "no-useless-escape": "error",
+      "no-void": "error",
+      "no-with": "error",
+      "radix": "error",
+      "vars-on-top": "error",
+      "yoda": "warn",
+      "init-declarations": ["error", "always"],
+      "no-label-var": "error",
+      "no-shadow-restricted-names": "error",
+      "no-shadow": "error",
+      "no-undefined": "error",
+      "no-use-before-define": "error",
+      "array-bracket-spacing": ["error", "never"],
+      "block-spacing": "error",
+      "brace-style":["error", "stroustrup", { "allowSingleLine": true }],
+      "comma-dangle": ["error", "never"],
+      "comma-spacing": ["error", { "before": false, "after": true }],
+      "comma-style": ["error", "last"],
+      "computed-property-spacing": ["error", "never"],
+      "func-call-spacing": ["error", "never"],
+      "func-names": ["error", "always"],
+      "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+      "jsx-quotes": ["error", "prefer-double"],
+      "keyword-spacing": ["error", { "before": true, "after": true }],
+      "no-tabs": "error",
+      "quotes": ["warn","single"],
+      "no-var": "error",
+      "semi": "error",
+      "react/jsx-uses-vars": "error"
+    }
+  }
 }

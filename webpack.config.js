@@ -27,7 +27,7 @@ module.exports = {
     vendor  : Object.keys(pkg.dependencies)
   },
   eslint  : {
-    configFile: './.eslintrc'
+    configFile: './package.json'
   },
   module    : {
     loaders : [
