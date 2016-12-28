@@ -38,21 +38,20 @@ import {
  * @return {ReactDOM}
  * generate `<li class="todoList_item"/>` markup
  */
-export function Todo ({
-  completed,
-  label,
-  onClick,
-  onButtonClick
-}) {
-  return (
-    <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>
+export const Todo = (
+  {
+    completed,
+    label,
+    onClick,
+    onButtonClick
+  }
+) =>
+  <li className={`todoList_item todoList_item-${completed ? 'completed' : 'pending'}`}>
     <span className="todoList_itemLabel"
           onClick={onClick}>{label}</span>
-      <button className="todoList_itemButton"
-              onClick={onButtonClick}>+</button>
-    </li>
-  );
-}
+    <button className="todoList_itemButton"
+            onClick={onButtonClick}>+</button>
+  </li>;
 
 /**
  * Generate a list of todos
@@ -67,25 +66,24 @@ export function Todo ({
  * @return {ReactDOM}
  * generate `<ul class="todoList"/>` markup
  */
-export function TodoList ({
-  filteredTodos,
-  onTodoClick,
-  onTodoButtonClick
-}) {
-  return (
-    <ul className="todoList">
-      {
-        filteredTodos.map(
-          todo =>
-            <Todo key={todo.id}
-                  {...todo}
-                  onClick={() => onTodoClick(todo.id)}
-                  onButtonClick={() => onTodoButtonClick(todo.id)}/>
-        )
-      }
-    </ul>
-  );
-}
+export const TodoList = (
+  {
+    filteredTodos,
+    onTodoClick,
+    onTodoButtonClick
+  }
+) =>
+  <ul className="todoList">
+    {
+      filteredTodos.map(
+        todo =>
+          <Todo key={todo.id}
+                {...todo}
+                onClick={() => onTodoClick(todo.id)}
+                onButtonClick={() => onTodoButtonClick(todo.id)}/>
+      )
+    }
+  </ul>;
 
 /**
  * Generate a form to submit a new todo
@@ -96,9 +94,7 @@ export function TodoList ({
  * @return {ReactDOM}
  * generate `<form class="todoForm"/>` markup
  */
-export function TodoForm ({
-  onTodoFormSubmit
-}) {
+export const TodoForm = ({ onTodoFormSubmit }) => {
   let _label = '';
 
   return (
@@ -117,7 +113,7 @@ export function TodoForm ({
       <button className="todoForm_submit">add</button>
     </form>
   );
-}
+};
 
 /**
  * Generate a link to change filter value
@@ -132,22 +128,21 @@ export function TodoForm ({
  * @return {ReactDOM}
  * generate `<a class="filterList_item">` markup
  */
-export function FilterLink ({
-  active,
-  filter,
-  onClick
-}) {
-  return (
-    <a className={classNames('filterList_item', {'filterList_item-active' : active})}
-       href={`#${filter}`}
-       onClick={
-         event => {
-          event.preventDefault();
-          !active && onClick(filter);
-         }
-       }>{filter.replace(/SHOW_/, '')}</a>
-  );
-}
+export const FilterLink = (
+  {
+    active,
+    filter,
+    onClick
+  }
+) =>
+  <a className={classNames('filterList_item', {'filterList_item-active' : active})}
+     href={`#${filter}`}
+     onClick={
+       event => {
+        event.preventDefault();
+        !active && onClick(filter);
+       }
+     }>{filter.replace(/SHOW_/, '')}</a>;
 
 /**
  * Generate a list of todo filter links
@@ -162,26 +157,25 @@ export function FilterLink ({
  * @return {ReactDOM}
  * generate `<div class="filterList" />` markup
  */
-export function TodoFilterLinks ({
-  filterList,
-  currentFilter,
-  onLinkClick
-}) {
-  return (
-    <div className="filterList">
-      <span class="filterList_label">see:</span>
-      {
-        filterList.map(
-          (filter, index) =>
-            <FilterLink key={index}
-                        filter={filter}
-                        active={filter === currentFilter}
-                        onClick={onLinkClick}/>
-        )
-      }
-    </div>
-  );
-}
+export const TodoFilterLinks = (
+  {
+    filterList,
+    currentFilter,
+    onLinkClick
+  }
+) =>
+  <div className="filterList">
+    <span class="filterList_label">see:</span>
+    {
+      filterList.map(
+        (filter, index) =>
+          <FilterLink key={index}
+                      filter={filter}
+                      active={filter === currentFilter}
+                      onClick={onLinkClick}/>
+      )
+    }
+  </div>;
 
 /**
  * Generate a footer for the todo list
@@ -194,10 +188,12 @@ export function TodoFilterLinks ({
  * @return {ReactDOM}
  * generate `<p class="todoFooter" />` markup
  */
-export function TodoFooter ({
-  todos,
-  onTodoClearClick
-}) {
+export const TodoFooter = (
+  {
+    todos,
+    onTodoClearClick
+  }
+) => {
   let completed = todos.filter(todo => todo.completed).length,
     total       = todos.length,
     text        = total ? (total === completed ? 'all done, good job!' : `${completed}/${total} done`) : 'no todo yet';
@@ -212,7 +208,7 @@ export function TodoFooter ({
          }}>clear completed</a>
     </p>
   );
-}
+};
 
 // Container Components
 
@@ -239,35 +235,34 @@ export function TodoFooter ({
  * @return {ReactDOM}
  * generate `<section class="todoApp" />` markup
  */
-export function TodoApp ({
-  todos,
-  filter,
-  filterList,
-  onTodoFormSubmit,
-  onTodoClick,
-  onTodoButtonClick,
-  onTodoClearClick,
-  onLinkClick
-}) {
-  return (
-    <section className="todoApp">
-      <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>
-      <TodoFilterLinks filterList={filterList}
-                       currentFilter={filter}
-                       onLinkClick={onLinkClick}/>
-      <TodoList filteredTodos={getFilteredTodos(todos, filter)}
-                onTodoClick={onTodoClick}
-                onTodoButtonClick={onTodoButtonClick}/>
-      <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>
-    </section>
-  );
-}
+export const TodoApp = (
+  {
+    todos,
+    filter,
+    filterList,
+    onTodoFormSubmit,
+    onTodoClick,
+    onTodoButtonClick,
+    onTodoClearClick,
+    onLinkClick
+  }
+) =>
+  <section className="todoApp">
+    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>
+    <TodoFilterLinks filterList={filterList}
+                     currentFilter={filter}
+                     onLinkClick={onLinkClick}/>
+    <TodoList filteredTodos={getFilteredTodos(todos, filter)}
+              onTodoClick={onTodoClick}
+              onTodoButtonClick={onTodoButtonClick}/>
+    <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>
+  </section>;
 
 const MapStateToProps = ( state ) => {
   return {
-    todos         : state.todos,
-    filter        : state.todoFilter,
-    filterList    : Object.keys(todoFilters)
+    todos       : state.todos,
+    filter      : state.todoFilter,
+    filterList  : Object.keys(todoFilters)
   };
 };
 

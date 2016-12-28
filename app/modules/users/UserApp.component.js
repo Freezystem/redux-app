@@ -21,23 +21,22 @@ import {
  * @return {ReactDOM}
  * generate `<li class="userList_item"/>` markup
  */
-export function User ({
-  login,
-  url,
-  avatar_url
-}) {
-  return (
-    <li className="userList_item">
-      <a className="userList_itemLink"
-         href={url}
-         target="_blank">
-        <img src={avatar_url}
-             alt={`${login} avatar`} />
-        <span>{login}</span>
-      </a>
-    </li>
-  );
-}
+export const User = (
+  {
+    login,
+    url,
+    avatar_url
+  }
+) =>
+  <li className="userList_item">
+    <a className="userList_itemLink"
+       href={url}
+       target="_blank">
+      <img src={avatar_url}
+           alt={`${login} avatar`} />
+      <span>{login}</span>
+    </a>
+  </li>;
 
 /**
  * Generate a list of users
@@ -48,17 +47,12 @@ export function User ({
  * @return {ReactDOM}
  * generate `<ul class="userList"/>` markup
  */
-export function UserList ({
-  users
-}) {
-  return (
-    <ul className="userList">
-      {
-        users.map(user => <User key={user.id} {...user}/>)
-      }
-    </ul>
-  );
-}
+export const UserList = ({ users }) =>
+  <ul className="userList">
+    {
+      users.map(user => <User key={user.id} {...user}/>)
+    }
+  </ul>;
 
 /**
  * Generate a visual error when request fails
@@ -71,16 +65,11 @@ export function UserList ({
  * @return {ReactDOM}
  * generate `<p class="userError"/>` markup
  */
-export function UserError ({
-  error
-}) {
-  return (
-    <p className="userError">
-      <span className="userError_title">unable to get user list</span>
-      <span className="userError_message">{error.message}</span>
-    </p>
-  );
-}
+export const UserError = ({ error }) =>
+  <p className="userError">
+    <span className="userError_title">unable to get user list</span>
+    <span className="userError_message">{error.message}</span>
+  </p>;
 
 /**
  * Generate a header to display list title and button to launch user query
@@ -91,18 +80,13 @@ export function UserError ({
  * @return {ReactDOM}
  * generate `<div class="userHeader"/>` markup
  */
-export function UserHeader ({
-  onClick
-}) {
-  return (
-    <div className="userHeader">
-      <p className="userHeader_title">user list</p>
-      <button className="userHeader_refresh"
-              onClick={onClick}>refresh
-      </button>
-    </div>
-  );
-}
+export const UserHeader = ({ onClick }) =>
+  <div className="userHeader">
+    <p className="userHeader_title">user list</p>
+    <button className="userHeader_refresh"
+            onClick={onClick}>refresh
+    </button>
+  </div>;
 
 // Container Components
 
@@ -121,20 +105,19 @@ export function UserHeader ({
  * @return {ReactDOM}
  * generate `<section class="userApp"/>` markup
  */
-export function UserApp ({
-  users,
-  error,
-  onRefreshButtonClick
-}) {
-  return (
-    <section className="userApp">
-      <UserHeader onClick={onRefreshButtonClick}/>
-      {
-        error ? <UserError error={error}/> : <UserList users={users}/>
-      }
-    </section>
-  );
-}
+export const UserApp = (
+  {
+    users,
+    error,
+    onRefreshButtonClick
+  }
+) =>
+  <section className="userApp">
+    <UserHeader onClick={onRefreshButtonClick}/>
+    {
+      error ? <UserError error={error}/> : <UserList users={users}/>
+    }
+  </section>;
 
 const MapStateToProps = ( state ) => {
   return {

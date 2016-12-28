@@ -7,9 +7,7 @@ import { connect }    from 'react-redux';
 
 import { logIn }      from './reducers/auth.reducer';
 
-export function AuthApp ({
-  onLoginFormSubmit
-}) {
+export const AuthApp = ({ onLoginFormSubmit }) => {
   let _login  = '',
     _password = '';
 
@@ -35,7 +33,7 @@ export function AuthApp ({
       </form>
     </div>
   );
-}
+};
 
 const MapStateToProps = ( state ) => {
   return {
