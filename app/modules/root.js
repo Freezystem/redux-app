@@ -32,8 +32,8 @@ export const initialState = {
   auth        : {
     isFetching      : false,
     isAuthenticated : false,
-    error           : null,
-    user            : {}
+    user            : {},
+    error           : {}
   },
   routing     : { locationBeforeTransitions : null },
   todos       : [],

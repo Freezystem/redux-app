@@ -107,7 +107,7 @@ export const fetchUsersError = ( error ) => {
 // Epic
 
 /**
- * Epic observer that query user API
+ * Epic observer that query user API when triggered
  * @param {Object} action$
  * action object that trigger the user API request
  * @param {string} action$.type

@@ -7,12 +7,23 @@ import { connect }    from 'react-redux';
 
 import { logIn }      from './reducers/auth.reducer';
 
+// Presentational Components
+
+/**
+ * Generate an user log in form
+ * @param {!Object} props
+ * react props object
+ * @param {!function} props.onLoginFormSubmit
+ * the function to perform when the form is submitted, here {@link logIn}
+ * @return {ReactDOM}
+ * generate `<section class="authApp"/>` markup
+ */
 export const AuthApp = ({ onLoginFormSubmit }) => {
   let _login  = '',
     _password = '';
 
   return (
-    <div className="authApp">
+    <section className="authApp">
       <form className="authForm"
             onSubmit={
               event => {
@@ -31,7 +42,7 @@ export const AuthApp = ({ onLoginFormSubmit }) => {
                ref={input => _password = input}/>
         <button className="todoForm_submit">log in</button>
       </form>
-    </div>
+    </section>
   );
 };
 
@@ -50,7 +61,7 @@ const MapDispatchToProps = ( dispatch ) => {
 /**
  * connect react component to redux state
  * @return {ReactDOM}
- * generate connected `<section class="todoApp" />` markup
+ * generate connected `<section class="authApp" />` markup
  */
 export default connect(
   MapStateToProps,
