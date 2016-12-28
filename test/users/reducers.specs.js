@@ -12,11 +12,11 @@ import usersReducer,
 }                     from '../../app/modules/users/reducers/users.reducer';
 
 /** @test */
-describe('reducers', () => {
+describe('reducers', function () {
 
   /** @test {usersReducer} */
-  describe('usersReducer()', () => {
-    it('should handle unknown or missing actions', () => {
+  describe('usersReducer()', function () {
+    it('should handle unknown or missing actions', function () {
       const stateBefore = deepFreeze({
         requestState  : requestState.FULFILLED,
         data          : [],
@@ -26,7 +26,7 @@ describe('reducers', () => {
       expect(usersReducer(stateBefore, {})).toEqual(stateBefore);
     });
 
-    it('should handle FETCH_USERS', () => {
+    it('should handle FETCH_USERS', function () {
       const stateBefore = deepFreeze({
         requestState  : requestState.FULFILLED,
         data          : [],
@@ -41,7 +41,7 @@ describe('reducers', () => {
       expect(usersReducer(stateBefore, fetchUsers())).toEqual(stateAfter);
     });
 
-    it('should handle FETCH_USERS_SUCCESS', () => {
+    it('should handle FETCH_USERS_SUCCESS', function () {
       const data        = [
         {id: 42, login: 'foo'},
         {id: 43, login: 'bar'},
@@ -61,7 +61,7 @@ describe('reducers', () => {
       expect(usersReducer(stateBefore, fetchUsersSuccess(data))).toEqual(stateAfter);
     });
 
-    it('should handle FETCH_USERS_ERROR', () => {
+    it('should handle FETCH_USERS_ERROR', function () {
       const error       = {
         message : 'error retrieving users'
       };

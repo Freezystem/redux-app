@@ -13,11 +13,11 @@ import {
 }                     from '../../app/modules/users/reducers/users.reducer';
 
 /** @test */
-describe('actions', () => {
+describe('actions', function () {
 
   /** @test {fetchUsers} */
-  describe('fetchUsers()', () => {
-    it('should create an action to fetch users', () => {
+  describe('fetchUsers()', function () {
+    it('should create an action to fetch users', function () {
       const since   = 42;
       const perPage = 3;
       const expectedAction = {
@@ -33,8 +33,8 @@ describe('actions', () => {
   });
 
   /** @test {fetchUsersSuccess} */
-  describe('fetchUsersSuccess()', () => {
-    it('should create an action to notify user fetch success', () => {
+  describe('fetchUsersSuccess()', function () {
+    it('should create an action to notify user fetch success', function () {
       const data = [
         {id: 42, login: 'foo'},
         {id: 43, login: 'bar'},
@@ -52,8 +52,8 @@ describe('actions', () => {
   });
 
   /** @test {fetchUsersError} */
-  describe('fetchUsersError()', () => {
-    it('should create an action to notify user fetch error', () => {
+  describe('fetchUsersError()', function () {
+    it('should create an action to notify user fetch error', function () {
       const error = {message: 'error retrieving users'};
       const expectedAction = {
         type : FETCH_USERS_ERROR,

@@ -20,10 +20,10 @@ import {
 }                   from '../../app/modules/todos/reducers/todoFilter.reducer';
 
 /** @test */
-describe('components', () => {
+describe('components', function () {
 
   /** @test {Todo} */
-  describe('<Todo />', () => {
+  describe('<Todo />', function () {
     let attrs = {},
       wrapper = null;
 
@@ -39,18 +39,18 @@ describe('components', () => {
       wrapper = mount(<Todo {...attrs} />);
     });
 
-    it('should render a todo', () => {
+    it('should render a todo', function () {
       expect(wrapper.find('.todoList_itemLabel').text()).toBe('todo');
       expect(wrapper.find('.todoList_itemButton').text()).toExist();
     });
 
-    it('should call onClick() when label is clicked', () => {
+    it('should call onClick() when label is clicked', function () {
       wrapper.find('.todoList_itemLabel').simulate('click');
 
       expect(attrs.onClick.calls.length).toBe(1);
     });
 
-    it('should call onButtonClick() when button is clicked', () => {
+    it('should call onButtonClick() when button is clicked', function () {
       wrapper.find('.todoList_itemButton').simulate('click');
 
       expect(attrs.onButtonClick.calls.length).toBe(1);
@@ -58,7 +58,7 @@ describe('components', () => {
   });
 
   /** @test {TodoList} */
-  describe('<TodoList />', () => {
+  describe('<TodoList />', function () {
     let attrs = {},
       wrapper = null;
 
@@ -76,7 +76,7 @@ describe('components', () => {
       wrapper = mount(<TodoList {...attrs} />);
     });
 
-    it('should render filtered todos', () => {
+    it('should render filtered todos', function () {
       const firstTodo = wrapper.find(Todo).at(0);
       const secondTodo = wrapper.find(Todo).at(1);
       const thirdTodo = wrapper.find(Todo).at(2);
@@ -90,7 +90,7 @@ describe('components', () => {
   });
 
   /** @test {TodoForm} */
-  describe('<TodoForm />', () => {
+  describe('<TodoForm />', function () {
     let attrs = {},
       wrapper = null;
 
@@ -102,7 +102,7 @@ describe('components', () => {
       wrapper = mount(<TodoForm {...attrs} />);
     });
 
-    it('should render a form to add a todo', () => {
+    it('should render a form to add a todo', function () {
       const form    = wrapper.find('.todoForm');
       const input   = form.find('.todoForm_label');
       const button  = form.find('.todoForm_submit');
@@ -118,7 +118,7 @@ describe('components', () => {
       expect(button.type()).toBe('button');
     });
 
-    it('should not submit form with an empty label', () => {
+    it('should not submit form with an empty label', function () {
       const form    = wrapper.find('.todoForm');
 
       form.simulate('submit');
@@ -126,7 +126,7 @@ describe('components', () => {
       expect(attrs.onTodoFormSubmit).toNotHaveBeenCalled();
     });
 
-    it('should submit form when a label is given', () => {
+    it('should submit form when a label is given', function () {
       wrapper.find('.todoForm_label').get(0).value = 'write test';
       wrapper.find('.todoForm').simulate('submit');
 
@@ -135,7 +135,7 @@ describe('components', () => {
   });
 
   /** @test {FilterLink} */
-  describe('<FilterLink />', () => {
+  describe('<FilterLink />', function () {
     let attrs = {},
     wrapper = null;
 
@@ -149,7 +149,7 @@ describe('components', () => {
       wrapper = mount(<FilterLink {...attrs} />);
     });
 
-    it('should generate a clickable link to filter todos', () => {
+    it('should generate a clickable link to filter todos', function () {
       const link  = wrapper.find('.filterList_item').first();
 
       expect(link.props().href).toBe(`#${todoFilters.SHOW_ALL}`);
@@ -160,7 +160,7 @@ describe('components', () => {
       expect(attrs.onClick).toHaveBeenCalledWith(todoFilters.SHOW_ALL);
     });
 
-    it('should not be clickable if filter is already active', () => {
+    it('should not be clickable if filter is already active', function () {
       wrapper.setProps({ active : true });
       const link  = wrapper.find('.filterList_item').first();
 
@@ -172,7 +172,7 @@ describe('components', () => {
       expect(attrs.onClick).toNotHaveBeenCalled();
     });
 
-    it('should display the filter name properly', () => {
+    it('should display the filter name properly', function () {
       const link = wrapper.find('.filterList_item').first();
 
       expect(link.text()).toBe('ALL');
@@ -180,7 +180,7 @@ describe('components', () => {
   });
 
   /** @test {TodoFilterLinks} */
-  describe('<TodoFilterLinks />', () => {
+  describe('<TodoFilterLinks />', function () {
     let attrs = {},
       wrapper = null;
 
@@ -194,17 +194,17 @@ describe('components', () => {
       wrapper = mount(<TodoFilterLinks {...attrs} />);
     });
 
-    it('should render all filter links', () => {
+    it('should render all filter links', function () {
       expect(wrapper.find('.filterList_item').length).toBe(attrs.filterList.length);
     });
 
-    it('should set proper filter as active', () => {
+    it('should set proper filter as active', function () {
       expect(wrapper.find('.filterList_item-active').length).toBe(1);
       expect(wrapper.find('.filterList_item').not('.filterList_item-active').length).toBe(attrs.filterList.length - 1);
       expect(wrapper.find('.filterList_item-active').text()).toBe('ALL');
     });
 
-    it('should pass a fonction as onClick property', () => {
+    it('should pass a fonction as onClick property', function () {
       wrapper.find('.filterList_item').not('.filterList_item-active').first().simulate('click');
 
       expect(attrs.onLinkClick).toHaveBeenCalled();
@@ -212,7 +212,7 @@ describe('components', () => {
   });
 
   /** @test {TodoFooter} */
-  describe('<TodoFooter />', () => {
+  describe('<TodoFooter />', function () {
     let attrs = {},
       wrapper = null;
 
@@ -229,7 +229,7 @@ describe('components', () => {
       wrapper = mount(<TodoFooter {...attrs} />);
     });
 
-    it('should not display clear link if there isn\'t completed todo', () => {
+    it('should not display clear link if there isn\'t completed todo', function () {
       wrapper.setProps({
         todos : [
           {label: 'todo1', id: 111, completed: false},
@@ -241,11 +241,11 @@ describe('components', () => {
       expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeTruthy();
     });
 
-    it('should display clear link if there is completed todo', () => {
+    it('should display clear link if there is completed todo', function () {
       expect(wrapper.find('.todoFooter_clear').hasClass('todoFooter_clear-hide')).toBeFalsy();
     });
 
-    it('should call onTodoClearClick on clear link click', () => {
+    it('should call onTodoClearClick on clear link click', function () {
       wrapper.find('.todoFooter_clear').first().simulate('click');
 
       expect(attrs.onTodoClearClick).toHaveBeenCalled();

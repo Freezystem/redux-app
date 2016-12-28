@@ -20,11 +20,11 @@ import {
 }                 from '../../app/modules/todos/reducers/todoFilter.reducer';
 
 /** @test */
-describe('actions', () => {
+describe('actions', function () {
 
   /** @test {addTodo} */
-  describe('addTodo()', () => {
-    it('should create an action to add a todo', () => {
+  describe('addTodo()', function () {
+    it('should create an action to add a todo', function () {
       const label = 'write tests';
       const expectedAction = {
         type : ADD_TODO,
@@ -39,8 +39,8 @@ describe('actions', () => {
   });
 
   /** @test {removeTodo} */
-  describe('removeTodo()', () => {
-    it('should create an action to remove a todo', () => {
+  describe('removeTodo()', function () {
+    it('should create an action to remove a todo', function () {
       const id = 42;
       const expectedAction = {
         type : REMOVE_TODO,
@@ -54,8 +54,8 @@ describe('actions', () => {
   });
 
   /** @test {toggleTodo} */
-  describe('toggleTodo()', () => {
-    it('should create an action to toggle a todo', () => {
+  describe('toggleTodo()', function () {
+    it('should create an action to toggle a todo', function () {
       const id = 42;
       const expectedAction = {
         type : TOGGLE_TODO,
@@ -69,8 +69,8 @@ describe('actions', () => {
   });
 
   /** @test {clearTodo} */
-  describe('clearTodo()', () => {
-    it('should create an action to clear completed todo', () => {
+  describe('clearTodo()', function () {
+    it('should create an action to clear completed todo', function () {
       const expectedAction = {
         type : CLEAR_TODO
       };
@@ -82,8 +82,8 @@ describe('actions', () => {
   });
 
   /** @test {setTodoFilter} */
-  describe('setTodoFilter()', () => {
-    it('should create an action to set the todo filter', () => {
+  describe('setTodoFilter()', function () {
+    it('should create an action to set the todo filter', function () {
       const filter = todoFilters.SHOW_ALL;
       const expectedAction = {
         type : SET_TODO_FILTER,

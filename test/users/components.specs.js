@@ -19,10 +19,10 @@ import {
 }                 from '../../app/modules/users/reducers/users.reducer';
 
 /** @test */
-describe('components', () => {
+describe('components', function () {
 
   /** @test {User} */
-  describe('<User />', () => {
+  describe('<User />', function () {
     let attrs = {},
       wrapper = null;
 
@@ -36,7 +36,7 @@ describe('components', () => {
       wrapper = mount(<User {...attrs} />);
     });
 
-    it('should render a user', () => {
+    it('should render a user', function () {
       expect(wrapper.find('.userList_itemLink').props().href).toBe('/details/foo');
       expect(wrapper.find('.userList_itemLink span').text()).toBe('foo');
       expect(wrapper.find('.userList_itemLink img').props().src).toBe('/img/foo.jpg');
@@ -45,7 +45,7 @@ describe('components', () => {
   });
 
   /** @test {UserList} */
-  describe('<UserList />', () => {
+  describe('<UserList />', function () {
     let users = [
         {id: 111, login: 'foo', url: '/details/foo', avatar_url: '/img/foo.jpg'},
         {id: 222, login: 'bar', url: '/details/bar', avatar_url: '/img/bar.jpg'},
@@ -57,7 +57,7 @@ describe('components', () => {
       wrapper = mount(<UserList users={users} />);
     });
 
-    it('should render a user list', () => {
+    it('should render a user list', function () {
       expect(wrapper.find('.userList').children().length).toBe(3);
       expect(wrapper.find(User).at(0).key()).toBe('111');
       expect(wrapper.find(User).at(1).key()).toBe('222');
@@ -66,7 +66,7 @@ describe('components', () => {
   });
 
   /** @test {UserError} */
-  describe('<UserError />', () => {
+  describe('<UserError />', function () {
     let error = {message : 'error: enable to retrieve users'},
       wrapper = null;
 
@@ -74,13 +74,13 @@ describe('components', () => {
       wrapper = mount(<UserError error={error} />);
     });
 
-    it('should render an error', () => {
+    it('should render an error', function () {
       expect(wrapper.find('.userError_message').text()).toBe(error.message);
     });
   });
 
   /** @test {UserHeader} */
-  describe('<UserHeader />', () => {
+  describe('<UserHeader />', function () {
     let onClick = createSpy(),
       wrapper   = null;
 
@@ -88,7 +88,7 @@ describe('components', () => {
       wrapper = mount(<UserHeader onClick={onClick} />);
     });
 
-    it('should call a function on refresh button click', () => {
+    it('should call a function on refresh button click', function () {
       wrapper.find('.userHeader_refresh').simulate('click');
 
       expect(onClick).toHaveBeenCalled();
