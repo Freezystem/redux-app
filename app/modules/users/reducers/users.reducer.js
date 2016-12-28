@@ -69,12 +69,12 @@ export const requestState = {
  * @property {number} perPage
  * number of user to get
  */
-export function fetchUsers (
+export const fetchUsers = (
   since   = Math.floor(Math.random()*500),
   perPage = 10
-) {
+) => {
   return { type : FETCH_USERS, since, perPage };
-}
+};
 
 /**
  * action to provide users data to the state
@@ -86,9 +86,9 @@ export function fetchUsers (
  * @property {Array<userObj>} data
  * user list from API
  */
-export function fetchUsersSuccess ( data ) {
+export const fetchUsersSuccess = ( data ) => {
   return { type : FETCH_USERS_SUCCESS, data };
-}
+};
 
 /**
  * action to provide users error logs to state
@@ -100,9 +100,9 @@ export function fetchUsersSuccess ( data ) {
  * @property {Object} error
  * error from failed API request
  */
-export function fetchUsersError ( error ) {
+export const fetchUsersError = ( error ) => {
   return { type : FETCH_USERS_ERROR, error };
-}
+};
 
 // Epic
 
@@ -114,14 +114,14 @@ export function fetchUsersError ( error ) {
  * action type
  * @return {(Array<userObj>|Object)}
  */
-export function fetchUsersEpic ( action$ ) {
+export const fetchUsersEpic = ( action$ ) => {
   return action$.ofType(FETCH_USERS)
     .mergeMap(action =>
       ajax(`https://api.github.com/users?per_page=${action.perPage}&since=${action.since}`)
         .map(xhr => fetchUsersSuccess(xhr.response))
         .catch(error => Observable.of(fetchUsersError(error)))
     );
-}
+};
 
 // Reducer
 
@@ -149,14 +149,14 @@ export function fetchUsersEpic ( action$ ) {
  * @property {?Object} state.error
  * error object from failed user request
  */
-export default function usersReducer (
+const usersReducer = (
   state = {
     requestState : requestState.FULFILLED,
     data         : [],
     error        : null
   },
   action
-) {
+) => {
   switch ( action.type ) {
     case FETCH_USERS:
       return Object.assign({}, state, {
@@ -179,4 +179,6 @@ export default function usersReducer (
     default:
       return state;
   }
-}
+};
+
+export default usersReducer;

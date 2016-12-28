@@ -16,42 +16,41 @@ export const LOGGED_OUT     = 'LOGGED_OUT';
 
 // Actions
 
-export function logIn ( login, password ) {
+export const logIn = ( login, password ) => {
   return { type : LOGIN_REQUEST, login, password };
-}
+};
 
-export function logInSuccess ( user ) {
+export const logInSuccess = ( user ) => {
   return { type : LOGIN_SUCCESS, user };
-}
+};
 
-export function logInFailure ( error ) {
+export const logInFailure = ( error ) => {
   return { type : LOGIN_FAILURE, error };
-}
+};
 
-export function logOut () {
+export const logOut = () => {
   return { type : LOGGED_OUT };
-}
+};
 
 // Epic
 
-export function logInEpic ( action$ ) {
+export const logInEpic = ( action$ ) => {
   return action$.ofType(LOGIN_REQUEST)
     .mergeMap(action =>
       ajax({
         method      : 'POST',
-        url         : 'http://reqres.in/api/login',
+        url         : 'https://reqres.in/api/login',
         body        : { email : action.login, password : action.password },
         crossDomain : true
       })
         .map(xhr => logInSuccess(xhr.response))
         .catch(error => Observable.of(logInFailure(error)))
     );
-}
-
+};
 
 // Reducer
 
-export default function authReducer (
+const authReducer = (
   state = {
     isFetching      : false,
     isAuthenticated : false,
@@ -59,7 +58,7 @@ export default function authReducer (
     error           : null
   },
   action
-) {
+) => {
   switch ( action.type ) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
@@ -92,4 +91,6 @@ export default function authReducer (
     default:
       return state;
   }
-}
+};
+
+export default authReducer;

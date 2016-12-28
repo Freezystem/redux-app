@@ -48,7 +48,7 @@ import {
 }                     from './modules/root';
 
 // Redirects to /login by default
-const isAuthenticated = UserAuthWrapper({
+const isAuthenticated     = UserAuthWrapper({
   authSelector            : state => state.auth.user,
   authenticatingSelector  : state => state.auth.isFetching,
   redirectAction          : routerActions.replace,
@@ -56,7 +56,7 @@ const isAuthenticated = UserAuthWrapper({
   wrapperDisplayName      : 'isAuthenticated'
 });
 
-const isNotAuthenticated = UserAuthWrapper({
+const isNotAuthenticated  = UserAuthWrapper({
   authSelector            : state => state.auth.user,
   redirectAction          : routerActions.replace,
   predicate               : user => !user.token,
@@ -67,8 +67,8 @@ const isNotAuthenticated = UserAuthWrapper({
 
 const routingMiddleware = routerMiddleware(browserHistory);
 const composer          = process.env.NODE_ENV !== 'production'
-                        && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-                        || compose;
+                          && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+                          || compose;
 const epicMiddleware    = createEpicMiddleware(rootEpic);
 const middlewares       = composer(applyMiddleware(routingMiddleware, epicMiddleware));
 const store             = createStore(rootReducer, initialState, middlewares);

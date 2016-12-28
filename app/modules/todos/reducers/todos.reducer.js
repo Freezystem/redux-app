@@ -7,7 +7,7 @@
  * @property {string} label
  * short sentence describing the task to perform
  * @property {boolean} completed
- * wheter the todo is completed or not
+ * whether the todo is completed or not
  */
 
 // Constants
@@ -44,9 +44,9 @@ export const CLEAR_TODO   = 'CLEAR_TODO';
  * @property {string} label
  * label of the todo to create
  */
-export function addTodo ( label ) {
+export const addTodo = ( label ) => {
   return { type : ADD_TODO, label };
-}
+};
 
 /**
  * action to remove a todo
@@ -57,9 +57,9 @@ export function addTodo ( label ) {
  * @property {number} id
  * id of the todo to remove
  */
-export function removeTodo ( id ) {
+export const removeTodo = ( id ) => {
   return { type : REMOVE_TODO, id };
-}
+};
 
 /**
  * action to toggle a todo
@@ -70,9 +70,9 @@ export function removeTodo ( id ) {
  * @property {number} id
  * id of the todo to toggle
  */
-export function toggleTodo ( id ) {
+export const toggleTodo = ( id ) => {
   return { type : TOGGLE_TODO, id };
-}
+};
 
 /**
  * action to clear completed todos
@@ -80,9 +80,9 @@ export function toggleTodo ( id ) {
  * @property {string} type
  * action type
  */
-export function clearTodo () {
+export const clearTodo = () => {
   return { type : CLEAR_TODO };
-}
+};
 
 // Reducer
 
@@ -101,7 +101,7 @@ export function clearTodo () {
  * @return {Array<todoObj>}
  * new state value after performing action
  */
-export default function todosReducer ( state = [], action ) {
+const todosReducer = ( state = [], action ) => {
   switch ( action.type ) {
     case ADD_TODO:
       return state.concat(
@@ -122,4 +122,6 @@ export default function todosReducer ( state = [], action ) {
     default:
       return state;
   }
-}
+};
+
+export default todosReducer;

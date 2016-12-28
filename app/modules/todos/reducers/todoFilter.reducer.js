@@ -36,9 +36,9 @@ export const todoFilters = {
  * @property {string} filter
  * label of the filter to set
  */
-export function setTodoFilter ( filter ) {
+export const setTodoFilter = ( filter ) => {
   return { type : SET_TODO_FILTER, filter };
-}
+};
 
 /**
  * filter a list of given todos
@@ -49,10 +49,10 @@ export function setTodoFilter ( filter ) {
  * @return {Array<todoObj>}
  * a list of filtered todos
  */
-export function getFilteredTodos (
+export const getFilteredTodos = (
   todos = [],
   filter = todoFilters.SHOW_ALL
-) {
+) => {
   switch ( filter ) {
     case todoFilters.SHOW_PENDING:
       return todos.filter(todo => !todo.completed);
@@ -61,7 +61,7 @@ export function getFilteredTodos (
     default:
       return todos;
   }
-}
+};
 
 // Reducer
 
@@ -76,14 +76,16 @@ export function getFilteredTodos (
  * @return {string}
  * new state value after performing the action
  */
-export default function todoFiltersReducer (
+const todoFiltersReducer = (
   state = todoFilters.SHOW_ALL,
   action
-) {
+) => {
   switch ( action.type ) {
     case SET_TODO_FILTER:
       return action.filter in todoFilters ? action.filter : state;
     default:
       return state;
   }
-}
+};
+
+export default todoFiltersReducer;
