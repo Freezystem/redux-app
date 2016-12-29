@@ -4,7 +4,10 @@ import React        from 'react';
 import expect, {
   createSpy
 }                   from 'expect';
-import { mount }    from 'enzyme';
+import {
+  mount,
+  shallow
+}                   from 'enzyme';
 
 import {
   Todo,
@@ -12,7 +15,8 @@ import {
   TodoForm,
   TodoFooter,
   FilterLink,
-  TodoFilterLinks
+  TodoFilterLinks,
+  TodoApp
 }                   from '../../app/modules/todos/TodoApp.component';
 
 import {
@@ -96,7 +100,7 @@ describe('components', function () {
 
     beforeEach(() => {
       attrs = {
-        onTodoFormSubmit : createSpy()
+        onSubmit : createSpy()
       };
 
       wrapper = mount(<TodoForm {...attrs} />);
@@ -119,18 +123,16 @@ describe('components', function () {
     });
 
     it('should not submit form with an empty label', function () {
-      const form    = wrapper.find('.todoForm');
+      wrapper.find('.todoForm').simulate('submit');
 
-      form.simulate('submit');
-
-      expect(attrs.onTodoFormSubmit).toNotHaveBeenCalled();
+      expect(attrs.onSubmit).toNotHaveBeenCalled();
     });
 
     it('should submit form when a label is given', function () {
       wrapper.find('.todoForm_label').get(0).value = 'write test';
       wrapper.find('.todoForm').simulate('submit');
 
-      expect(attrs.onTodoFormSubmit).toHaveBeenCalledWith('write test');
+      expect(attrs.onSubmit).toHaveBeenCalledWith('write test');
     });
   });
 
@@ -249,6 +251,31 @@ describe('components', function () {
       wrapper.find('.todoFooter_clear').first().simulate('click');
 
       expect(attrs.onTodoClearClick).toHaveBeenCalled();
+    });
+  });
+
+  /** @test {TodoApp} */
+  describe('<TodoApp />', function () {
+    let wrapper = null;
+
+    beforeEach(() => {
+      wrapper = shallow(<TodoApp />);
+    });
+
+    it('should contain <TodoForm /> component', function () {
+      expect(wrapper.find(TodoForm).length).toBe(1);
+    });
+
+    it('should contain <TodoFilterLinks /> component', function () {
+      expect(wrapper.find(TodoFilterLinks).length).toBe(1);
+    });
+
+    it('should contain <TodoList /> component', function () {
+      expect(wrapper.find(TodoList).length).toBe(1);
+    });
+
+    it('should contain <TodoFooter /> component', function () {
+      expect(wrapper.find(TodoFooter).length).toBe(1);
     });
   });
 });

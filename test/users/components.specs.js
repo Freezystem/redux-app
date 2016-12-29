@@ -4,7 +4,10 @@ import React      from 'react';
 import expect, {
   createSpy
 }                 from 'expect';
-import { mount }  from 'enzyme';
+import {
+  mount,
+  shallow
+}                 from 'enzyme';
 
 import {
   User,
@@ -13,10 +16,6 @@ import {
   UserHeader,
   UserApp
 }                 from '../../app/modules/users/UserApp.component';
-
-import {
-  requestState
-}                 from '../../app/modules/users/reducers/users.reducer';
 
 /** @test */
 describe('components', function () {
@@ -92,6 +91,23 @@ describe('components', function () {
       wrapper.find('.userHeader_refresh').simulate('click');
 
       expect(onClick).toHaveBeenCalled();
+    });
+  });
+
+  /** @test {UserApp} */
+  describe('<UserApp />', function () {
+    let wrapper = null;
+
+    beforeEach(() => {
+      wrapper = shallow(<UserApp />);
+    });
+
+    it('should contain <UserHeader /> component', function () {
+      expect(wrapper.find(UserHeader).length).toBe(1);
+    });
+
+    it('should contain <UserList /> component', function () {
+      expect(wrapper.find(UserList).length).toBe(1);
     });
   });
 });

@@ -28,7 +28,7 @@ describe('actions', function () {
       const fetchUsersSpy = createSpy().andCall(fetchUsers);
 
       expect(fetchUsersSpy(since, perPage)).toEqual(expectedAction);
-      expect(fetchUsersSpy).toHaveBeenCalledWith(42, 3);
+      expect(fetchUsersSpy).toHaveBeenCalledWith(since, perPage);
     });
   });
 
@@ -54,7 +54,7 @@ describe('actions', function () {
   /** @test {fetchUsersError} */
   describe('fetchUsersError()', function () {
     it('should create an action to notify user fetch error', function () {
-      const error = {message: 'error retrieving users'};
+      const error = { message: 'error retrieving users' };
       const expectedAction = {
         type : FETCH_USERS_ERROR,
         error

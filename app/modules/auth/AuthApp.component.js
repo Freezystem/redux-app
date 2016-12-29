@@ -9,6 +9,36 @@ import { logIn }      from './reducers/auth.reducer';
 
 // Presentational Components
 
+export const AuthForm = ({ onSubmit }) => {
+  let _login  = '',
+    _password = '';
+
+  return (
+    <form className="authForm"
+          onSubmit={
+            event => {
+              event.preventDefault();
+              _login.value.trim()
+              && _password.value
+              && onSubmit(_login.value.trim(), _password.value);
+              _login.value = _password.value = '';
+            }
+          }>
+      <input className="authForm_login"
+             type="text"
+             placeholder="login"
+             required
+             ref={input => _login = input}/>
+      <input className="authForm_password"
+             type="password"
+             placeholder="password"
+             required
+             ref={input => _password = input}/>
+      <button className="authForm_submit">log in</button>
+    </form>
+  );
+};
+
 /**
  * Generate an user log in form
  * @param {!Object} props
@@ -18,33 +48,10 @@ import { logIn }      from './reducers/auth.reducer';
  * @return {ReactDOM}
  * generate `<section class="authApp"/>` markup
  */
-export const AuthApp = ({ onLoginFormSubmit }) => {
-  let _login  = '',
-    _password = '';
-
-  return (
+export const AuthApp = ({ onLoginFormSubmit }) =>
     <section className="authApp">
-      <form className="authForm"
-            onSubmit={
-              event => {
-                event.preventDefault();
-                _login.value.trim() && onLoginFormSubmit(_login.value.trim(), _password.value);
-                _login.value = _password.value = '';
-              }
-            }>
-        <input className="authForm_login"
-               type="text"
-               placeholder="login"
-               ref={input => _login = input}/>
-        <input className="authForm_login"
-               type="password"
-               placeholder="password"
-               ref={input => _password = input}/>
-        <button className="todoForm_submit">log in</button>
-      </form>
-    </section>
-  );
-};
+      <AuthForm onSubmit={onLoginFormSubmit}/>
+    </section>;
 
 const MapStateToProps = ( state ) => {
   return {

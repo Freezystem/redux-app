@@ -94,7 +94,7 @@ export const TodoList = (
  * @return {ReactDOM}
  * generate `<form class="todoForm"/>` markup
  */
-export const TodoForm = ({ onTodoFormSubmit }) => {
+export const TodoForm = ({ onSubmit }) => {
   let _label = '';
 
   return (
@@ -102,13 +102,14 @@ export const TodoForm = ({ onTodoFormSubmit }) => {
           onSubmit={
             event => {
               event.preventDefault();
-              _label.value.trim() && onTodoFormSubmit(_label.value.trim());
+              _label.value.trim() && onSubmit(_label.value.trim());
               _label.value = '';
             }
           }>
       <input className="todoForm_label"
              type="text"
              placeholder="What's need to be done today ?"
+             required
              ref={input => _label = input}/>
       <button className="todoForm_submit">add</button>
     </form>
@@ -248,7 +249,7 @@ export const TodoApp = (
   }
 ) =>
   <section className="todoApp">
-    <TodoForm onTodoFormSubmit={onTodoFormSubmit}/>
+    <TodoForm onSubmit={onTodoFormSubmit}/>
     <TodoFilterLinks filterList={filterList}
                      currentFilter={filter}
                      onLinkClick={onLinkClick}/>

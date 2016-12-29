@@ -17,6 +17,12 @@ describe('App', () => {
     });
   });
 
+  importTest('Auth Module', [
+    './auth/actions.specs',
+    './auth/components.specs',
+    './auth/reducers.specs'
+  ]);
+
   importTest('Todos Module', [
     './todos/actions.specs',
     './todos/components.specs',

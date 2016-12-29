@@ -34,7 +34,7 @@ describe('actions', function () {
 
 
       expect(addTodoSpy(label)).toEqual(expectedAction);
-      expect(addTodoSpy).toHaveBeenCalledWith('write tests');
+      expect(addTodoSpy).toHaveBeenCalledWith(label);
     });
   });
 
@@ -49,7 +49,7 @@ describe('actions', function () {
       const removeTodoSpy = createSpy().andCall(removeTodo);
 
       expect(removeTodoSpy(id)).toEqual(expectedAction);
-      expect(removeTodoSpy).toHaveBeenCalledWith(42);
+      expect(removeTodoSpy).toHaveBeenCalledWith(id);
     });
   });
 
@@ -64,7 +64,7 @@ describe('actions', function () {
       const toggleTodoSpy = createSpy().andCall(toggleTodo);
 
       expect(toggleTodoSpy(id)).toEqual(expectedAction);
-      expect(toggleTodoSpy).toHaveBeenCalledWith(42);
+      expect(toggleTodoSpy).toHaveBeenCalledWith(id);
     });
   });
 
