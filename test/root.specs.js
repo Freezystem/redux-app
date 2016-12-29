@@ -8,11 +8,11 @@ import {
 }                   from '../app/modules/root';
 
 /** @test */
-describe('App', () => {
+describe('App', function () {
 
   /** @test {rootReducer} */
-  describe('rootReducer()', () => {
-    it('should return the initial state', () => {
+  describe('rootReducer()', function () {
+    it('should return the initial state', function () {
       expect(rootReducer(undefined, {})).toEqual(initialState);
     });
   });
@@ -37,7 +37,7 @@ describe('App', () => {
 });
 
 function importTest ( name, tests ) {
-  Array.isArray(tests) && describe(name, () => {
+  Array.isArray(tests) && describe(name, function () {
     tests.map(test => {
       require(test);
     });
