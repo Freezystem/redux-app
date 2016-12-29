@@ -9,6 +9,15 @@ import { logIn }      from './reducers/auth.reducer';
 
 // Presentational Components
 
+/**
+ * Generate a form
+ * @param {!Object} props
+ * react props object
+ * @param {!function} props.onSubmit
+ * the function to perform when the form is submitted, here {@link logIn}
+ * @return {ReactDOM}
+ * generate `<form class="authForm"/>` markup
+ */
 export const AuthForm = ({ onSubmit }) => {
   let _login  = '',
     _password = '';
@@ -40,11 +49,11 @@ export const AuthForm = ({ onSubmit }) => {
 };
 
 /**
- * Generate an user log in form
+ * Generate an user log in component
  * @param {!Object} props
  * react props object
  * @param {!function} props.onLoginFormSubmit
- * the function to perform when the form is submitted, here {@link logIn}
+ * the function to perform when the auth form is submitted, here {@link logIn}
  * @return {ReactDOM}
  * generate `<section class="authApp"/>` markup
  */
