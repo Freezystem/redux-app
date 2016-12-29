@@ -109,5 +109,9 @@ describe('components', function () {
     it('should contain <UserList /> component', function () {
       expect(wrapper.find(UserList).length).toBe(1);
     });
+
+    it('should not contain <UserError /> component', function () {
+      expect(wrapper.find(UserError).length).toBe(0);
+    });
   });
 });
