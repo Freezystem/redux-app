@@ -1,10 +1,12 @@
 'use strict';
 
 // Dependencies
+
 import { combineReducers }  from 'redux';
 import { combineEpics }  from 'redux-observable';
 
 // Reducers & Epics
+
 import {
   routerReducer
 }                           from 'react-router-redux';
