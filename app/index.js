@@ -1,6 +1,7 @@
 'use strict';
 
 // Libs
+
 import React          from 'react';
 import ReactDOM       from 'react-dom';
 import {
@@ -27,6 +28,7 @@ import {
 }                     from 'redux-auth-wrapper';
 
 // Components
+
 import {
   Router,
   Route
@@ -41,13 +43,15 @@ import MainApp,
 }                     from './modules/main/MainApp.component';
 
 // Reducer
+
 import {
   rootReducer,
   initialState,
   rootEpic
 }                     from './modules/root';
 
-// Redirects to /login by default
+//Auth wrappers
+
 const isAuthenticated     = UserAuthWrapper({
   authSelector            : state => state.auth.user,
   authenticatingSelector  : state => state.auth.isFetching,
@@ -64,6 +68,8 @@ const isNotAuthenticated  = UserAuthWrapper({
   allowRedirectBack       : false,
   wrapperDisplayName      : 'isNotAuthenticated'
 });
+
+// Redux App Bootstrapping
 
 const routingMiddleware = routerMiddleware(browserHistory);
 const composer          = process.env.NODE_ENV !== 'production'
