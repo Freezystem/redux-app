@@ -49,9 +49,7 @@ export const User = (
  */
 export const UserList = ({ users }) =>
   <ul className="userList">
-    {
-      users.map(user => <User key={user.id} {...user}/>)
-    }
+    { users.map(user => <User key={user.id} {...user}/>) }
   </ul>;
 
 /**
@@ -119,18 +117,14 @@ export const UserApp = (
     }
   </section>;
 
-const MapStateToProps = ( state ) => {
-  return {
+const MapStateToProps = state => ({
     users : state.users.data,
     error : state.users.error
-  };
-};
+  });
 
-const MapDispatchToProps = ( dispatch ) => {
-  return {
+const MapDispatchToProps = dispatch => ({
     onRefreshButtonClick : () => dispatch(fetchUsers())
-  };
-};
+  });
 
 /**
  * connect react component to redux state

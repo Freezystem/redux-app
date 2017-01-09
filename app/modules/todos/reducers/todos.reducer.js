@@ -44,9 +44,7 @@ export const CLEAR_TODO   = 'CLEAR_TODO';
  * @property {string} label
  * label of the todo to create
  */
-export const addTodo = ( label ) => {
-  return { type : ADD_TODO, label };
-};
+export const addTodo = label => ({ type : ADD_TODO, label });
 
 /**
  * action to remove a todo
@@ -57,9 +55,7 @@ export const addTodo = ( label ) => {
  * @property {number} id
  * id of the todo to remove
  */
-export const removeTodo = ( id ) => {
-  return { type : REMOVE_TODO, id };
-};
+export const removeTodo = id => ({ type : REMOVE_TODO, id });
 
 /**
  * action to toggle a todo
@@ -70,9 +66,7 @@ export const removeTodo = ( id ) => {
  * @property {number} id
  * id of the todo to toggle
  */
-export const toggleTodo = ( id ) => {
-  return { type : TOGGLE_TODO, id };
-};
+export const toggleTodo = id => ({ type : TOGGLE_TODO, id });
 
 /**
  * action to clear completed todos
@@ -80,9 +74,7 @@ export const toggleTodo = ( id ) => {
  * @property {string} type
  * action type
  */
-export const clearTodo = () => {
-  return { type : CLEAR_TODO };
-};
+export const clearTodo = () => ({ type : CLEAR_TODO });
 
 // Reducer
 

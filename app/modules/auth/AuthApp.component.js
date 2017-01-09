@@ -62,17 +62,11 @@ export const AuthApp = ({ onLoginFormSubmit }) =>
       <AuthForm onSubmit={onLoginFormSubmit}/>
     </section>;
 
-const MapStateToProps = ( state ) => {
-  return {
-    auth  : state.auth
-  };
-};
+const MapStateToProps = state => ({ auth : state.auth });
 
-const MapDispatchToProps = ( dispatch ) => {
-  return {
+const MapDispatchToProps = dispatch => ({
     onLoginFormSubmit  : ( login, password ) => dispatch(logIn(login, password))
-  };
-};
+  });
 
 /**
  * connect react component to redux state

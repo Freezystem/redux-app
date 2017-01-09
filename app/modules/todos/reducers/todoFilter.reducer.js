@@ -36,9 +36,7 @@ export const todoFilters = {
  * @property {string} filter
  * label of the filter to set
  */
-export const setTodoFilter = ( filter ) => {
-  return { type : SET_TODO_FILTER, filter };
-};
+export const setTodoFilter = filter => ({ type : SET_TODO_FILTER, filter });
 
 /**
  * filter a list of given todos

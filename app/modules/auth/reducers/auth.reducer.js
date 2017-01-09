@@ -49,9 +49,7 @@ export const LOGGED_OUT     = 'LOGGED_OUT';
  * @property {string} password
  * user password
  */
-export const logIn = ( login, password ) => {
-  return { type : LOGIN_REQUEST, login, password };
-};
+export const logIn = ( login, password ) => ({ type : LOGIN_REQUEST, login, password });
 
 /**
  * action to notify user log in success
@@ -63,9 +61,7 @@ export const logIn = ( login, password ) => {
  * @property {string} user
  * user data
  */
-export const logInSuccess = ( user ) => {
-  return { type : LOGIN_SUCCESS, user };
-};
+export const logInSuccess = user => ({ type : LOGIN_SUCCESS, user });
 
 /**
  * action to notify user log in failure
@@ -77,9 +73,7 @@ export const logInSuccess = ( user ) => {
  * @property {string} error
  * error data
  */
-export const logInFailure = ( error ) => {
-  return { type : LOGIN_FAILURE, error };
-};
+export const logInFailure = error => ({ type : LOGIN_FAILURE, error });
 
 /**
  * action to log user out
@@ -87,9 +81,7 @@ export const logInFailure = ( error ) => {
  * @property {string} type
  * action type
  */
-export const logOut = () => {
-  return { type : LOGGED_OUT };
-};
+export const logOut = () => ({ type : LOGGED_OUT });
 
 // Epic
 
@@ -101,8 +93,8 @@ export const logOut = () => {
  * action type
  * @return {Object}
  */
-export const logInEpic = ( action$ ) => {
-  return action$.ofType(LOGIN_REQUEST)
+export const logInEpic = action$ =>
+  action$.ofType(LOGIN_REQUEST)
     .mergeMap(action =>
       ajax({
         method      : 'POST',
@@ -113,7 +105,6 @@ export const logInEpic = ( action$ ) => {
         .map(xhr => logInSuccess(xhr.response))
         .catch(error => Observable.of(logInFailure(error)))
     );
-};
 
 // Reducer
 

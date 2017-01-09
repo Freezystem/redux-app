@@ -259,23 +259,19 @@ export const TodoApp = (
     <TodoFooter todos={todos} onTodoClearClick={onTodoClearClick}/>
   </section>;
 
-const MapStateToProps = ( state ) => {
-  return {
+const MapStateToProps = state => ({
     todos       : state.todos,
     filter      : state.todoFilter,
     filterList  : Object.keys(todoFilters)
-  };
-};
+  });
 
-const MapDispatchToProps = ( dispatch ) => {
-  return {
+const MapDispatchToProps = dispatch => ({
     onTodoFormSubmit  : label => dispatch(addTodo(label)),
     onTodoClick       : id => dispatch(toggleTodo(id)),
     onTodoButtonClick : id => dispatch(removeTodo(id)),
     onTodoClearClick  : () => dispatch(clearTodo()),
     onLinkClick       : filter => dispatch(setTodoFilter(filter))
-  };
-};
+  });
 
 /**
  * connect react component to redux state
