@@ -1,4 +1,4 @@
-##Redux App
+## Redux App
 
 [![Build Status](https://semaphoreci.com/api/v1/freezystem/redux-app/branches/master/shields_badge.svg)](https://semaphoreci.com/freezystem/redux-app)
 [![Dependency Status](https://david-dm.org/freezystem/redux-app.svg)](https://david-dm.org/freezystem/redux-app)
@@ -7,7 +7,7 @@
 
 > Just a simple app with routing, tests and stuff to learn Redux.
 
-###Features
+### Features
 
 Here is the features I intend to have in this project
 - [x] Configure a webpack development build
@@ -28,7 +28,7 @@ Here is the features I intend to have in this project
 - [ ] Create production ready build in Yarn scripts
 - [ ] Make some data persistent (LocalStorage / SessionStorage)
 
-###What's in
+### What's in
 
 Build 
 - [Yarn](https://github.com/yarnpkg/yarn)
@@ -63,15 +63,15 @@ Documentation and quality
 - [ESDoc](https://esdoc.org)
 - [EsLint](http://eslint.org)
 
-###Yarn scripts
+### Yarn scripts
 
-####Setup the app
+#### Setup the app
 ```
 git clone https://github.com/Freezystem/redux-app.git
 cd redux-app && yarn
 ```
 
-####Run development app
+#### Run development app
 First add this line to `/etc/hosts` on Unix systems or `C:\Windows\System32\drivers\etc` on Windows.
 ```
 127.0.0.1           redux.app.io
@@ -81,7 +81,7 @@ Then just run
 yarn run dev
 ```
 
-####Build production app
+#### Build production app
 ```
 yarn run build
 ```
@@ -91,7 +91,7 @@ or for a clean install
 yarn run build:clean
 ```
 
-####Run tests
+#### Run tests
 ```
 yarn test
 ```
@@ -100,7 +100,7 @@ or with watch option
 yarn run test:watch
 ```
 
-####Generate Documentation
+#### Generate Documentation
 ```
 yarn run doc
 ```
