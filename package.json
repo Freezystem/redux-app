@@ -11,15 +11,15 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
     "redux-auth-wrapper": "^0.9.0",
     "redux-observable": "^0.12.2",
-    "rxjs": "^5.0.2"
+    "rxjs": "^5.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -31,24 +31,24 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.18.0",
-    "clean-webpack-plugin": "^0.1.14",
+    "clean-webpack-plugin": "^0.1.15",
     "css-loader": "^0.26.1",
     "deep-freeze": "0.0.1",
     "enzyme": "^2.7.0",
-    "esdoc": "^0.5.1",
-    "eslint": "^3.12.2",
+    "esdoc": "^0.5.2",
+    "eslint": "^3.13.0",
     "eslint-loader": "^1.6.1",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react": "^6.9.0",
     "expect": "^1.20.2",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.4",
-    "html-webpack-plugin": "^2.24.1",
+    "html-webpack-plugin": "^2.26.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "^9.9.1",
     "jsdom-global": "^2.1.1",
     "mocha": "^3.2.0",
-    "node-sass": "^4.1.1",
-    "react-addons-test-utils": "^15.4.1",
+    "node-sass": "^4.2.0",
+    "react-addons-test-utils": "^15.4.2",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
@@ -121,7 +121,10 @@
       "consistent-return": "error",
       "curly": "error",
       "default-case": "error",
-      "dot-location": ["error", "property"],
+      "dot-location": [
+        "error",
+        "property"
+      ],
       "dot-notation": "warn",
       "eqeqeq": "warn",
       "guard-for-in": "warn",
@@ -157,26 +160,77 @@
       "radix": "error",
       "vars-on-top": "error",
       "yoda": "warn",
-      "init-declarations": ["error", "always"],
+      "init-declarations": [
+        "error",
+        "always"
+      ],
       "no-label-var": "error",
       "no-shadow-restricted-names": "error",
       "no-shadow": "error",
       "no-undefined": "error",
       "no-use-before-define": "error",
-      "array-bracket-spacing": ["error", "never"],
+      "array-bracket-spacing": [
+        "error",
+        "never"
+      ],
       "block-spacing": "error",
-      "brace-style":["error", "stroustrup", { "allowSingleLine": true }],
-      "comma-dangle": ["error", "never"],
-      "comma-spacing": ["error", { "before": false, "after": true }],
-      "comma-style": ["error", "last"],
-      "computed-property-spacing": ["error", "never"],
-      "func-call-spacing": ["error", "never"],
-      "func-names": ["error", "always"],
-      "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-      "jsx-quotes": ["error", "prefer-double"],
-      "keyword-spacing": ["error", { "before": true, "after": true }],
+      "brace-style": [
+        "error",
+        "stroustrup",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "comma-spacing": [
+        "error",
+        {
+          "before": false,
+          "after": true
+        }
+      ],
+      "comma-style": [
+        "error",
+        "last"
+      ],
+      "computed-property-spacing": [
+        "error",
+        "never"
+      ],
+      "func-call-spacing": [
+        "error",
+        "never"
+      ],
+      "func-names": [
+        "error",
+        "always"
+      ],
+      "func-style": [
+        "error",
+        "declaration",
+        {
+          "allowArrowFunctions": true
+        }
+      ],
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ],
+      "keyword-spacing": [
+        "error",
+        {
+          "before": true,
+          "after": true
+        }
+      ],
       "no-tabs": "error",
-      "quotes": ["warn","single"],
+      "quotes": [
+        "warn",
+        "single"
+      ],
       "no-var": "error",
       "semi": "error",
       "react/jsx-uses-vars": "error"
