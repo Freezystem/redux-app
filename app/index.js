@@ -52,21 +52,20 @@ import {
 
 //Auth wrappers
 
-const isAuthenticated     = UserAuthWrapper({
+const isAuthenticated = UserAuthWrapper({
   authSelector            : state => state.auth.user,
-  authenticatingSelector  : state => state.auth.isFetching,
   redirectAction          : routerActions.replace,
   predicate               : user => 'token' in user && user.token !== '',
   wrapperDisplayName      : 'isAuthenticated'
 });
 
-const isNotAuthenticated  = UserAuthWrapper({
+const unAuthenticated = UserAuthWrapper({
   authSelector            : state => state.auth.user,
   redirectAction          : routerActions.replace,
   predicate               : user => !user.token,
   failureRedirectPath     : (state, ownProps) => ownProps.location.query.redirect || '/home',
   allowRedirectBack       : false,
-  wrapperDisplayName      : 'isNotAuthenticated'
+  wrapperDisplayName      : 'unAuthenticated'
 });
 
 // Redux App Bootstrapping
@@ -87,7 +86,7 @@ ReactDOM.render(
         <Route path="/" component={HomePage}/>
         <Route path="todos" component={TodoApp}/>
         <Route path="users" component={isAuthenticated(UserApp)}/>
-        <Route path="login" component={isNotAuthenticated(AuthApp)}/>
+        <Route path="login" component={unAuthenticated(AuthApp)}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>

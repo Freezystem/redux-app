@@ -33,6 +33,22 @@ export const LOGIN_FAILURE  = 'LOGIN_FAILURE';
  */
 export const LOGGED_OUT     = 'LOGGED_OUT';
 
+/**
+ * list of authentication states
+ * @type {Object}
+ * @property {string} UNAUTHENTICATED
+ * user is not authenticated
+ * @property {string} AUTHENTICATED
+ * user is authenticated
+ * @property {string} AUTHENTICATING
+ * user is authenticating
+ */
+export const authState = {
+  UNAUTHENTICATED : 'UNAUTHENTICATED',
+  AUTHENTICATED   : 'AUTHENTICATED',
+  AUTHENTICATING  : 'AUTHENTICATING'
+};
+
 // Actions
 
 /**
@@ -136,41 +152,36 @@ export const logInEpic = action$ =>
  */
 const authReducer = (
   state = {
-    isFetching      : false,
-    isAuthenticated : false,
-    user            : {},
-    error           : {}
+    authState : authState.UNAUTHENTICATED,
+    user      : {},
+    error     : {}
   },
   action
 ) => {
   switch ( action.type ) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
-        isFetching      : true,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.AUTHENTICATING,
+        user      : {},
+        error     : {}
       });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
-        isFetching      : false,
-        isAuthenticated : true,
-        user            : action.user,
-        error           : {}
+        authState : authState.AUTHENTICATED,
+        user      : action.user,
+        error     : {}
       });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
-        isFetching      : false,
-        isAuthenticated : false,
-        user            : {},
-        error           : action.error
+        authState : authState.UNAUTHENTICATED,
+        user      : {},
+        error     : action.error
       });
     case LOGGED_OUT:
       return Object.assign({}, state, {
-        isFetching      : false,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.UNAUTHENTICATED,
+        user      : {},
+        error     : {}
       });
     default:
       return state;

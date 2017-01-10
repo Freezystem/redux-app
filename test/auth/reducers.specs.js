@@ -8,7 +8,8 @@ import authReducer,
   logIn,
   logInSuccess,
   logInFailure,
-  logOut
+  logOut,
+  authState
 }                     from '../../app/modules/auth/reducers/auth.reducer';
 
 /** @test */
@@ -31,16 +32,14 @@ describe('reducers', function () {
       const login       = 'johndoe';
       const password    = 'azerty';
       const stateBefore = deepFreeze({
-        isFetching      : false,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.UNAUTHENTICATED,
+        user      : {},
+        error     : {}
       });
       const stateAfter  = {
-        isFetching      : true,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.AUTHENTICATING,
+        user      : {},
+        error     : {}
       };
 
       expect(authReducer(stateBefore, logIn(login, password))).toEqual(stateAfter);
@@ -52,16 +51,14 @@ describe('reducers', function () {
         login : 'johndoe'
       };
       const stateBefore = deepFreeze({
-        isFetching      : true,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.AUTHENTICATING,
+        user      : {},
+        error     : {}
       });
       const stateAfter  = {
-        isFetching      : false,
-        isAuthenticated : true,
+        authState : authState.AUTHENTICATED,
         user,
-        error           : {}
+        error     : {}
       };
 
       expect(authReducer(stateBefore, logInSuccess(user))).toEqual(stateAfter);
@@ -72,15 +69,13 @@ describe('reducers', function () {
         message : 'wrong credentials'
       };
       const stateBefore = deepFreeze({
-        isFetching      : true,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.AUTHENTICATING,
+        user      : {},
+        error     : {}
       });
       const stateAfter  = {
-        isFetching      : false,
-        isAuthenticated : false,
-        user            : {},
+        authState : authState.UNAUTHENTICATED,
+        user      : {},
         error
       };
 
@@ -88,17 +83,19 @@ describe('reducers', function () {
     });
 
     it('should handle LOGOUT', function () {
+      const user        = {
+        token : 'flzudp283HSD9Hdkjdfod29',
+        login : 'johndoe'
+      };
       const stateBefore = deepFreeze({
-        isFetching      : false,
-        isAuthenticated : true,
-        user            : {},
-        error           : {}
+        authState : authState.AUTHENTICATED,
+        user,
+        error     : {}
       });
       const stateAfter  = {
-        isFetching      : false,
-        isAuthenticated : false,
-        user            : {},
-        error           : {}
+        authState : authState.UNAUTHENTICATED,
+        user      : {},
+        error     : {}
       };
 
       expect(authReducer(stateBefore, logOut())).toEqual(stateAfter);

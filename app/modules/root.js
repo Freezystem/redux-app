@@ -15,7 +15,8 @@ import todoFilter, {
   todoFilters
 }                           from './todos/reducers/todoFilter.reducer';
 import auth, {
-  logInEpic
+  logInEpic,
+  authState
 }                           from './auth/reducers/auth.reducer';
 import users, {
   requestState,
@@ -32,10 +33,9 @@ import users, {
  */
 export const initialState = {
   auth        : {
-    isFetching      : false,
-    isAuthenticated : false,
-    user            : {},
-    error           : {}
+    authState : authState.UNAUTHENTICATED,
+    user      : {},
+    error     : {}
   },
   routing     : { locationBeforeTransitions : null },
   todos       : [],
