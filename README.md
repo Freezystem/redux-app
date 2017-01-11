@@ -22,11 +22,11 @@ Here is the features I intend to have in this project
 - [x] Add Linter
 - [x] Write and Generate Documentation
 - [x] Add (fake) authentication
+- [x] Make some data persistent (LocalStorage / SessionStorage)
 - [ ] Add and use complex forms
 - [ ] Add e2e tests on application
 - [ ] Mock/Stub calls to API
 - [ ] Create production ready build in Yarn scripts
-- [ ] Make some data persistent (LocalStorage / SessionStorage)
 
 ### What's in
 
@@ -46,6 +46,8 @@ Libraries
 - [RxJS](https://github.com/ReactiveX/RxJS)
 - [Redux-observable](https://github.com/redux-observable/redux-observable)
 - [History](https://github.com/mjackson/history)
+- [Lodash](https://github.com/lodash/lodash)
+- [Node-uuid](https://github.com/broofa/node-uuid)
 
 Style
 - [Sass](https://github.com/sass/sass)
