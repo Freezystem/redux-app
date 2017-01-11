@@ -3,7 +3,8 @@
 // Dependencies
 
 import { combineReducers }  from 'redux';
-import { combineEpics }  from 'redux-observable';
+import { combineEpics }     from 'redux-observable';
+import { loadState }        from '../helpers/localStorage';
 
 // Reducers & Epics
 
@@ -31,7 +32,7 @@ import users, {
  * @property {string} todoFilter
  * @property {Object} users
  */
-export const initialState = {
+export const initialState = Object.assign({
   auth        : {
     authState : authState.UNAUTHENTICATED,
     user      : {},
@@ -45,7 +46,7 @@ export const initialState = {
     data         : [],
     error        : null
   }
-};
+}, loadState());
 
 /**
  * Return all the reducers combined

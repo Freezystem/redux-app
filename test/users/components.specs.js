@@ -18,10 +18,10 @@ import {
 }                 from '../../app/modules/users/UserApp.component';
 
 /** @test */
-describe('components', function () {
+describe('components', () => {
 
   /** @test {User} */
-  describe('<User />', function () {
+  describe('<User />', () => {
     let attrs = {},
       wrapper = null;
 
@@ -35,7 +35,7 @@ describe('components', function () {
       wrapper = mount(<User {...attrs} />);
     });
 
-    it('should render a user', function () {
+    it('should render a user', () => {
       expect(wrapper.find('.userList_itemLink').props().href).toBe('/details/foo');
       expect(wrapper.find('.userList_itemLink span').text()).toBe('foo');
       expect(wrapper.find('.userList_itemLink img').props().src).toBe('/img/foo.jpg');
@@ -44,7 +44,7 @@ describe('components', function () {
   });
 
   /** @test {UserList} */
-  describe('<UserList />', function () {
+  describe('<UserList />', () => {
     let users = [
         {id: 111, login: 'foo', url: '/details/foo', avatar_url: '/img/foo.jpg'},
         {id: 222, login: 'bar', url: '/details/bar', avatar_url: '/img/bar.jpg'},
@@ -56,7 +56,7 @@ describe('components', function () {
       wrapper = mount(<UserList users={users} />);
     });
 
-    it('should render a user list', function () {
+    it('should render a user list', () => {
       expect(wrapper.find('.userList').children().length).toBe(3);
       expect(wrapper.find(User).at(0).key()).toBe('111');
       expect(wrapper.find(User).at(1).key()).toBe('222');
@@ -65,7 +65,7 @@ describe('components', function () {
   });
 
   /** @test {UserError} */
-  describe('<UserError />', function () {
+  describe('<UserError />', () => {
     let error = {message : 'error: enable to retrieve users'},
       wrapper = null;
 
@@ -73,13 +73,13 @@ describe('components', function () {
       wrapper = mount(<UserError error={error} />);
     });
 
-    it('should render an error', function () {
+    it('should render an error', () => {
       expect(wrapper.find('.userError_message').text()).toBe(error.message);
     });
   });
 
   /** @test {UserHeader} */
-  describe('<UserHeader />', function () {
+  describe('<UserHeader />', () => {
     let onClick = createSpy(),
       wrapper   = null;
 
@@ -87,7 +87,7 @@ describe('components', function () {
       wrapper = mount(<UserHeader onClick={onClick} />);
     });
 
-    it('should call a function on refresh button click', function () {
+    it('should call a function on refresh button click', () => {
       wrapper.find('.userHeader_refresh').simulate('click');
 
       expect(onClick).toHaveBeenCalled();
@@ -95,22 +95,22 @@ describe('components', function () {
   });
 
   /** @test {UserApp} */
-  describe('<UserApp />', function () {
+  describe('<UserApp />', () => {
     let wrapper = null;
 
     beforeEach(() => {
       wrapper = shallow(<UserApp />);
     });
 
-    it('should contain <UserHeader /> component', function () {
+    it('should contain <UserHeader /> component', () => {
       expect(wrapper.find(UserHeader).length).toBe(1);
     });
 
-    it('should contain <UserList /> component', function () {
+    it('should contain <UserList /> component', () => {
       expect(wrapper.find(UserList).length).toBe(1);
     });
 
-    it('should not contain <UserError /> component', function () {
+    it('should not contain <UserError /> component', () => {
       expect(wrapper.find(UserError).length).toBe(0);
     });
   });

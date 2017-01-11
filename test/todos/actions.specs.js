@@ -20,11 +20,11 @@ import {
 }                 from '../../app/modules/todos/reducers/todoFilter.reducer';
 
 /** @test */
-describe('actions', function () {
+describe('actions', () => {
 
   /** @test {addTodo} */
-  describe('addTodo()', function () {
-    it('should create an action to add a todo', function () {
+  describe('addTodo()', () => {
+    it('should create an action to add a todo', () => {
       const label = 'write tests';
       const expectedAction = {
         type : ADD_TODO,
@@ -32,16 +32,15 @@ describe('actions', function () {
       };
       const addTodoSpy = createSpy().andCall(addTodo);
 
-
       expect(addTodoSpy(label)).toEqual(expectedAction);
       expect(addTodoSpy).toHaveBeenCalledWith(label);
     });
   });
 
   /** @test {removeTodo} */
-  describe('removeTodo()', function () {
-    it('should create an action to remove a todo', function () {
-      const id = 42;
+  describe('removeTodo()', () => {
+    it('should create an action to remove a todo', () => {
+      const id = '109156be-c4fb-41ea-b1b4-efe1671c5836';
       const expectedAction = {
         type : REMOVE_TODO,
         id
@@ -54,9 +53,9 @@ describe('actions', function () {
   });
 
   /** @test {toggleTodo} */
-  describe('toggleTodo()', function () {
-    it('should create an action to toggle a todo', function () {
-      const id = 42;
+  describe('toggleTodo()', () => {
+    it('should create an action to toggle a todo', () => {
+      const id = '109156be-c4fb-41ea-b1b4-efe1671c5836';
       const expectedAction = {
         type : TOGGLE_TODO,
         id
@@ -69,8 +68,8 @@ describe('actions', function () {
   });
 
   /** @test {clearTodo} */
-  describe('clearTodo()', function () {
-    it('should create an action to clear completed todo', function () {
+  describe('clearTodo()', () => {
+    it('should create an action to clear completed todo', () => {
       const expectedAction = {
         type : CLEAR_TODO
       };
@@ -82,8 +81,8 @@ describe('actions', function () {
   });
 
   /** @test {setTodoFilter} */
-  describe('setTodoFilter()', function () {
-    it('should create an action to set the todo filter', function () {
+  describe('setTodoFilter()', () => {
+    it('should create an action to set the todo filter', () => {
       const filter = todoFilters.SHOW_ALL;
       const expectedAction = {
         type : SET_TODO_FILTER,

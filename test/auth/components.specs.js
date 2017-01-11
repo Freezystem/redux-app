@@ -15,10 +15,10 @@ import {
 }                 from '../../app/modules/auth/AuthApp.component';
 
 /** @test */
-describe('components', function () {
+describe('components', () => {
 
   /** @test {AuthForm} */
-  describe('<AuthForm />', function () {
+  describe('<AuthForm />', () => {
     let attrs = {},
       wrapper = null;
 
@@ -30,7 +30,7 @@ describe('components', function () {
       wrapper = mount(<AuthForm {...attrs} />);
     });
 
-    it('should render login form', function () {
+    it('should render login form', () => {
       const form      = wrapper.find('.authForm');
       const login     = form.find('.authForm_login');
       const password  = form.find('.authForm_password');
@@ -51,7 +51,7 @@ describe('components', function () {
       expect(button.type()).toBe('button');
     });
 
-    it('should not submit form with empty credentials', function () {
+    it('should not submit form with empty credentials', () => {
       const form      = wrapper.find('.authForm');
       const login     = form.find('.authForm_login').get(0);
       const password  = form.find('.authForm_password').get(0);
@@ -70,7 +70,7 @@ describe('components', function () {
       expect(attrs.onSubmit).toNotHaveBeenCalled();
     });
 
-    it('should call onSubmit() when form is properly submitted', function () {
+    it('should call onSubmit() when form is properly submitted', () => {
       wrapper.find('.authForm_login').get(0).value = 'johndoe';
       wrapper.find('.authForm_password').get(0).value = 'azerty';
       wrapper.find('.authForm').simulate('submit');
@@ -80,14 +80,14 @@ describe('components', function () {
   });
 
   /** @test {AuthApp} */
-  describe('<AuthApp />', function () {
+  describe('<AuthApp />', () => {
     let wrapper = null;
 
     beforeEach(() => {
       wrapper = shallow(<AuthApp />);
     });
 
-    it('should contain <AuthForm /> component', function () {
+    it('should contain <AuthForm /> component', () => {
       expect(wrapper.find(AuthForm).length).toBe(1);
     });
   });

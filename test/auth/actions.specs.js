@@ -15,11 +15,11 @@ import {
 }                     from '../../app/modules/auth/reducers/auth.reducer';
 
 /** @test */
-describe('actions', function () {
+describe('actions', () => {
 
   /** @test {logIn} */
-  describe('logIn()', function () {
-    it('should create an action to log user in', function () {
+  describe('logIn()', () => {
+    it('should create an action to log user in', () => {
       const login           = 'johndoe';
       const password        = 'azerty';
       const expectedAction  = {
@@ -35,8 +35,8 @@ describe('actions', function () {
   });
 
   /** @test {logInSuccess} */
-  describe('logInSuccess()', function () {
-    it('should create an action to notify user log in success', function () {
+  describe('logInSuccess()', () => {
+    it('should create an action to notify user log in success', () => {
       const user              = {
         token : 'flzudp283HSD9Hdkjdfod29',
         login : 'johndoe'
@@ -53,8 +53,8 @@ describe('actions', function () {
   });
 
   /** @test {logInFailure} */
-  describe('logInFailure()', function () {
-    it('should create an action to notify user log in failure', function () {
+  describe('logInFailure()', () => {
+    it('should create an action to notify user log in failure', () => {
       const error           = { message: 'wrong credentials' };
       const expectedAction  = {
         type : LOGIN_FAILURE,
@@ -68,8 +68,8 @@ describe('actions', function () {
   });
 
   /** @test {logOut} */
-  describe('logOut()', function () {
-    it('should create an action to log user out', function () {
+  describe('logOut()', () => {
+    it('should create an action to log user out', () => {
       const expectedAction  = {
         type : LOGGED_OUT
       };

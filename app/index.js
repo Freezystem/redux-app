@@ -2,45 +2,43 @@
 
 // Libs
 
-import React          from 'react';
-import ReactDOM       from 'react-dom';
+import React              from 'react';
+import ReactDOM           from 'react-dom';
 import {
   createStore,
   applyMiddleware,
   compose
-}                     from 'redux';
-import {
-  Provider
-}                     from 'react-redux';
-import {
-  browserHistory
-}                     from 'react-router';
+}                         from 'redux';
+import { Provider }       from 'react-redux';
+import { browserHistory } from 'react-router';
 import {
   syncHistoryWithStore,
   routerActions,
   routerMiddleware
-}                     from 'react-router-redux';
+}                         from 'react-router-redux';
 import {
   createEpicMiddleware
-}                     from 'redux-observable';
+}                         from 'redux-observable';
 import {
   UserAuthWrapper
-}                     from 'redux-auth-wrapper';
+}                         from 'redux-auth-wrapper';
+import throttle           from 'lodash/throttle';
+import { saveState }      from './helpers/localStorage';
 
 // Components
 
 import {
   Router,
   Route
-}                     from 'react-router';
-import TodoApp        from './modules/todos/TodoApp.component';
-import UserApp        from './modules/users/UserApp.component';
-import AuthApp        from './modules/auth/AuthApp.component';
+}                         from 'react-router';
+import TodoApp            from './modules/todos/TodoApp.component';
+import UserApp            from './modules/users/UserApp.component';
+import AuthApp            from './modules/auth/AuthApp.component';
 import MainApp,
 {
   HomePage,
   NotFound
-}                     from './modules/main/MainApp.component';
+}                         from './modules/main/MainApp.component';
 
 // Reducer
 
@@ -48,7 +46,7 @@ import {
   rootReducer,
   initialState,
   rootEpic
-}                     from './modules/root';
+}                         from './modules/root';
 
 //Auth wrappers
 
@@ -93,3 +91,11 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 );
+
+// Save todos to localStorage
+
+store.subscribe(throttle(() => {
+  saveState({
+    todos : store.getState().todos
+  });
+}, 1000));
