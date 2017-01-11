@@ -1,5 +1,7 @@
 'use strict';
 
+import { v4 } from 'node-uuid';
+
 /**
  * @typedef {Object} todoObj
  * @property {number} id
@@ -98,7 +100,7 @@ const todosReducer = ( state = [], action ) => {
     case ADD_TODO:
       return state.concat(
         {
-          id        : state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+          id        : v4(),
           label     : action.label,
           completed : false
         }
