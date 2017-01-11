@@ -53,19 +53,19 @@ import {
 //Auth wrappers
 
 const isAuthenticated = UserAuthWrapper({
-  authSelector            : state => state.auth.user,
-  redirectAction          : routerActions.replace,
-  predicate               : user => 'token' in user && user.token !== '',
-  wrapperDisplayName      : 'isAuthenticated'
+  authSelector        : state => state.auth.user,
+  redirectAction      : routerActions.replace,
+  predicate           : user => 'token' in user && user.token !== '',
+  wrapperDisplayName  : 'isAuthenticated'
 });
 
 const unAuthenticated = UserAuthWrapper({
-  authSelector            : state => state.auth.user,
-  redirectAction          : routerActions.replace,
-  predicate               : user => !user.token,
-  failureRedirectPath     : (state, ownProps) => ownProps.location.query.redirect || '/home',
-  allowRedirectBack       : false,
-  wrapperDisplayName      : 'unAuthenticated'
+  authSelector        : state => state.auth.user,
+  redirectAction      : routerActions.replace,
+  predicate           : user => !user.token,
+  failureRedirectPath : (state, ownProps) => ownProps.location.query.redirect || '/home',
+  allowRedirectBack   : false,
+  wrapperDisplayName  : 'unAuthenticated'
 });
 
 // Redux App Bootstrapping
