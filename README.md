@@ -23,6 +23,7 @@ Here is the features I intend to have in this project
 - [x] Write and Generate Documentation
 - [x] Add (fake) authentication
 - [x] Make some data persistent (LocalStorage / SessionStorage)
+- [ ] Static Typing with Flow
 - [ ] Add and use complex forms
 - [ ] Add e2e tests on application
 - [ ] Mock/Stub calls to API
@@ -61,9 +62,9 @@ Tests
 - [jsDOM](https://github.com/tmpvar/jsdom)
 
 Documentation and quality
-
 - [ESDoc](https://esdoc.org)
 - [EsLint](http://eslint.org)
+- [Flow](https://flowtype.org/)
 
 ### Yarn scripts
 
