@@ -1,4 +1,4 @@
-const localStorage = localStorage || null;
+const localStorage = window.localStorage || null;
 
 export const loadState = () => {
   try {

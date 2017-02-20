@@ -36,10 +36,20 @@ describe('App', () => {
   ]);
 });
 
-function importTest ( name, tests ) {
+function importTest ( name, ...tests ) {
+  const flatten = array => array.reduce((fa, v) => fa.concat(Array.isArray(v) ? flatten(v) : v.toString()), []);
+  tests = flatten(tests);
+
   Array.isArray(tests) && describe(name, () => {
     tests.map(test => {
-      require(test);
+      if ( typeof test === 'string' ) {
+        try {
+          require(test);
+        }
+        catch ( err ) {
+          console.error(err);
+        }
+      }
     });
   });
 }
