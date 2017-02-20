@@ -60,7 +60,7 @@
   "scripts": {
     "clean": "rimraf node_modules dist && yarn cache clean",
     "dev": "webpack-dev-server --content-base dist --inline --hot --port 3004 --host redux.app.io --open",
-    "build": "yarn && webpack -p",
+    "build": "yarn && rimraf dist && webpack -p",
     "build:clean": "yarn run clean && yarn build",
     "test": "mocha --compilers js:babel-register --es_staging --use_strict -r ignore-styles -r jsdom-global/register",
     "test:watch": "yarn test -- --watch",
